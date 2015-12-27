@@ -98,4 +98,21 @@ class InRecord extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Member::className(), ['id' => 'member_id']);
     }
+
+    public static function prepareModelForSellStack($member_id, $amount, $total, $fee)
+    {
+        $data = array(
+            'member_id' => $member_id,
+            'type' => 2,
+            'fee' => $fee,
+            'amount' => $amount,
+            'total' => $total,
+            'account_type' => 1,
+            'note' => '出售股票'
+        );
+
+        $model = new InRecord();
+        $model->load($data, '');
+        return $model;
+    }
 }

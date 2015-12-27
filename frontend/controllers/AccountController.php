@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Cash;
-use common\models\InRecord;
+use yii\filters\AccessControl;
 use common\models\Member;
 use common\models\OutRecord;
 use common\models\search\CashSearch;
@@ -11,9 +11,36 @@ use yii;
 use common\models\search\InRecordSearch;
 use common\models\search\OutRecordSearch;
 use common\models\search\MemberSearch;
+use common\models\search\FundTransactionSearch;
 
 class AccountController extends \yii\web\Controller
 {
+
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => \frontend\components\AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'actions' => ['list', 'cashlist','charge', 'inlist', 'outlist', 'fund'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
 
     public function actionList()
     {
@@ -99,6 +126,17 @@ class AccountController extends \yii\web\Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('outlist', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionFund()
+    {
+        $searchModel = new FundTransactionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('fund', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

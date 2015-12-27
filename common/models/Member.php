@@ -7,6 +7,7 @@ use yii\behaviors\AttributeBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\db\ActiveRecord;
+use common\models\MemberStack;
 
 /**
  * This is the model class for table "member".
@@ -75,6 +76,15 @@ class Member extends ActiveRecord
                 'class' => AttributeBehavior::className(),
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => 'investment',
+                ],
+                'value' => function ($event) {
+                    return $this->investment * 10000;
+                },
+            ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'finance_fund',
                 ],
                 'value' => function ($event) {
                     return $this->investment * 10000;

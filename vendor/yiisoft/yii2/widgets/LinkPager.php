@@ -86,13 +86,13 @@ class LinkPager extends Widget
      * If it's specified as true, page number will be used as label.
      * Default is false that means the "first" page button will not be displayed.
      */
-    public $firstPageLabel = false;
+    public $firstPageLabel = 'First Page';
     /**
      * @var string|boolean the text label for the "last" page button. Note that this will NOT be HTML-encoded.
      * If it's specified as true, page number will be used as label.
      * Default is false that means the "last" page button will not be displayed.
      */
-    public $lastPageLabel = false;
+    public $lastPageLabel = 'Last Page';
     /**
      * @var boolean whether to register link tags in the HTML header for prev, next, first and last page.
      * Defaults to `false` to avoid conflicts when multiple pagers are used on one page.
@@ -189,7 +189,8 @@ class LinkPager extends Widget
             $buttons[] = $this->renderPageButton($lastPageLabel, $pageCount - 1, $this->lastPageCssClass, $currentPage >= $pageCount - 1, false);
         }
 
-        return Html::tag('ul', implode("\n", $buttons), $this->options);
+        return Html::tag('ul', implode("\n", $buttons), $this->options) . '<input id="pageNo"/><button class="goToButon" onClick="var hurl=\'' . $this->pagination->createUrl(1) . '\';window.location=(hurl).replace(\'page=2\', \'page=\' + parseInt(jQuery(\'#pageNo\').val()));
+">GO</button>';
     }
 
     /**

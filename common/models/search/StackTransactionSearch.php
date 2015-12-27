@@ -19,8 +19,8 @@ class StackTransactionSearch extends StackTransaction
     {
         return [
             [['id', 'stack_id', 'member_id', 'volume', 'type'], 'integer'],
-            [['price', 'total', 'charge'], 'number'],
-            [['created_at', 'updated_at', 'stackname', 'stackcode', 'membername'], 'safe'],
+            [['price', 'total_price', 'charge'], 'number'],
+            [['created_at', 'updated_at', 'stackname', 'stackcode', 'membername', 'status'], 'safe'],
         ];
     }
 
@@ -67,7 +67,8 @@ class StackTransactionSearch extends StackTransaction
             'stack_id' => $this->stack_id,
             'member_id' => $this->member_id,
             'volume' => $this->volume,
-            'price' => $this->price,
+            'total_price' => $this->total_price,
+            'status' => $this->status,
             'total' => $this->total,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

@@ -13,11 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="member-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Member'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -32,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'added_by',
                 'value' => function($model) {
-                    $parent = $model->getAddedByMember()->one();
+                    $parent = $model->getAddedByMember() ? $model->getAddedByMember()->one() : null;
                     return ($parent) ? $parent->username : '#';
                 },
             ],

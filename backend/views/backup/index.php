@@ -9,7 +9,7 @@ use kartik\grid\GridView;
 
 $this->title = Yii::t('app', 'Backups');
 $this->params['breadcrumbs'][] = $this->title;
-?>                                                                               mm
+?>
 <div class="backup-index">
 
     <h1><?= Html::encode($this->title) ?></h1>

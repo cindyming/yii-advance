@@ -7,7 +7,7 @@ use kartik\grid\GridView;;
 /* @var $searchModel common\models\search\StackSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Stack Trends');
+$this->title = Yii::t('app', 'Stack Transactions');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stack-index">
@@ -29,7 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'type',
-
+                'filter' => Yii::$app->options->getOptions('stack_type'),
+                'value' => function($model) {
+                    return Yii::$app->options->getOptionLabel('stack_type', $model->type);
+                }
             ],
             [
                 'attribute' => 'stackcode',
@@ -45,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'volume',
             'price',
-            'total',
+            'total_price',
             'charge',
             'created_at',
         ],

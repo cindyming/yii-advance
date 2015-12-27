@@ -12,8 +12,9 @@ class System extends ActiveRecord
     public $enable_memmber_login;
     public $lowest_cash_amount;
     public $cash_factorage;
-    public $stop_banus_times;
-    public $open_baodan_tree;
+    public $show_add_member;
+    public $sell_fee_rate;
+    public $annual_fee;
 
     /**
      * @inheritdoc
@@ -36,11 +37,12 @@ class System extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'enable_memmber_login' => '会员登录功能',
-            'stop_banus_times' => '分红封顶倍数',
-            'lowest_cash_amount' => '最低提现额',
-            'cash_factorage' => '绩效提现手续费',
-            'open_baodan_tree' => '报单员网络图'
+            'enable_memmber_login' => Yii::t('app', 'Enable Member Login'),
+            'show_add_member' => Yii::t('app', 'Show Add Member'),
+            'lowest_cash_amount' => Yii::t('app', 'Lowest Cash Amount'),
+            'cash_factorage' => Yii::t('app', 'Cash Factorage'),
+            'sell_fee_rate' => Yii::t('app', 'Exchange Fee Rate'),
+            'annual_fee' => Yii::t('app', 'Annual Fee'),
             ];
     }
 

@@ -81,4 +81,20 @@ class Date extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
+
+    public static function isWorkingDay()
+    {
+        $data = Date::find()->where(['=', 'date', new Expression('curdate()')])->one();
+        return ($data->status == 0) ? true : false;
+    }
+
+    public static function isWorkingTime()
+    {
+        $hours = date('H');
+        if (((10 < $hours) && ($hours < 12)) || ((14 < $hours) && ($hours < 16))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

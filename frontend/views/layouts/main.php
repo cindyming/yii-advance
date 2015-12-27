@@ -26,6 +26,21 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+
+    <h2>QC(启程)股票在线交易平台</h2>
+    <div class="m-info">
+        <ul>
+            <li>
+                会员ID: <?php echo Yii::$app->user->identity->username?>
+            </li>
+            <li>
+                理财账户余额: <?php echo Yii::$app->user->identity->finance_fund; ?>
+            </li>
+            <li>
+                股票账户余额: <?php echo Yii::$app->user->identity->stack_fund?>
+            </li>
+        </ul>
+    </div>
     <?php
     NavBar::begin();
     echo Nav::widget([
@@ -35,7 +50,8 @@ AppAsset::register($this);
             [
                 'label' => '业务中心', 'url' => ['/member/create'],
                 'items' => [
-                    ['label' => '会员注册', 'url' => ['/member/create']],
+                    (\common\models\System::loadConfig('show_add_member')) ?
+                    ['label' => '会员注册', 'url' => ['/member/create']]:'',
                     ['label' => '我的注册', 'url' => ['/member/index']],
                 ]
             ],

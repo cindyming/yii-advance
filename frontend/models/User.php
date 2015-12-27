@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\web\IdentityInterface;
+use common\models\MemberStack;
 
 /**
  * User model
@@ -188,7 +189,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function setPassword2($password)
     {
-        $this->password2_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password_hash2 = Yii::$app->security->generatePasswordHash($password);
     }
 
     /**
@@ -223,5 +224,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function isMember()
     {
         return true;
+    }
+
+    public function getMemberStack($stack_id)
+    {
+        return MemberStack::find()->where(['member_id' => Yii::$app->user->identity->id,  'stack_id' => $stack_id])->one();
     }
 }

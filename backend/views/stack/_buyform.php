@@ -16,7 +16,6 @@ use yii\widgets\ActiveForm;
         'validationUrl' => '/stack/validatebuy?' . ($model->id ? 'id=' . $model->id : ''),
     ]); ?>
 
-
     <?= $form->field($model, 'membername')->textInput(['maxlength' => true, 'readOnly' => ($model->isNewRecord ? false : true)]) ?>
 
     <?= $form->field($model, 'stackcode')->textInput(['maxlength' => true]) ?>

@@ -7,6 +7,7 @@ use yii\db\Expression;
 use yii\behaviors\AttributeBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use common\models\MemberStack;
 
 /**
  * This is the model class for table "stack_transaction".
@@ -28,6 +29,11 @@ class StackTransaction extends ActiveRecord
     public $stackname;
     public $stackcode;
     public $membername;
+    public $stackprice;
+    public $total;
+    public $password2;
+    public $sellnumber;
+    public $locknumber;
     /**
      * @inheritdoc
      */
@@ -46,34 +52,10 @@ class StackTransaction extends ActiveRecord
             [
                 'class' => AttributeBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'total',
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'status',
                 ],
                 'value' => function ($event) {
-                    return $this->price * $this->volume;
-                },
-            ],
-            [
-                'class' => AttributeBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'member_id',
-                ],
-                'value' => function ($event) {
-                    if (Yii::$app->user->identity->isAdmin()) {
-                        $existUser = Member::find()->where(['=', 'username', $this->membername])->one();
-                        return $existUser ? $existUser->id : 0;
-                    } else {
-                        return Yii::$app->user->identity->id;
-                    }
-                },
-            ],
-            [
-                'class' => AttributeBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'stack_id',
-                ],
-                'value' => function ($event) {
-                    $stack = Stack::find()->where(['=', 'code', $this->stackcode])->one();
-                    return $stack ? $stack->id : 0;
+                    return 0;
                 },
             ],
             [
@@ -98,12 +80,13 @@ class StackTransaction extends ActiveRecord
     public function rules()
     {
         return [
-            [['membername', 'stackcode', 'volume',], 'required'],
-            [[ 'stack_id', 'member_id', 'volume', 'type'], 'integer'],
-            [['price', 'total'], 'number'],
+            [[ 'volume',], 'required'],
+            [[ 'stack_id', 'member_id', 'volume', 'type', 'status'], 'integer'],
+            [['price', 'total_price'], 'number'],
+            [['total_price'], 'checkFund'],
             [['membername'], 'checkUsername'],
             [['stackcode'], 'checkStackcode'],
-            [['created_at', 'updated_at'], 'safe']
+            [['created_at', 'updated_at','membername', 'stackcode'], 'safe']
         ];
     }
 
@@ -154,6 +137,49 @@ class StackTransaction extends ActiveRecord
         $existUser = Stack::find()->where(['=', 'code', $this->stackcode])->one();
         if(!$existUser){
             $this->addError($attribute, '该股票不存在，请核对后重新输入');
+        }
+    }
+    public function getMemberStack()
+    {
+        return $this->hasOne(MemberStack::className(), ['member_stack.member_id' => 'member_id', 'member_stack.stack_id' => 'stack_id']);
+    }
+
+    public function checkFund($attribute, $param)
+    {
+        $member = Member::findOne($this->member_id);
+        if (($this->price * $this->volume) > ($member->stack_fund + $member->finance_fund)) {
+            $this->addError('volume', '账号资金不足. 股票基金: '. $member->stack_fund . '. 理财基金:' . $member->finance_fund);
+        }
+    }
+
+    public function checkSellVolume($memberStack, $volume)
+    {
+        if ($volume > $memberStack->sell_volume) {
+            $this->addError('volume', '可交易股票数量不足: '. $memberStack->sell_volume);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function setStackId($stack_id = null)
+    {
+        if ($stack_id) {
+            $this->stack_id = $stack_id;
+        } else {
+            $stack = Stack::find()->where(['=', 'code', $this->stackcode])->one();
+            if ($stack) {
+                $this->stack_id = $stack->id;
+            }
+        }
+    }
+    public function setMemberId()
+    {
+        if (Yii::$app->user->identity->isAdmin()) {
+            $existUser = Member::find()->where(['=', 'username', $this->membername])->one();
+            $this->member_id = $existUser ? $existUser->id : 0;
+        } else {
+            $this->member_id = Yii::$app->user->identity->id;
         }
     }
 }

@@ -23,6 +23,7 @@ use yii\db\ActiveRecord;
  */
 class Stack extends ActiveRecord
 {
+
     /**
      * @inheritdoc
      */

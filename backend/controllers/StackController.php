@@ -2,6 +2,10 @@
 
 namespace backend\controllers;
 
+use common\models\Member;
+use common\models\MemberStack;
+use common\models\OutRecord;
+use common\models\search\MemberStackSearch;
 use common\models\search\StackTransactionSearch;
 use common\models\search\StackTrendsSearch;
 use common\models\StackTransaction;
@@ -9,6 +13,7 @@ use common\models\StackTrends;
 use Yii;
 use common\models\Stack;
 use common\models\search\StackSearch;
+use yii\caching\MemCache;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -105,6 +110,16 @@ class StackController extends Controller
         ]);
     }
 
+    public function actionFund()
+    {
+        $searchModel = new MemberStackSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('fund', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function actionTransactions()
     {
         $searchModel = new StackTransactionSearch();
@@ -163,15 +178,75 @@ class StackController extends Controller
     public function actionBuy()
     {
         $model = new StackTransaction();
-        $data = Yii::$app->request->post();
-        $data['StackTransaction']['type'] = 0;
-        if (Yii::$app->request->post() && $model->load($data) && $model->save()) {
-            return $this->redirect(['transactions']);
-        } else {
-            return $this->render('buy', [
-                'model' => $model,
-            ]);
+
+        if ($model->load(Yii::$app->request->post())) {
+            $validate = true;;
+            if ($validate) {
+                $model->setStackId();
+                $model->setMemberId();
+                $model->type = 0;
+                $model->total_price = $model->price * $model->volume;
+                $memberStack = MemberStack::getMemberStack($model);
+                $member = Member::findOne($model->member_id);
+                $stackFund = $member->stack_fund;
+                $financeMisFund = 0;
+                $stackOutRecord = null;
+                $financeOutRecord = null;
+                if ($stackFund > $model->total_price) {
+                    $member->stack_fund -= $model->total_price;
+                    $stackOutRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->stack_fund, 2);
+                } else if ($member->stack_fund > 0){
+                    $financeMisFund = $model->total_price - $member->stack_fund;
+                    $member->stack_fund = 0;
+                    $stackOutRecord = OutRecord::prepareModelForBuyStack($model->member_id, ($model->total_price - $financeMisFund), 0, 2);
+
+                } else {
+                    $financeMisFund = $model->total_price;
+                }
+                $financeOutRecord = null;
+                if ($financeMisFund) {
+                    $member->finance_fund -= $financeMisFund;
+                    $financeOutRecord = OutRecord::prepareModelForBuyStack($model->member_id, $financeMisFund, $member->finance_fund, 1);
+                }
+
+                $connection = Yii::$app->db;
+                try {
+                    $transaction = $connection->beginTransaction();
+                    $success = false;
+                    if ($stackOutRecord && $financeOutRecord && $model->save() && $memberStack->save() && $member->save() && $stackOutRecord->save() && $financeOutRecord->save()) {
+                        $success = true;
+                    } elseif ($financeOutRecord && $model->save() && $memberStack->save() && $member->save() && $financeOutRecord->save()) {
+                        $success = true;
+                    }elseif ($stackOutRecord && $model->save() && $memberStack->save() && $member->save() && $stackOutRecord->save()) {
+                        $success = true;
+                    }
+                    if ($success) {
+                        $transaction->commit();
+                        return $this->redirect(['transactions']);
+                    } else {
+                        Yii::error('Stack Buy Failed');
+                        Yii::error( json_encode($model->getErrors()));
+                        Yii::error( json_encode($memberStack->getErrors()));
+                        Yii::error( json_encode($member->getErrors()));
+                        if ($stackOutRecord) {
+                            Yii::error( json_encode($stackOutRecord->getErrors()));
+                        }
+                        if ($financeOutRecord) {
+                            Yii::error( json_encode($financeOutRecord->getErrors()));
+                        }
+                        $transaction->rollback();
+                    }
+
+                }  catch (Exception $e) {
+                }
+            } else {
+                $model->validate();
+            }
+
         }
+        return $this->render('buy', [
+            'model' => $model,
+        ]);
     }
 
     /**

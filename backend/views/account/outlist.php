@@ -21,7 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'pjax' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'member.username',
+            [
+                'attribute' => 'membername',
+                'value' => function($model) {
+                    return $model->member->username;
+                }
+            ],
             [
                 'attribute' => 'type',
                 'value' => function($model) {

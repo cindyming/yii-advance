@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\components\AccessRule;
 use Yii;
 use frontend\models\LoginForm;
 use yii\web\Controller;
@@ -20,15 +21,18 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup', 'captcha'],
+                'only' => ['logout', 'signup'],
+                'ruleConfig' => [
+                    'class' => \frontend\components\AccessRule::className(),
+                ],
                 'rules' => [
                     [
-                        'actions' => ['signup', 'captcha'],
+                        'actions' => ['signup'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout','captcha'],
+                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

@@ -61,6 +61,10 @@ class Options
             3 => '转账',
             4 => '其他'
         ),
+        'stack_type' => array(
+            0 => '购买',
+            1 => '出售'
+        ),
         'in_type' => array(
             1 => '充值',
             2 => '出售',
@@ -72,6 +76,10 @@ class Options
             1 => '未处理',
             2 => '已发放',
             3 => '已拒绝',
+        ),
+        'transcation_status' => array(
+            0 => '交易锁定',
+            1 => '交易完成'
         )
     );
 

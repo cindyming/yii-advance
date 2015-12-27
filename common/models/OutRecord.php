@@ -52,7 +52,6 @@ class OutRecord extends \yii\db\ActiveRecord
                     } else {
                         return Yii::$app->user->id;
                     }
-
                 },
             ],
         ];
@@ -97,5 +96,22 @@ class OutRecord extends \yii\db\ActiveRecord
     public function getMember()
     {
         return $this->hasOne(Member::className(), ['id' => 'member_id']);
+    }
+
+    public static function prepareModelForBuyStack($member_id, $amount, $total, $account_type)
+    {
+        $data = array(
+            'member_id' => $member_id,
+            'type' => 2,
+            'fee' => 0,
+            'amount' => $amount,
+            'total' => $total,
+            'account_type' => $account_type,
+            'note' => '购买股票'
+        );
+
+        $model = new OutRecord();
+        $model->load($data, '');
+        return $model;
     }
 }
