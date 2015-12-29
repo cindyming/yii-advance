@@ -90,4 +90,9 @@ class Message extends ActiveRecord
     {
         return $this->hasOne(Member::className(), ['id' => 'member_id']);
     }
+
+    public function isReplied()
+    {
+        return ($this->replied_content) ? '已回复' : '未回复';
+    }
 }

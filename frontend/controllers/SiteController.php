@@ -21,13 +21,13 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'except' => ['login', 'logout', 'autologin', 'captcha', 'index'],
                 'ruleConfig' => [
                     'class' => \frontend\components\AccessRule::className(),
                 ],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup', 'autologin', 'captcha', 'index'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -73,7 +73,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['/news/index']);
     }
 
     /**

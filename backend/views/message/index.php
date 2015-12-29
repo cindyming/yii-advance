@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'member_id',
                 'value' => function($model) {
-                    return $model->getMember()->username;
+                    return $model->getMember()->one()->username;
                 }
             ],
             [
@@ -53,14 +53,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\Column',
                 'header' => '删除',
                 'content' => function($model) {
-                    return Html::a('删除', ['admindelete', 'id' => $model->id]);
+                    return Html::a('删除', ['delete', 'id' => $model->id]);
                 }
             ],
             [
                 'class' => 'yii\grid\Column',
                 'header' => '回复',
                 'content' => function($model) {
-                    return Html::a('回复', ['adminreply', 'id' => $model->id]);
+                    return Html::a('回复', ['update', 'id' => $model->id]);
                 }
             ],
         ],

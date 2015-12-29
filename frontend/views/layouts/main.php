@@ -56,7 +56,7 @@ AppAsset::register($this);
                 ]
             ],
             [
-                'label' => '基金资产', 'url' => ['/fund/history'],
+                'label' => '基金资产', 'url' => ['/account/fund'],
             ],
             [
                 'label' => '股票管理',

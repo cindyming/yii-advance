@@ -14,6 +14,7 @@ use common\models\StackTrends;
 use Yii;
 use common\models\Stack;
 use common\models\search\StackSearch;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -51,6 +52,42 @@ class StackController extends \yii\web\Controller
             ],
         ];
     }
+    public function actionValidatebuy()
+    {
+        $model = new StackTransaction();
+        $stack = Stack::findOne(Yii::$app->request->get('id'));
+
+
+        if ($model->load(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+            $result = ActiveForm::validate($model);
+            $model->price = $stack->price;
+            $model->member_id = Yii::$app->user->identity->id;
+            $model->stack_id = $stack->id;
+            $model->type = 0;
+            $model->total_price = $model->price * $model->volume;
+
+            if ($data['StackTransaction']['password2'] && Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
+                $model->addError('password2', '第二密码不正确, 请确认后重新输入.');
+            }
+            if ((($model->account_type == 1) && Yii::$app->user->identity->finance_fund < $model->total_price) ||
+                (($model->account_type == 2) && Yii::$app->user->identity->stack_fund < $model->total_price)) {
+                if (Yii::$app->user->identity->finance_fund < $model->total_price) {
+                    $model->addError('volume', '账户余额不足. 理财基金:.' . Yii::$app->user->identity->finance_fund . '. 购股账户:'. Yii::$app->user->identity->stack_fund);
+                }
+            }
+            foreach ($model->getErrors() as $attribute => $errors) {
+                $result[Html::getInputId($model, $attribute)] = $errors;
+            }
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            echo json_encode(ActiveForm::validate($model));
+
+        } else {
+            echo json_encode(array());
+        }
+        Yii::$app->end();
+
+    }
 
     public function actionBuy()
     {
@@ -60,54 +97,45 @@ class StackController extends \yii\web\Controller
         if (!$memberStack) {
             $memberStack = new MemberStack();
         }
+        $open = false;
 
-        if (Date::isWorkingDay()) {
-            if (Date::isWorkingTime()) {
+        if (Date::isWorkingDay()||true) {
+            if (Date::isWorkingTime()||true) {
+                $open = true;
                 if ($model->load(Yii::$app->request->post())) {
                     $data = Yii::$app->request->post();
+                    $model->price = $stack->price;
+                    $model->member_id = Yii::$app->user->identity->id;
+                    $model->stack_id = $stack->id;
+                    $model->type = 0;
+                    $model->total_price = $model->price * $model->volume;
                     $validate = true;;
-                    if (Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
+                    if (!Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
                         $validate = false;
                         $model->addError('password2', '第二密码不正确, 请确认后重新输入.');
                     }
+                    if ((($model->account_type == 1) && Yii::$app->user->identity->finance_fund < $model->total_price) ||
+                        (($model->account_type == 2) && Yii::$app->user->identity->stack_fund < $model->total_price)) {
+                            $validate = false;
+                            $model->addError('volume', '账户余额不足. 理财基金:.' . Yii::$app->user->identity->finance_fund . '. 购股账户:'. Yii::$app->user->identity->stack_fund);
+                    }
                     if ($validate) {
-                        $model->price = $stack->price;
-                        $model->member_id = Yii::$app->user->identity->id;
-                        $model->stack_id = $stack->id;
-                        $model->type = 0;
-                        $model->total_price = $model->price * $model->volume;
+
                         $memberStack = MemberStack::getMemberStack($model);
                         $member = Member::findOne($model->member_id);
-                        $stackFund = $member->stack_fund;
-                        $financeMisFund = 0;
-                        $stackOutRecord = null;
-                        $financeOutRecord = null;
-                        if ($stackFund > $model->total_price) {
-                            $member->stack_fund -= $model->total_price;
-                            $stackOutRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->stack_fund, 2);
-                        } else if ($member->stack_fund > 0) {
-                            $financeMisFund = $model->total_price - $member->stack_fund;
-                            $member->stack_fund = 0;
-                            $stackOutRecord = OutRecord::prepareModelForBuyStack($model->member_id, ($model->total_price - $financeMisFund), 0, 2);
 
+                        if ($model->account_type == 1) {
+                            $member->finance_fund -= $model->total_price;
+                            $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->finance_fund, 1);
                         } else {
-                            $financeMisFund = $model->total_price;
+                            $member->stack_fund -= $model->total_price;
+                            $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->stack_fund, 2);
                         }
-                        $financeOutRecord = null;
-                        if ($financeMisFund) {
-                            $member->finance_fund -= $financeMisFund;
-                            $financeOutRecord = OutRecord::prepareModelForBuyStack($model->member_id, $financeMisFund, $member->finance_fund, 1);
-                        }
-
                         $connection = Yii::$app->db;
                         try {
                             $transaction = $connection->beginTransaction();
                             $success = false;
-                            if ($stackOutRecord && $financeOutRecord && $model->save() && $memberStack->save() && $member->save() && $stackOutRecord->save() && $financeOutRecord->save()) {
-                                $success = true;
-                            } elseif ($financeOutRecord && $model->save() && $memberStack->save() && $member->save() && $financeOutRecord->save()) {
-                                $success = true;
-                            } elseif ($stackOutRecord && $model->save() && $memberStack->save() && $member->save() && $stackOutRecord->save()) {
+                            if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save()) {
                                 $success = true;
                             }
                             if ($success) {
@@ -118,19 +146,12 @@ class StackController extends \yii\web\Controller
                                 Yii::error(json_encode($model->getErrors()));
                                 Yii::error(json_encode($memberStack->getErrors()));
                                 Yii::error(json_encode($member->getErrors()));
-                                if ($stackOutRecord) {
-                                    Yii::error(json_encode($stackOutRecord->getErrors()));
-                                }
-                                if ($financeOutRecord) {
-                                    Yii::error(json_encode($financeOutRecord->getErrors()));
-                                }
+                                Yii::error(json_encode($outRecord->getErrors()));
                                 $transaction->rollback();
                             }
 
                         } catch (Exception $e) {
                         }
-                    } else {
-                        $model->validate();
                     }
                 }
             } else {
@@ -143,7 +164,8 @@ class StackController extends \yii\web\Controller
         return $this->render('buy', [
             'model' => $model,
             'stack' => $stack,
-            'memberStack' => $memberStack
+            'memberStack' => $memberStack,
+            'open' => $open
         ]);
     }
 

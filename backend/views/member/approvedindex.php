@@ -17,6 +17,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'export'=>[
+            'fontAwesome'=>true,
+            'showConfirmAlert'=>false,
+            'target'=>GridView::TARGET_BLANK
+        ],
+        'exportConfig' => [
+            GridView::EXCEL => ['label' => '保存为Excel文件']
+        ],
+        'toolbar'=>[
+            '{export}',
+            '{toggleData}'
+        ],
+        'panel'=>[
+            'type'=>GridView::TYPE_PRIMARY,
+        ],
+        'autoXlFormat' => true,
         'layout' => '{items} {summary} {pager}',
         'pjax' => true,
         'columns' => [
@@ -60,6 +76,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         $url = '/member/resetpassword?id='.$model->id;
                         return $url;
                     }
+                    if ($action === 'update') {
+                        $url = '/member/update?id='.$model->id;
+                        return $url;
+                    }
                 }
             ],
             [
@@ -72,6 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => Yii::t('yii', '登录会员平台'),
                             'aria-label' => Yii::t('yii', '登录会员平台'),
                             'data-pjax' => '0',
+                            'target' => '_blank'
                         ];
                         return Html::a('登录会员平台', $url, $options);
                     },

@@ -16,15 +16,23 @@ use yii\widgets\ActiveForm;
         'validationUrl' => '/member/validate?' . ($model->id ? 'id=' . $model->id : ''),
     ]); ?>
 
+    <?php if($model->isNewRecord):?>
+
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?php endif ?>
 
     <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
 
+    <?php if($model->isNewRecord):?>
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'password_confirm')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'password2')->passwordInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'password2_confirm')->passwordInput(['maxlength' => true]) ?>
+    <?php else: ?>
+        <?= $form->field($model, 'buy_stack')->dropDownList(Yii::$app->options->getOptions('buy_stack')) ?>
+        <?= $form->field($model, 'locked')->dropDownList(Yii::$app->options->getOptions('locked')) ?>
+    <?php endif ?>
 
     <?= $form->field($model, 'identity')->textInput(['maxlength' => true]) ?>
 
@@ -32,7 +40,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->dropDownList(Yii::$app->options->getOptions('title')) ?>
 
+    <?php if($model->isNewRecord):?>
     <?= $form->field($model, 'investment')->textInput(['maxlength' => true]) ?>
+    <?php endif ?>
 
     <?= $form->field($model, 'bank')->dropDownList(Yii::$app->options->getOptions('bank')) ?>
 

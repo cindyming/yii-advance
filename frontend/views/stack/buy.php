@@ -11,30 +11,32 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Stacks'), 'url' => [
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stack-create">
-
+    <?php if ($open|| true): ?>
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="stack-form">
 
         <?php $form = ActiveForm::begin([
 //            'enableAjaxValidation' => true,
 //            'validateOnBlur' => true,
-//            'validationUrl' => '/account/validatebuy?' . ($model->id ? 'id=' . $model->id : ''),
+//            'validationUrl' => '/stack/validatebuy?' . ($stack->id ? 'id=' . $stack->id : ''),
         ]); ?>
-
+        <?= $form->field($model, 'account_type')->label('')->hiddenInput() ?>
         <?= $form->field($model, 'stackname')->textInput(['maxlength' => true, 'value' => $stack->name ,'readOnly' => ( true)]) ?>
         <?= $form->field($model, 'stackcode')->textInput(['maxlength' => true, 'value' => $stack->code ,'readOnly' => ( true)]) ?>
         <?= $form->field($model, 'stackprice')->textInput(['maxlength' => true, 'value' => $stack->price ,'readOnly' => ( true)]) ?>
         <?= $form->field($model, 'sellnumber')->textInput(['maxlength' => true, 'value' => $memberStack->sell_volume ? $memberStack->sell_volume : 0 ,'readOnly' => ( true)]) ?>
         <?= $form->field($model, 'locknumber')->textInput(['maxlength' => true, 'value' => $memberStack->lock_volume ? $memberStack->lock_volume : 0 ,'readOnly' => ( true)]) ?>
-
+        <?= $form->field($model, 'total_price')->textInput(['maxlength' => true, 'value' => $model->total_price ,'readOnly' => ( true)]) ?>
         <?= $form->field($model, 'volume')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'password2')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'password2')->passwordInput(['maxlength' => true]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton('确认[理财账户]购买', ['class' => 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(1)"]) ?>
+            <?= Html::submitButton('确认[购股账户]购买', ['class' => 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(2)"]) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
+        <?php endif ?>
 
     </div>
 

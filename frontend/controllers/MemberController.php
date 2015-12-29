@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\User;
 use Yii;
 use common\models\Member;
 use common\models\search\MemberSearch;
@@ -22,6 +23,7 @@ class MemberController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'except' => ['login', 'logout', 'autologin'],
                 'ruleConfig' => [
                     'class' => \frontend\components\AccessRule::className(),
                 ],
@@ -147,7 +149,7 @@ class MemberController extends Controller
 
     public function actionAutologin($id)
     {
-        $member = $this->findModel($id);
+        $member = User::findOne($id);
         Yii::$app->user->login($member);
 
         return $this->redirect(['news/index']);

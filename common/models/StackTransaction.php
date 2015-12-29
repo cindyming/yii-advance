@@ -34,6 +34,7 @@ class StackTransaction extends ActiveRecord
     public $password2;
     public $sellnumber;
     public $locknumber;
+    public $account_type;
     /**
      * @inheritdoc
      */
@@ -83,10 +84,9 @@ class StackTransaction extends ActiveRecord
             [[ 'volume',], 'required'],
             [[ 'stack_id', 'member_id', 'volume', 'type', 'status'], 'integer'],
             [['price', 'total_price'], 'number'],
-            [['total_price'], 'checkFund'],
             [['membername'], 'checkUsername'],
             [['stackcode'], 'checkStackcode'],
-            [['created_at', 'updated_at','membername', 'stackcode'], 'safe']
+            [['created_at', 'updated_at','membername', 'stackcode', 'account_type', 'password2'], 'safe']
         ];
     }
 
@@ -142,14 +142,6 @@ class StackTransaction extends ActiveRecord
     public function getMemberStack()
     {
         return $this->hasOne(MemberStack::className(), ['member_stack.member_id' => 'member_id', 'member_stack.stack_id' => 'stack_id']);
-    }
-
-    public function checkFund($attribute, $param)
-    {
-        $member = Member::findOne($this->member_id);
-        if (($this->price * $this->volume) > ($member->stack_fund + $member->finance_fund)) {
-            $this->addError('volume', '账号资金不足. 股票基金: '. $member->stack_fund . '. 理财基金:' . $member->finance_fund);
-        }
     }
 
     public function checkSellVolume($memberStack, $volume)

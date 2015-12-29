@@ -75,19 +75,10 @@ class Member extends ActiveRecord
             [
                 'class' => AttributeBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'investment',
-                ],
-                'value' => function ($event) {
-                    return $this->investment * 10000;
-                },
-            ],
-            [
-                'class' => AttributeBehavior::className(),
-                'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => 'finance_fund',
                 ],
                 'value' => function ($event) {
-                    return $this->investment * 10000;
+                    return $this->investment;
                 },
             ],
             [
