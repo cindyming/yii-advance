@@ -111,4 +111,7 @@ return [
     '{delta, plural, =1{a minute} other{# minutes}} ago' => '{delta}分钟前',
     'just now' => '刚刚',
     '{delta, plural, =1{a second} other{# seconds}} ago' => '{delta}秒前',
+    'Captcha' => '验证码',
+    'Login' => '登录',
+    
 ];
