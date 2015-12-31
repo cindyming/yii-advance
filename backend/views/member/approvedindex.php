@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
                     if ($action === 'login') {
-                        $url = str_replace('backend', 'frontend', Yii::$app->getRequest()->getHostInfo()) .  '/member/autologin?id='.$model->id;
+                        $url = str_replace('backend', 'www', Yii::$app->getRequest()->getHostInfo()) .  '/member/autologin?id='.$model->id;
                         return $url;
                     }
                 }

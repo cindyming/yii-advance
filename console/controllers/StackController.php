@@ -14,7 +14,7 @@ class StackController extends Controller
 {
     public function actionIndex()
     {
-        if (Data::isWorkingDay()) {
+        if (Date::isWorkingDay()) {
             return false;
         } else {
             $dates = Date::find()->where(['<', 'date', new Expression('curdate()')])->andWhere(['=', 'status', 0])->orderBy(['date' => SORT_DESC])->limit(2)->all();
