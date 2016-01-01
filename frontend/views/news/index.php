@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel common\models\Newssearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'news';
+$this->title = Yii::t('app', 'News');
 ?>
 <div class="news-index">
 
