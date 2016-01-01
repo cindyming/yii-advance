@@ -50,6 +50,7 @@ class User extends ActiveRecord implements IdentityInterface
             'username_old' => Yii::t('app', 'Original Username'),
             'password' => Yii::t('app', 'New Password'),
             'password_confirm' => Yii::t('app', 'New Password Confirm'),
+            'captcha' => Yii::t('app', 'Captcha'),
         ];
     }
 

@@ -12,7 +12,7 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $captcha;
-    public $rememberMe = true;
+    public $rememberMe = false;
 
     private $_user;
 
@@ -47,6 +47,15 @@ class LoginForm extends Model
                 $this->addError($attribute, 'Incorrect username or password.');
             }
         }
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
+            'captcha' => Yii::t('app', 'Captcha'),
+        ];
     }
 
     /**
