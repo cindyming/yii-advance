@@ -114,4 +114,20 @@ class OutRecord extends \yii\db\ActiveRecord
         $model->load($data, '');
         return $model;
     }
+
+    public static function prepareYearlyFeeRecord($member_id, $total)
+    {
+        $data = array(
+            'member_id' => $member_id,
+            'type' => 2,
+            'fee' => 0,
+            'amount' => System::loadConfig('annual_fee'),
+            'total' => $total,
+            'account_type' => 1,
+            'note' => '年费: ' .  date('Y-m-d H:i:s')
+        );
+        $model = new OutRecord();
+        $model->load($data, '');
+        return $model;
+    }
 }

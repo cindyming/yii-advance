@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\OutRecord;
 use Yii;
 use common\models\Member;
 use common\models\search\MemberSearch;
+use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -103,11 +105,23 @@ class MemberController extends Controller
     {
         $model = $this->findModel($id);
         $data = array('Member' => array('approved_at' => date('Y-m-d h:i:s', time()), 'role_id'=> 3));
+        $model->finance_fund -= System::loadConfig('annual_fee');
+        $outRecord = OutRecord::prepareYearlyFeeRecord($model->id, $model->finance_fund);
 
-        if ($model->load($data) && $model->save()) {
-            Yii::$app->session->setFlash('success', '会员(' .$model->username. ')审核成功');
-            return $this->redirect(['approvedindex']);
-        } else {
+        $connection = Yii::$app->db;
+        try{
+            $transaction = $connection->beginTransaction();
+            if ($model->save() && $outRecord->save()) {
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', '会员(' .$model->username. ')审核成功');
+                return $this->redirect(['approvedindex']);
+            } else {
+                $transaction->rollBack();
+                Yii::$app->session->setFlash('danger', '会员(' .$model->username. ')审核失败, 请稍后再试或联系管理员');
+                return $this->redirect(['unapprovedindex']);
+            }
+        } catch (Exception $e) {
+            $transaction->rollBack();
             Yii::$app->session->setFlash('danger', '会员(' .$model->username. ')审核失败, 请稍后再试或联系管理员');
             return $this->redirect(['unapprovedindex']);
         }
