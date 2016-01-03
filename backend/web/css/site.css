@@ -104,3 +104,53 @@ a.desc:after {
 .nav > li > form > button:hover {
     text-decoration: none;
 }
+
+.site-login{
+    width:35%;
+    margin:0 auto;
+}
+.site-login h1{
+    font-size:32px;
+    line-height: 40px;
+    color:#fff;
+    border-bottom:1px solid #3f4954;
+    text-align:center;
+    padding-bottom:2%;
+    margin-bottom:5%
+}
+.site-login label{
+    padding: 0;
+    color: #fff;
+    width:22%;
+    display: inline-block;
+    text-align: left;
+}
+.site-login input{
+    height: 35px;
+    border: 0px;
+    display: inline-block;
+    width: 75%;
+    line-height: 28px;
+    margin-bottom: 3px;
+}
+.form-control{
+    border-radius:0;
+    height:40px;
+}
+.has-error .control-label{
+    color:#fff
+}
+.help-block{
+    padding-left:22%
+}
+.field-loginform-captcha img{
+    float:right;
+    margin-right:2%;
+    margin-top:-2%;
+}
+.field-loginform-captcha input{
+    width:51%
+}
+.site-login button{
+    width:100%
+}
