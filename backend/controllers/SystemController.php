@@ -30,7 +30,7 @@ class SystemController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['*'],
+                        'actions' => ['password', 'log', 'index', 'backup', 'backupindex'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                 ]

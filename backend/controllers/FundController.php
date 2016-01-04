@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+use backend\components\AccessRule;
 use backend\models\User;
 use common\models\FundTransaction;
 use common\models\search\FundTransactionSearch;
 use Yii;
 use common\models\Fund;
 use common\models\search\FundSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
