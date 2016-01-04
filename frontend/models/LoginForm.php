@@ -53,7 +53,7 @@ class LoginForm extends Model
     {
         return [
             'username' => Yii::t('app', 'Username'),
-            'password' => Yii::t('app', 'Password'),
+            'password' => Yii::t('app', 'Login Password'),
             'captcha' => Yii::t('app', 'Captcha'),
         ];
     }
