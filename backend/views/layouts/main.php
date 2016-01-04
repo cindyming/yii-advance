@@ -55,7 +55,7 @@ AppAsset::register($this);
                     'url' => ['/stack/index'],
                     'items' => [
                         ['label' => '股票记录', 'url' => ['/stack/index']],
-                        ['label' => '股票动态', 'url' => ['/stack/trends']],
+                        ['label' => '股价动态', 'url' => ['/stack/trends']],
                         ['label' => '股票交易', 'url' => ['/stack/transactions']],
                         ['label' => '股票资产', 'url' => ['/stack/fund']],
                         ['label' => '添加资产', 'url' => ['/stack/buy']],
