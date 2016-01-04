@@ -30,7 +30,7 @@ return [
     'Identity' => '证件号',
     'Phone' => '手机号码',
     'Member Title' => '称谓',
-    'Investment' => '投资',
+    'Investment' => '注册金额',
     'Bank' => '银行名称',
     'Cardname' => '开户名',
     'Cardnumber' => '银行账号',
