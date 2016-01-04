@@ -15,7 +15,6 @@ body.login{
 .wrap > .container {
     padding: 70px 15px 20px;
 }
-
 .footer {
     height: 60px;
     background-color: #f5f5f5;
@@ -156,9 +155,19 @@ a.desc:after {
 .site-login button{
     width:100%
 }
+.header{
+    background-color: #2E363F;
+}
+h1.site-name{
+    display: inline;
+    color: #fff;
+    float: left;
+    margin: 8px 0 0 -15px;
+    font-size: 30px;
+}
 .navbar-default {
-  background-color: #2E363F;
-  border:none;
+    border:none;
+    border-radius: 0;
 }
 .navbar-default .navbar-nav > li > a{
     color:#999
