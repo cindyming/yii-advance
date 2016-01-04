@@ -169,7 +169,8 @@ h1.site-name{
 .navbar-default {
     border:none;
     border-radius: 0;
-    margin-bottom:0
+    margin-bottom:0;
+    background:transparent
 }
 .navbar-default .navbar-nav > li > a{
     color:#999
