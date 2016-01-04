@@ -143,12 +143,8 @@ return [
     '交易类型' => '交易类型',
     'Volume' => '购买数量',
     'In Price' => '股票价格',
-<<<<<<< HEAD
-    'Total Prices' => '交易金额',
-=======
     'Member Name' => '会员编号',
     'Total Price' => '交易金额',
->>>>>>> fd8873aa6564712d51c8237c640fadf843430af1
     'Charge' => '交易手续费',
     'Login Password' => '密码',
     'Create News' => '添加公告',
