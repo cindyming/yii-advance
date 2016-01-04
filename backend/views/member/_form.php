@@ -18,10 +18,10 @@ use yii\widgets\ActiveForm;
 
     <?php if($model->isNewRecord):?>
 
-    <?= $form->field($model, 'title')->dropDownList(Yii::$app->options->getOptions('title')) ?>
-    
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
     <?php endif ?>
+    
+    <?= $form->field($model, 'title')->dropDownList(Yii::$app->options->getOptions('title')) ?>
 
     <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
 
