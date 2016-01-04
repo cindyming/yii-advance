@@ -66,7 +66,7 @@ class StackTrends extends ActiveRecord
             'name' => Yii::t('app', 'Stack Name'),
             'code' => Yii::t('app', 'Stack Code'),
             'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Stack Updated At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 

@@ -22,15 +22,15 @@ AppAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head>
-    <body>
-<?php $this->beginBody() ?>
-<div class="wrap">
-    <div class="container">
-        <?= $content ?>
-    </div>
-</div>
+    <body class="login">
+        <?php $this->beginBody() ?>
+        <div class="wrap">
+            <div class="container">
+                <?= $content ?>
+            </div>
+        </div>
 
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

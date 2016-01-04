@@ -212,10 +212,17 @@ table span.glyphicon{
 .panel-primary > .panel-heading{float:left;padding: 10px 0;color: #333;background:transparent;border-color:transparent;}
 .panel-primary{border-color:transparent;}
 .summary{text-align:right;margin: 0 0 5px}
-div.required label:after {
+div.required > label:after {
   content: " *";
   color: red;
+}
+#inrecord-account_type label{
+    margin-right:15px
 }
 .pagination{margin:0 10px 0 0;float:left; }
 input#pageNo{width:34px;height:34px;border:1px solid #ddd;padding:5px;margin-right:5px}
 button.goToButon{background-color: #337ab7;border: 1px solid #337ab7;color: #fff;height: 34px;}
+
+ul.tabswitch{padding:0;list-style:none;margin-bottom:25px}
+ul.tabswitch li{border-bottom:3px solid transparent;display:inline-block;padding:1% 2% .5%;}
+ul.tabswitch li.active{border-bottom:3px solid #27A9E3}

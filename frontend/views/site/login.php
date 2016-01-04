@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if (\common\models\System::loadConfig('enable_memmber_login')):?>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-12">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'imageOptions'=>['alt'=>'点击换图','title'=>'点击换图', 'style'=>'cursor:pointer']
                 ]) ?>
 
-                <div style="color:#999;margin:1em 0">
+                <div style="color:#fff;margin:1em 0 1em 22%">
                     If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
                 </div>
 

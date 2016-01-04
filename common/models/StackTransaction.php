@@ -107,7 +107,7 @@ class StackTransaction extends ActiveRecord
             'stackcode' => Yii::t('app', 'Stack Code'),
             'stackname' => Yii::t('app', 'Stack Name'),
             'stack price' => Yii::t('app', 'Stack Price'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'created_at' => Yii::t('app', 'Stack Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'type' => Yii::t('app', 'Stack Type'),
         ];
