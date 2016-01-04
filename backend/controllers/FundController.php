@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\components\AccessRule;
 use backend\models\User;
 use common\models\FundTransaction;
 use common\models\search\FundTransactionSearch;
