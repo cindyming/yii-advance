@@ -143,6 +143,7 @@ return [
     '交易类型' => '交易类型',
     'Volume' => '购买数量',
     'In Price' => '股票价格',
+    'Member Name' => '会员编号',
     'Total Price' => '交易金额',
     'Charge' => '交易手续费',
     'Login Password' => '密码',
