@@ -6,7 +6,7 @@ use kartik\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '增减货币';
+$this->title = '账户管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
