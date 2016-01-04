@@ -73,13 +73,13 @@ class Message extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'user_id' => Yii::t('app', 'Messaged by'),
+            'user_id' => Yii::t('app', 'User ID'),
             'title' => Yii::t('app', 'Title'),
             'content' => Yii::t('app', 'Content'),
             'replied_content' => Yii::t('app', 'Replied Content'),
             'type' => Yii::t('app', 'Type'),
-            'created_at' => Yii::t('app', 'Leave At'),
-            'updated_at' => Yii::t('app', 'Reply At'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 
