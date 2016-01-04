@@ -137,7 +137,8 @@ a.desc:after {
     border-radius:0;
     height:40px;
 }
-.has-error .control-label{
+.has-error .control-label,
+.has-success .control-label{
     color:#fff
 }
 .help-block{
