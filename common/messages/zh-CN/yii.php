@@ -113,7 +113,7 @@ return [
     '{delta, plural, =1{a second} other{# seconds}} ago' => '{delta}秒前',
     'Captcha' => '验证码',
     'Login' => '登录',
-    'News' => '公告信息',
+    'News' => '公告管理',
     '#' => '编号',
     'News Title' => '公告标题',
     'Be Top' => '是否置顶',
