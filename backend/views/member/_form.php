@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
 
     <?php if($model->isNewRecord):?>
 
+    <?= $form->field($model, 'title')->dropDownList(Yii::$app->options->getOptions('title')) ?>
+    
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
     <?php endif ?>
 
@@ -37,8 +39,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'identity')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'title')->dropDownList(Yii::$app->options->getOptions('title')) ?>
 
     <?php if($model->isNewRecord):?>
     <?= $form->field($model, 'investment')->textInput(['maxlength' => true]) ?>
