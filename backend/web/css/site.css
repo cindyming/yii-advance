@@ -1,9 +1,10 @@
 html,
 body {
     height: 100%;
+}
+body.login{
     background:#2E363F
 }
-
 .wrap {
     min-height: 100%;
     height: auto;
