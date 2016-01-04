@@ -61,7 +61,7 @@ class Log extends ActiveRecord
             'action' => Yii::t('app', 'Action'),
             'result' => Yii::t('app', 'Result'),
             'note' => Yii::t('app', 'Note'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'created_at' => Yii::t('app', 'Log Date'),
         ];
     }
 
