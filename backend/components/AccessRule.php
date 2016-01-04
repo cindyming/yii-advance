@@ -35,13 +35,4 @@ class AccessRule extends \yii\filters\AccessRule
         }
         return false;
     }
-
-    public function matchAction($action)
-    {
-        if ((isset($this->actions[0])) && ($this->actions[0] == '*')) {
-            return true;
-        } else {
-            return empty($this->actions) || in_array($action->id, $this->actions, true);
-        }
-    }
 }
