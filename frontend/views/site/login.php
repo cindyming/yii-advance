@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if (\common\models\System::loadConfig('enable_memmber_login')):?>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-12">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
