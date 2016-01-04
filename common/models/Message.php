@@ -78,7 +78,7 @@ class Message extends ActiveRecord
             'content' => Yii::t('app', 'Content'),
             'replied_content' => Yii::t('app', 'Replied Content'),
             'type' => Yii::t('app', 'Type'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'created_at' => Yii::t('app', 'Leave At'),
             'updated_at' => Yii::t('app', 'Reply At'),
         ];
     }

@@ -168,6 +168,9 @@ h2.site-name{
     line-height:50px;
     font-weight:normal;
 }
+.sm-form {
+  width: 50%;
+}
 .navbar-default {
     border:none;
     border-radius: 0;
@@ -193,4 +196,12 @@ table span.glyphicon{
     padding:0;
     margin:0;
     font-size:12px 
+}
+.field-system-lowest_cash_amount label{
+    width:100%
+}
+#system-lowest_cash_amount{
+    width:60%;
+    display:inline-block;
+    margin-right:0.5%
 }
