@@ -8,6 +8,7 @@ use common\models\search\FundTransactionSearch;
 use Yii;
 use common\models\Fund;
 use common\models\search\FundSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
