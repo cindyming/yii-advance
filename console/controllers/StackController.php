@@ -5,6 +5,7 @@ namespace console\controllers;
 use common\models\InRecord;
 use common\models\StackTransaction;
 use common\models\Date;
+use common\models\System;
 use Yii;
 use yii\console\Controller;
 use yii\db\Expression;
@@ -17,8 +18,18 @@ class StackController extends Controller
         if (Date::isWorkingDay()) {
             return false;
         } else {
-            $dates = Date::find()->where(['<', 'date', new Expression('curdate()')])->andWhere(['=', 'status', 0])->orderBy(['date' => SORT_DESC])->limit(2)->all();
-            $date = array_pop($dates);
+            $limit = (int)System::loadConfig('transaction_rule');
+            if ($limit) {
+                $limit = $limit - 1;
+            } else {
+                $limit = 0;
+            }
+            if ($limit == 0) {
+                $date = date('Y-m-d');
+            } else {
+                $dates = Date::find()->where(['<', 'date', new Expression('curdate()')])->andWhere(['=', 'status', 0])->orderBy(['date' => SORT_DESC])->limit(2)->all();
+                $date = array_pop($dates);
+            }
 
             $transactions = StackTransaction::find()->where(['=', 'status', 0])->andWhere(['<', 'created_at', $date->date])->all();
             foreach ($transactions as $transaction) {

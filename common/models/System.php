@@ -15,6 +15,7 @@ class System extends ActiveRecord
     public $show_add_member;
     public $sell_fee_rate;
     public $annual_fee;
+    public $transaction_rule;
 
     /**
      * @inheritdoc
@@ -44,6 +45,7 @@ class System extends ActiveRecord
             'sell_fee_rate' => Yii::t('app', 'Exchange Fee Rate'),
             'annual_fee' => Yii::t('app', 'Annual Fee'),
             'username' =>  Yii::t('app', 'User Name'),
+            'transaction_rule' =>  Yii::t('app', 'Transaction Rule'),
             ];
     }
 
