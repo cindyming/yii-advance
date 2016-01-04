@@ -33,20 +33,20 @@ class StackController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => \yii\filters\AccessControl::className(),
                 'except' => ['login', 'logout', 'autologin'],
                 'ruleConfig' => [
-                    'class' => AccessRule::className(),
+                    'class' => \backend\components\AccessRule::className(),
                 ],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['*'],
+                        'actions' => ['index', 'trends', 'transactions', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['*'],
+                        'actions' => ['index', 'trends', 'transactions', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete'],
                         'roles' => [User::STACK_ADMIN]
                     ],
                 ],

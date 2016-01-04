@@ -111,12 +111,6 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; ROSE GIRL <?= date('Y') ?></p>
-    </div>
-</footer>
-
 <div id="errorMessageContainer" style="display:none">
     <div id="errorMessage">
         <div id="errorMessageHtml">

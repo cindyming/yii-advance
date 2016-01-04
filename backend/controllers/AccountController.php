@@ -13,6 +13,32 @@ use common\models\search\MemberSearch;
 
 class AccountController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'except' => ['login', 'logout', 'autologin'],
+                'ruleConfig' => [
+                    'class' => \backend\components\AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['list', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve'],
+                        'roles' => [User::SUPPER_ADMIN]
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     public function actionAdd()
     {
         if (Yii::$app->request->get('type') == 'out') {

@@ -29,7 +29,7 @@ class MessageController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['*'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                 ],

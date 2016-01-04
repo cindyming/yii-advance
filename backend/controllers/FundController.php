@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\User;
 use common\models\FundTransaction;
 use common\models\search\FundTransactionSearch;
 use Yii;
@@ -19,6 +20,20 @@ class FundController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'except' => ['login', 'logout', 'autologin'],
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'history', 'view', 'create', 'update', 'lock', 'clear', 'settings', 'delete'],
+                        'roles' => [User::SUPPER_ADMIN]
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

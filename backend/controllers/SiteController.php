@@ -20,10 +20,10 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => \yii\filters\AccessControl::className(),
                 'except' => ['login', 'logout', 'autologin'],
                 'ruleConfig' => [
-                    'class' => AccessRule::className(),
+                    'class' => \backend\components\AccessRule::className(),
                 ],
                 'rules' => [
                     [
