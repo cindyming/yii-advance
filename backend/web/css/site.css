@@ -156,3 +156,17 @@ a.desc:after {
 .site-login button{
     width:100%
 }
+.navbar-default {
+  background-color: #2E363F;
+  border:none;
+}
+.navbar-default .navbar-nav > li > a{
+    color:#999
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+    color:#fff
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+    background:#27a9e3;
+    color:#fff
+}

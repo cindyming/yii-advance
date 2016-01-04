@@ -26,6 +26,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+    <h1>管理平台</h1>
     <?php
     NavBar::begin();
     $menuItems = [
