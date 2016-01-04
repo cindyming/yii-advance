@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="member-form">
+<div class="member-form sm-form">
 
     <?php $form = ActiveForm::begin([
         'enableAjaxValidation' => true,
