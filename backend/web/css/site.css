@@ -139,7 +139,7 @@ a.desc:after {
 }
 .has-error .control-label,
 .has-success .control-label{
-    color:#fff
+    /*color:#fff*/
 }
 .help-block{
     padding-left:22%
@@ -183,4 +183,7 @@ h2.site-name{
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
     background:#27a9e3;
     color:#fff
+}
+table span.glyphicon{
+    margin:0 5px
 }
