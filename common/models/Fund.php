@@ -79,6 +79,7 @@ class Fund extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Fund Name'),
             'code' => Yii::t('app', 'Code'),
             'status' => Yii::t('app', 'Status'),
+            'membername' => Yii::t('app', 'Member Name'),
             'daily' => Yii::t('app', 'Daily Revenue'),
             'monthly' => Yii::t('app', 'Month Revenue'),
             'excepted' => Yii::t('app', 'Excepted Revenue'),

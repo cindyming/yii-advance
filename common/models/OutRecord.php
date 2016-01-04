@@ -84,6 +84,7 @@ class OutRecord extends \yii\db\ActiveRecord
             'fee' => Yii::t('app', 'Fee'),
             'total' => Yii::t('app', 'Total'),
             'note' => Yii::t('app', 'Note'),
+            'membername' => Yii::t('app', 'Member Name'),
             'type' => Yii::t('app', 'Out Type'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),

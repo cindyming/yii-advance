@@ -84,6 +84,7 @@ class InRecord extends \yii\db\ActiveRecord
             'amount' => Yii::t('app', 'Amount'),
             'fee' => Yii::t('app', 'Fee'),
             'total' => Yii::t('app', 'Total'),
+            'membername' => Yii::t('app', 'Member Name'),
             'type' => Yii::t('app', 'In Type'),
             'note' => Yii::t('app', 'Note'),
             'created_at' => Yii::t('app', 'Created At'),
