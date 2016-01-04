@@ -7,14 +7,14 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = Yii::t('app', 'Login');
+$this->title = Yii::t('app', 'QC股票管理平臺');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-12">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
