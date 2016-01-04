@@ -41,12 +41,12 @@ class StackController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete'],
+                        'actions' => ['index', 'trends', 'transactions', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete'],
+                        'actions' => ['index', 'trends', 'transactions', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
                         'roles' => [User::STACK_ADMIN]
                     ],
                 ],
