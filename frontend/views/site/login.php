@@ -11,7 +11,7 @@ $this->title = Yii::t('app', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>QC(启程)股票在线交易平台 </h1>
 
     <?php if (\common\models\System::loadConfig('enable_memmber_login')):?>
 

@@ -15,6 +15,15 @@ body.login{
 .wrap > .container {
     padding: 20px 15px 20px;
 }
+
+.btn-primary{
+    background:#F61919;
+    border-color:#F61919
+}
+.btn-primary:hover{
+    background:#E03434;
+    border-color: #E03434
+}
 .footer {
     height: 60px;
     background-color: #f5f5f5;
@@ -112,7 +121,7 @@ a.desc:after {
     padding: 1% 2%;
 }
 .site-login h1{
-    font-size:32px;
+    font-size:27px;
     line-height: 40px;
     color:#fff;
     border-bottom:1px solid #fff;
@@ -135,6 +144,7 @@ a.desc:after {
     line-height: 28px;
     margin-bottom: 3px;
 }
+.site-login a{color:#00D6F9}
 .site-login .help-block{padding-left:22%}
 .form-control{
     border-radius:0;
