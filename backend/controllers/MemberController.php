@@ -33,7 +33,7 @@ class MemberController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'approvedindex', 'unapproveindex', 'approve', 'resetpassword', 'reject', 'validate', 'create', 'update','view', 'delete'],
+                        'actions' => ['index', 'approvedindex', 'unapprovedindex', 'approve', 'resetpassword', 'reject', 'validate', 'create', 'update','view', 'delete'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
