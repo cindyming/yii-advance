@@ -43,6 +43,7 @@ class System extends ActiveRecord
             'cash_factorage' => Yii::t('app', 'Cash Factorage'),
             'sell_fee_rate' => Yii::t('app', 'Exchange Fee Rate'),
             'annual_fee' => Yii::t('app', 'Annual Fee'),
+            'username' =>  Yii::t('app', 'User Name'),
             ];
     }
 
