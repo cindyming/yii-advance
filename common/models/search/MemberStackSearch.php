@@ -53,6 +53,10 @@ class MemberStackSearch extends MemberStack
 
         $this->load($params);
 
+        if (!Yii::$app->user->identity->isAdmin()) {
+            $this->member_id = Yii::$app->user->identity->id;
+        }
+
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
