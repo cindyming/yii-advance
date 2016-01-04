@@ -41,7 +41,7 @@ class NewsSearch extends News
      */
     public function search($params)
     {
-        $query = News::find();
+        $query = News::find()->orderBy(['public_at' => SORT_DESC, 'be_top' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

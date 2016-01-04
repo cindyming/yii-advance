@@ -82,6 +82,7 @@ class FundTransaction extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'fund_id' => Yii::t('app', 'Fund ID'),
             'member_id' => Yii::t('app', 'Member ID'),
+            'membername' => Yii::t('app', 'Member Name'),
             'investment' => Yii::t('app', 'Fund Investment'),
             'revenue' => Yii::t('app', 'Revenue'),
             'locked' => Yii::t('app', 'Locked'),

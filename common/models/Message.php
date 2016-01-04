@@ -76,6 +76,7 @@ class Message extends ActiveRecord
             'user_id' => Yii::t('app', 'Member Id'),
             'title' => Yii::t('app', 'Title'),
             'content' => Yii::t('app', 'Content'),
+            'membername' => Yii::t('app', 'Member Name'),
             'replied_content' => Yii::t('app', 'Replied Content'),
             'type' => Yii::t('app', 'Type'),
             'created_at' => Yii::t('app', 'Created Date'),
