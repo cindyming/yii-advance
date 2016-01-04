@@ -187,3 +187,10 @@ h2.site-name{
 table span.glyphicon{
     margin:0 5px
 }
+.filters input,
+.filters select{height:30px}
+.filters .help-block{
+    padding:0;
+    margin:0;
+    font-size:12px 
+}
