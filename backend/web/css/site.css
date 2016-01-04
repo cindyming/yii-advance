@@ -1,9 +1,10 @@
 html,
 body {
     height: 100%;
+}
+body.login{
     background:#2E363F
 }
-
 .wrap {
     min-height: 100%;
     height: auto;
@@ -12,9 +13,8 @@ body {
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
+    padding: 20px 15px 20px;
 }
-
 .footer {
     height: 60px;
     background-color: #f5f5f5;
@@ -137,8 +137,9 @@ a.desc:after {
     border-radius:0;
     height:40px;
 }
-.has-error .control-label{
-    color:#fff
+.has-error .control-label,
+.has-success .control-label{
+    /*color:#fff*/
 }
 .help-block{
     padding-left:22%
@@ -153,4 +154,54 @@ a.desc:after {
 }
 .site-login button{
     width:100%
+}
+.header{
+    background-color: #2E363F;
+}
+h1{font-size:28px;}
+h2.site-name{
+    display: inline;
+    color: #fff;
+    float: left;
+    margin: 0;
+    font-size: 22px;
+    line-height:50px;
+    font-weight:normal;
+}
+.sm-form {
+  width: 50%;
+}
+.navbar-default {
+    border:none;
+    border-radius: 0;
+    margin-bottom:0;
+    background:transparent
+}
+.navbar-default .navbar-nav > li > a{
+    color:#999
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+    color:#fff
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+    background:#27a9e3;
+    color:#fff
+}
+table span.glyphicon{
+    margin:0 5px
+}
+.filters input,
+.filters select{height:30px}
+.filters .help-block{
+    padding:0;
+    margin:0;
+    font-size:12px 
+}
+.field-system-lowest_cash_amount label{
+    width:100%
+}
+#system-lowest_cash_amount{
+    width:60%;
+    display:inline-block;
+    margin-right:0.5%
 }

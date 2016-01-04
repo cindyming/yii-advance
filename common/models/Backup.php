@@ -41,7 +41,7 @@ class Backup extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'filename' => Yii::t('app', 'Filename'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'created_at' => Yii::t('app', 'Created Date'),
         ];
     }
 }
