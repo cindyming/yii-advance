@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <div class="header">
         <div class="container">
-            <h1 class="site-name">管理平台</h1>
+            <h2 class="site-name">管理平台</h2>
             <?php
             NavBar::begin();
             $menuItems = [

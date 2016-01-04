@@ -158,12 +158,14 @@ a.desc:after {
 .header{
     background-color: #2E363F;
 }
-h1.site-name{
+h1{font-size:28px;}
+h2.site-name{
     display: inline;
     color: #fff;
     float: left;
-    margin: 8px 0 0;
-    font-size: 30px;
+    margin: 0;
+    font-size: 22px;
+    line-height:50px;
     font-weight:normal;
 }
 .navbar-default {
