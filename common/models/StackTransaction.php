@@ -100,6 +100,8 @@ class StackTransaction extends ActiveRecord
             'stack_id' => Yii::t('app', 'Stack ID'),
             'member_id' => Yii::t('app', 'Member ID'),
             'volume' => Yii::t('app', 'Volume'),
+            'sellnumber' => Yii::t('app', 'Sell Number'),
+            'locknumber' => Yii::t('app', 'Lock Number'),
             'type' => Yii::t('app', 'Transaction Type'),
             'price' => Yii::t('app', 'In Price'),
             'total_price' => Yii::t('app', 'Total Price'),
