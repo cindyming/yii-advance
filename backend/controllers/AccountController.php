@@ -6,6 +6,7 @@ use common\models\InRecord;
 use common\models\Member;
 use common\models\OutRecord;
 use common\models\search\CashSearch;
+use backend\models\User;
 use yii;
 use common\models\search\InRecordSearch;
 use common\models\search\OutRecordSearch;
@@ -26,7 +27,7 @@ class AccountController extends \yii\web\Controller
                     [
                         'allow' => true,
                         'actions' => ['list', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve'],
-                        'roles' => [User::SUPPER_ADMIN]
+                        'roles' => [\backend\models\User::SUPPER_ADMIN]
                     ],
                 ],
             ],
