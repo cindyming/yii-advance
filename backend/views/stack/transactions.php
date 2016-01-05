@@ -50,7 +50,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'total_price',
             'charge',
-            'created_at',
+            [
+                'attribute' =>  'created_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
             [
                 'attribute' => 'status',
                 'filter' => Yii::$app->options->getOptions('transcation_status'),

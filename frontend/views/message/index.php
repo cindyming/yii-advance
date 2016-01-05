@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\MessageSearch */
@@ -41,7 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->replied_content ? '已回复' : '未回复';
                 }
             ],
-            'created_at',
+            [
+                'attribute' =>  'created_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
             [
                 'attribute' => 'updated_at',
                 'value' => function($model) {

@@ -42,9 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->isReplied();
                 }
             ],
-            'created_at',
+            [
+                'attribute' =>  'created_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
+
             [
                 'attribute' => 'updated_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
                 'value' => function($model) {
                     return ($model->replied_content == '') ? '' :  $model->updated_at;
                 }

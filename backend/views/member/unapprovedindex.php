@@ -32,7 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'phone',
-            'created_at',
+            [
+                'attribute' =>  'created_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '拒绝',

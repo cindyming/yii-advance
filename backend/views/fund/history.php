@@ -29,8 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'investment',
             'revenue',
-            'created_at',
-            'cleared_at',
+            [
+                'attribute' => 'created_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
+            [
+                'attribute' => 'cleared_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
             [
                 'attribute' => 'locked',
                 'label' => '锁定',

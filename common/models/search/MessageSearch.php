@@ -64,10 +64,21 @@ class MessageSearch extends Message
             'id' => $this->id,
             'member_id' => $this->member_id,
             'type' => $this->type,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
-
+        if ($this->created_at) {
+            $date = explode(' - ', $this->created_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1]]);
+            }
+        }
+        if ($this->updated_at) {
+            $date = explode(' - ', $this->updated_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.updated_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.updated_at', $date[1]]);
+            }
+        }
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'replied_content', $this->replied_content])

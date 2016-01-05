@@ -56,12 +56,25 @@ class StackSearch extends Stack
             return $dataProvider;
         }
 
+        if ($this->created_at) {
+            $date = explode(' - ', $this->created_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1]]);
+            }
+        }
+        if ($this->updated_at) {
+            $date = explode(' - ', $this->updated_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.updated_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.updated_at', $date[1]]);
+            }
+        }
+
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
             'price' => $this->price,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
         return $dataProvider;

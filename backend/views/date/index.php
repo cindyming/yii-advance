@@ -25,7 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'pjax' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'date',
+            [
+                'attribute' => 'date',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
             [
                 'attribute'=>'status',
                 'value' => function($model){

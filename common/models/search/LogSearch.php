@@ -57,8 +57,15 @@ class LogSearch extends Log
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
         ]);
+
+        if ($this->created_at) {
+            $date = explode(' - ', $this->created_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1]]);
+            }
+        }
 
         $query->andFilterWhere(['like', 'role', $this->role])
             ->andFilterWhere(['like', 'action', $this->action])

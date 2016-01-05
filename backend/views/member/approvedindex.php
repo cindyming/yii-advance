@@ -41,7 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'nickname',
             'phone',
             'identity',
-            'approved_at',
+            [
+                'attribute' =>  'approved_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
             [
                 'attribute' => 'locked',
                 'filter' => Yii::$app->options->getOptions('locked'),

@@ -38,8 +38,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
 
             ],
-            'updated_at',
-            'created_at',
+
+            [
+                'attribute' =>  'updated_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
+            [
+                'attribute' =>  'created_at',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+            ],
             [
                 'attribute' => 'status',
                 'value' => function($model) {

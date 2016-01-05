@@ -61,6 +61,20 @@ class StackTransactionSearch extends StackTransaction
             // $query->where('0=1');
             return $dataProvider;
         }
+        if ($this->created_at) {
+            $date = explode(' - ', $this->created_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1]]);
+            }
+        }
+        if ($this->updated_at) {
+            $date = explode(' - ', $this->updated_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.updated_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.updated_at', $date[1]]);
+            }
+        }
 
         $query->andFilterWhere([
             'id' => $this->id,
@@ -70,8 +84,6 @@ class StackTransactionSearch extends StackTransaction
             'total_price' => $this->total_price,
             'status' => $this->status,
             'total' => $this->total,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ])->andFilterWhere(['like','stack.code',$this->stackcode])
             ->andFilterWhere(['like','stack.name',$this->stackname])
             ->andFilterWhere(['like','member.username',$this->membername])

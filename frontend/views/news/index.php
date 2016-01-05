@@ -29,7 +29,10 @@ $this->title = Yii::t('app', 'News');
                 },
             ],
             'title',
-            'public_at',
+            [
+                'attribute' => 'public_at',
+                'filter' => false,
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}'

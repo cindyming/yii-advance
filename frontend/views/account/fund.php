@@ -57,7 +57,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'investment',
             'revenue',
-            'created_at',
+
+            [
+                'attribute' => 'created_at',
+                'filter' => false
+            ],
             [
                 'attribute' => 'cleared_at',
                 'label' => '状态',

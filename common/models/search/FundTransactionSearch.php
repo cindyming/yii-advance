@@ -60,6 +60,21 @@ class FundTransactionSearch extends FundTransaction
             // $query->where('0=1');
             return $dataProvider;
         }
+        if ($this->created_at) {
+            $date = explode(' - ', $this->created_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1] . ' 23:59:59']);
+            }
+        }
+
+        if ($this->cleared_at) {
+            $date = explode(' - ', $this->cleared_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.cleared_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.cleared_at', $date[1] . ' 23:59:59']);
+            }
+        }
 
         $query->andFilterWhere([
             'id' => $this->id,
@@ -69,8 +84,6 @@ class FundTransactionSearch extends FundTransaction
             'revenue' => $this->revenue,
             'fund_transaction.locked' => $this->locked,
             'cleared' => $this->cleared,
-            'created_at' => $this->created_at,
-            'cleared_at' => $this->cleared_at,
         ])->andFilterWhere(['like','member.username',$this->membername])
         ->orderBy(['created_at' => SORT_DESC]);
 

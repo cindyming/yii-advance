@@ -74,6 +74,28 @@ class MemberSearch extends Member
             'finance_fund' => $this->finance_fund,
         ]);
 
+        if ($this->approved_at) {
+            $date = explode(' - ', $this->approved_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.approved_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.approved_at', $date[1]]);
+            }
+        }
+        if ($this->created_at) {
+            $date = explode(' - ', $this->created_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1]]);
+            }
+        }
+        if ($this->updated_at) {
+            $date = explode(' - ', $this->updated_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.updated_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.updated_at', $date[1]]);
+            }
+        }
+
         $query->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'access_token', $this->access_token])

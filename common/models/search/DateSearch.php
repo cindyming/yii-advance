@@ -54,14 +54,20 @@ class DateSearch extends Date
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        if ($this->date) {
+            $date = explode(' - ', $this->date);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.date', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.date', $date[1]]);
+            }
+        }
         $query->andFilterWhere([
             'id' => $this->id,
-            'date' => $this->date,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ])->orderBy(['date' => SORT_DESC]);
+
 
         return $dataProvider;
     }

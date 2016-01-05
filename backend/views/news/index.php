@@ -29,7 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Yii::$app->options->getOptionLabel('be_top', $model->be_top);
                 },
             ],
-            'public_at',
+            [
+                'attribute' => 'public_at',
+                'filter' => false,
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '修改',

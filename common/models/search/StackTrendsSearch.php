@@ -58,12 +58,25 @@ class StackTrendsSearch extends StackTrends
             return $dataProvider;
         }
 
+        if ($this->created_at) {
+            $date = explode(' - ', $this->created_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1]]);
+            }
+        }
+        if ($this->updated_at) {
+            $date = explode(' - ', $this->updated_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.updated_at', $date[0]]);
+                $query->andFilterWhere(['<=', $this::tableName() . '.updated_at', $date[1]]);
+            }
+        }
+
         $query->andFilterWhere([
             'id' => $this->id,
             'stack_id' => $this->stack_id,
             'price' => $this->price,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]) ->andFilterWhere(['like','stack.code',$this->code])
             ->andFilterWhere(['like','stack.name',$this->name])
             ->orderBy(['created_at' => SORT_DESC]);
