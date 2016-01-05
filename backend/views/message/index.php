@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'title',
             [
-                'attribute' => 'member_id',
+                'attribute' => 'membername',
                 'value' => function($model) {
                     return $model->getMember()->one()->username;
                 }
