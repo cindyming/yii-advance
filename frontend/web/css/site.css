@@ -4,6 +4,7 @@ body {
 }
 body.login{
     background:url(/bg.jpeg) no-repeat center center;
+    background-size: cover;
 }
 .wrap {
     min-height: 100%;
