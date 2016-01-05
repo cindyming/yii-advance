@@ -223,7 +223,7 @@ return [
     'backaddress' => '开户行',
     'Create Message' => '添加留言',
     'Sell Stack' => '卖出股票',
-    '' => '',
+    'My Stacks' => '股票资产',
     '' => '',
     '' => '',
     '' => '',
