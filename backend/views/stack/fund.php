@@ -7,7 +7,7 @@ use kartik\grid\GridView;;
 /* @var $searchModel common\models\search\StackSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Stacks');
+$this->title = Yii::t('app', 'Stacks Record');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stack-index">
