@@ -106,6 +106,7 @@ class MemberController extends Controller
     {
         $model = $this->findModel($id);
         $data = array('Member' => array('approved_at' => date('Y-m-d h:i:s', time()), 'role_id'=> 3));
+        $model->load($data);
         $model->finance_fund -= System::loadConfig('annual_fee');
         $outRecord = OutRecord::prepareYearlyFeeRecord($model->id, $model->finance_fund);
 

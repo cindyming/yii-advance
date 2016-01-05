@@ -68,6 +68,8 @@ class MemberStack extends ActiveRecord
             'lock_volume' => Yii::t('app', 'Lock Volume'),
             'created_at' => Yii::t('app', 'Created At'),
             'membername' => Yii::t('app', 'Member Name'),
+            'current_price' => Yii::t('app', 'Current Price'),
+            'total_price' => Yii::t('app', 'Total Price'),
             'stackname' => Yii::t('app', 'Stack Name'),
             'stackcode' => Yii::t('app', 'Stack Code'),
             'updated_at' => Yii::t('app', 'Updated At'),

@@ -57,6 +57,43 @@ class FundTransaction extends \yii\db\ActiveRecord
 
                 },
             ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'fund_id',
+                ],
+                'value' => function ($event) {
+                    return 1;
+                },
+            ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'revenue',
+                ],
+                'value' => function ($event) {
+                    return 0;
+                },
+            ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'locked',
+                ],
+                'value' => function ($event) {
+                    return 0;
+                },
+            ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'cleared',
+                ],
+                'value' => function ($event) {
+                    return 0;
+                },
+            ],
+
         ];
     }
 
@@ -66,10 +103,11 @@ class FundTransaction extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fund_id', 'member_id', 'investment', 'revenue', 'locked', 'cleared'], 'required'],
+            [[ 'investment'], 'required'],
             [['fund_id', 'member_id', 'locked', 'cleared'], 'integer'],
             [['investment', 'revenue'], 'number'],
-            [['created_at', 'cleared_at'], 'safe']
+            [['membername'], 'checkUsername'],
+            [['created_at', 'cleared_at', 'fund_id', 'revenue', 'locked', 'cleared'], 'safe']
         ];
     }
 
@@ -106,5 +144,13 @@ class FundTransaction extends \yii\db\ActiveRecord
     public function getMember()
     {
         return $this->hasOne(Member::className(), ['id' => 'member_id']);
+    }
+
+    public function checkUsername($attribute, $param)
+    {
+        $existUser = Member::find()->where(['=', 'username', $this->membername])->one();
+        if(!$existUser){
+            $this->addError($attribute, '该用户不存在!');
+        }
     }
 }

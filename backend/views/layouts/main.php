@@ -47,6 +47,7 @@ AppAsset::register($this);
                     'url' => ['/fund/history'],
                     'items' => [
                         ['label' => '基金设置', 'url' => ['/fund/settings']],
+                        ['label' => '添加资产', 'url' => ['/fund/add']],
                         ['label' => '基金资产', 'url' => ['/fund/history']],
                     ]
                 ],

@@ -13,6 +13,8 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * FundController implements the CRUD actions for Fund model.
@@ -31,7 +33,7 @@ class FundController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'history', 'view', 'create', 'update', 'lock', 'clear', 'settings', 'delete'],
+                        'actions' => ['index', 'history', 'view', 'create', 'update', 'lock', 'clear', 'settings', 'delete', 'add', 'validateadd'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                 ],
@@ -81,6 +83,34 @@ class FundController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionValidateadd()
+    {
+        $model = new FundTransaction();
+
+        if ($model->load(Yii::$app->request->post()))
+        {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            echo json_encode(ActiveForm::validate($model));
+
+        } else {
+            echo json_encode(array());
+        }
+        Yii::$app->end();
+    }
+
+    public function actionAdd()
+    {
+        $model = new FundTransaction();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['history']);
+        } else {
+            return $this->render('add', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
