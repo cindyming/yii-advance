@@ -164,7 +164,7 @@ class MemberController extends Controller
     public function actionValidate()
     {
         $model = new Member();
-        if($model->load(Yii::$app->request->post(), false))
+        if($model->load(Yii::$app->request->post()))
         {
             Yii::$app->response->format = Response::FORMAT_JSON;
             echo json_encode(ActiveForm::validate($model));
