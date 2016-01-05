@@ -51,6 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'total_price',
             'charge',
             'created_at',
+            [
+                'attribute' => 'status',
+                'filter' => Yii::$app->options->getOptions('transcation_status'),
+                'value' => function($model) {
+                    return Yii::$app->options->getOptionLabel('transcation_status', $model->status);
+                }
+            ],
         ],
     ]); ?>
 

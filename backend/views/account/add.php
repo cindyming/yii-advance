@@ -29,7 +29,10 @@ $isOut = (Yii::$app->request->get('type') == 'out');
     <div class="cash-_form sm-form">
 
         <?php $form = ActiveForm::begin([
-            'action' => ($isOut) ? '/account/add?type=out' : '/account/add?type=in'
+            'action' => ($isOut) ? '/account/add?type=out' : '/account/add?type=in',
+            'validateOnBlur' => true,
+            'enableAjaxValidation' => true,
+            'validationUrl' => '/account/validateadd?type=' . (($isOut) ? 'out' : 'in'),
         ]); ?>
         <?= $form->field($model, 'membername')->textInput(['value' => Yii::$app->getRequest()->get('id')]); ?>
         <?= $form->field($model, 'amount') ?>

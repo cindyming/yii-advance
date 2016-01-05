@@ -67,6 +67,7 @@ class InRecord extends \yii\db\ActiveRecord
             [['member_id', 'account_type', 'amount', 'total'], 'required'],
             [['member_id', 'account_type', 'type'], 'integer'],
             [['amount', 'fee', 'total'], 'number'],
+            [['membername'],  'string', 'max' => 250],
             [['created_at', 'updated_at', 'membername'], 'safe'],
             [['note'], 'string', 'max' => 250]
         ];

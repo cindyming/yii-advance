@@ -10,7 +10,7 @@ class Options
             'ABC' => '农业银行'
         ),
         'title' => array(
-            'mis' => '小姐',
+            'mis' => '女士',
             'mr' => '先生'
         ),
         'role' => array(
