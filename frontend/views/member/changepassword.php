@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = '密码修改';
+$this->title = '修改密码';
 ?>
 <div class="user-create">
 

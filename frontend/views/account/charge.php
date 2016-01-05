@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Cash */
 
-$this->title = 'Charge';
+$this->title = '申请提现';
 ?>
 <div class="cash-create">
 

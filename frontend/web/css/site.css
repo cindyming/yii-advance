@@ -151,8 +151,8 @@ a.desc:after {
     border-radius:0;
     height:40px;
 }
-.has-error .control-label,
-.has-success .control-label{
+.site-login .has-error .control-label,
+.site-login .has-success .control-label{
     color:#fff
 }
 .help-block{
@@ -258,3 +258,9 @@ button.goToButon{background-color: #337ab7;border: 1px solid #337ab7;color: #fff
 ul.tabswitch{padding:0;list-style:none;margin-bottom:25px}
 ul.tabswitch li{border-bottom:3px solid transparent;display:inline-block;padding:1% 2% .5%;}
 ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
+
+.user-form > div {
+  width: 48%;
+  margin-right: 2%;
+  display: inline-block;
+}
