@@ -151,8 +151,8 @@ a.desc:after {
     border-radius:0;
     height:40px;
 }
-.has-error .control-label,
-.has-success .control-label{
+.site-login .has-error .control-label,
+.site-login .has-success .control-label{
     color:#fff
 }
 .help-block{
@@ -170,7 +170,23 @@ a.desc:after {
     width:100%
 }
 .header{
-    background-color: #2E363F;
+    background-color:#2E363F;
+    color:#fff
+}
+.top-header{
+    background-color:#435060;
+    color:#eee;
+}
+.top-header ul{
+    list-style:none;
+    text-align:right;
+    margin:0;
+}
+.top-header ul li{
+    display:inline-block;
+    margin-left:15px;
+    font-size:13px;
+    line-height:32px
 }
 h1{font-size:28px;}
 h2.site-name{
@@ -184,6 +200,9 @@ h2.site-name{
 }
 .sm-form {
   width: 50%;
+}
+.navbar-collapse{
+    float:right;
 }
 .navbar-default {
     border:none;
@@ -239,3 +258,12 @@ button.goToButon{background-color: #337ab7;border: 1px solid #337ab7;color: #fff
 ul.tabswitch{padding:0;list-style:none;margin-bottom:25px}
 ul.tabswitch li{border-bottom:3px solid transparent;display:inline-block;padding:1% 2% .5%;}
 ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
+
+.user-form > div {
+  width: 48%;
+  margin-right: 2%;
+  display: inline-block;
+}
+.user-form > div:last-child {
+  margin-right: 0;
+}
