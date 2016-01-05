@@ -202,7 +202,7 @@ class Member extends ActiveRecord
 
     public static function isExist($usename)
     {
-        $existUser = Member::find()->where(['=', 'username', $usename])->one();;
-        return $existUser;
+        $existUser = Member::find()->where(['=', 'username', $usename]);
+        return ($existUser) ? $existUser->one() : null;
     }
 }

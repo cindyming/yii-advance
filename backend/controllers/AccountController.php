@@ -26,12 +26,50 @@ class AccountController extends \yii\web\Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve'],
+                        'actions' => ['list', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve', 'validateadd'],
                         'roles' => [\backend\models\User::SUPPER_ADMIN]
                     ],
                 ],
             ],
         ];
+    }
+
+    public function actionValidateadd()
+    {
+        if (Yii::$app->request->get('type') == 'out') {
+            $model = new OutRecord();
+        } else {
+            $model = new InRecord();
+        }
+
+        Yii::$app->response->format = yii\web\Response::FORMAT_JSON;
+
+        if ($model->load(Yii::$app->request->post())) {
+            $member = Member::isExist($model->membername);
+            $result = yii\widgets\ActiveForm::validate($model);
+            
+            if (!$member) {
+                $model->addError('membername', '用户编号不存在,请确认后输入');
+            } else {
+                if (Yii::$app->request->get('type') == 'out') {
+                    if ($model->account_type == 1) {
+                        $compareData = $member->finance_fund;
+                    } else {
+                        $compareData = $member->stack_fund;
+                    }
+                    if ($model->amount > $compareData) {
+                        $model->addError('amount', '账户余额不足,理财账户余额: ' . $member->finance_fund . '. 购股账户余额: '. $member->stack_fund);
+                    }
+                }
+            }
+            foreach ($model->getErrors() as $attribute => $errors) {
+                $result[yii\helpers\Html::getInputId($model, $attribute)] = $errors;
+            }
+            echo json_encode($result);
+        } else {
+            echo json_encode(array());
+        }
+        Yii::$app->end();
     }
 
     public function actionAdd()
