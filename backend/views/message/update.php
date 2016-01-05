@@ -14,6 +14,21 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?= \yii\widgets\DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            [
+                'attribute' => 'type',
+                'value' => Yii::$app->options->getOptionLabel('question_type', $model->type)
+            ],
+            [
+                'attribute' => 'membername',
+                'value' => $model->getMember()->one()->username
+            ],
+            'content:html',
+        ],
+    ]) ?>
+
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
