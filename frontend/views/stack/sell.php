@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Stack */
 /* @var $form yii\widgets\ActiveForm */
-$this->title = Yii::t('app', 'Sell Stack ');
+$this->title = Yii::t('app', 'Sell Stack');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Stacks'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

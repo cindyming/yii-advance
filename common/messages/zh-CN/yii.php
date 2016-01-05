@@ -222,7 +222,7 @@ return [
     'Total Price' => '总股价',
     'backaddress' => '开户行',
     'Create Message' => '添加留言',
-    '' => '',
+    'Sell Stack' => '卖出股票',
     '' => '',
     '' => '',
     '' => '',

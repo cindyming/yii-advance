@@ -264,3 +264,6 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
   margin-right: 2%;
   display: inline-block;
 }
+.user-form > div:last-child {
+  margin-right: 0;
+}
