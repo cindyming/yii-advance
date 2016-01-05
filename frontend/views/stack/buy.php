@@ -16,9 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="stack-form">
 
         <?php $form = ActiveForm::begin([
-//            'enableAjaxValidation' => true,
-//            'validateOnBlur' => true,
-//            'validationUrl' => '/stack/validatebuy?' . ($stack->id ? 'id=' . $stack->id : ''),
+            'enableAjaxValidation' => true,
+            'validateOnBlur' => true,
+            'validationUrl' => '/stack/validatebuy?' . ($stack->id ? 'id=' . $stack->id : ''),
         ]); ?>
         <?= $form->field($model, 'account_type')->label('')->hiddenInput() ?>
         <?= $form->field($model, 'stackname')->textInput(['maxlength' => true, 'value' => $stack->name ,'readOnly' => ( true)]) ?>
