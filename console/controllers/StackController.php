@@ -16,8 +16,6 @@ class StackController extends Controller
     public function actionIndex()
     {
         if (Date::isWorkingDay()) {
-            return false;
-        } else {
             $limit = (int)System::loadConfig('transaction_rule');
             if ($limit) {
                 $limit = $limit - 1;
@@ -40,6 +38,9 @@ class StackController extends Controller
                 }
 
             }
+
+        } else {
+            return false;
         }
     }
 
