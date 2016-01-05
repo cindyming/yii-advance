@@ -27,9 +27,10 @@ class StackController extends Controller
             } else {
                 $dates = Date::find()->where(['<', 'date', new Expression('curdate()')])->andWhere(['=', 'status', 0])->orderBy(['date' => SORT_DESC])->limit(2)->all();
                 $date = array_pop($dates);
+                $date = $date->date;
             }
 
-            $transactions = StackTransaction::find()->where(['=', 'status', 0])->andWhere(['<', 'created_at', $date->date])->all();
+            $transactions = StackTransaction::find()->where(['=', 'status', 0])->andWhere(['<', 'created_at', $date])->all();
             foreach ($transactions as $transaction) {
                 if ($transaction->type == 0) {
                     $this->dealBuyAction($transaction);
