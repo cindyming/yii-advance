@@ -224,7 +224,7 @@ return [
     'Create Message' => '添加留言',
     'Sell Stack' => '卖出股票',
     'My Stacks' => '股票资产',
-    '' => '',
+    'Stacks Record' => '股票资产',
     '' => '',
     '' => '',
     '' => '',
