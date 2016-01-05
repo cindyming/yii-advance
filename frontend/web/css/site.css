@@ -16,7 +16,7 @@ body.login{
 .wrap > .container {
     padding: 20px 15px 20px;
 }
-
+table th{font-size:12px}
 .btn-primary{
     background:#F61919;
     border-color:#F61919
