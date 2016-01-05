@@ -170,7 +170,12 @@ a.desc:after {
     width:100%
 }
 .header{
-    background-color: #2E363F;
+    background-color:#2E363F;
+    color:#fff
+}
+.top-header{
+    background-color:#2E363F;
+    color:#fff
 }
 h1{font-size:28px;}
 h2.site-name{
