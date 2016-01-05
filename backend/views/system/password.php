@@ -24,7 +24,7 @@ $this->title = '密码修改';
 
             <?= $form->field($model, 'password_old')->passwordInput(['minlength' => 6, 'label' => '原一级密码']) ?>
 
-            <?= $form->field($model, 'username')->textInput(['minlength' => 6, 'value' => $model->username]) ?>
+            <?= $form->field($model, 'username')->textInput(['minlength' => 6, 'value' => $model->username])->label(Yii::t('app', 'User Name'))?>
 
             <?= $form->field($model, 'password')->passwordInput(['minlength' => 6, 'label' => '新一级密码', 'value' => '']) ?>
 
