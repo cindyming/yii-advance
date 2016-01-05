@@ -174,8 +174,19 @@ a.desc:after {
     color:#fff
 }
 .top-header{
-    background-color:#2E363F;
-    color:#fff
+    background-color:#435060;
+    color:#eee;
+}
+.top-header ul{
+    list-style:none;
+    text-align:right;
+    margin:0;
+}
+.top-header ul li{
+    display:inline-block;
+    margin-left:15px;
+    font-size:13px;
+    line-height:32px
 }
 h1{font-size:28px;}
 h2.site-name{
@@ -189,6 +200,9 @@ h2.site-name{
 }
 .sm-form {
   width: 50%;
+}
+.navbar-collapse{
+    float:right;
 }
 .navbar-default {
     border:none;
