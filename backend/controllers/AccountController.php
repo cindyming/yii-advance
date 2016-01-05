@@ -47,7 +47,7 @@ class AccountController extends \yii\web\Controller
         if ($model->load(Yii::$app->request->post())) {
             $member = Member::isExist($model->membername);
             $result = yii\widgets\ActiveForm::validate($model);
-            
+
             if (!$member) {
                 $model->addError('membername', '用户编号不存在,请确认后输入');
             } else {
