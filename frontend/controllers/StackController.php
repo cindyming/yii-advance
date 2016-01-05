@@ -155,7 +155,7 @@ class StackController extends \yii\web\Controller
                     }
                 }
             } else {
-                Yii::$app->session->setFlash('danger', '非交易时间. 早上10:00 ~ 12:00. 下午2:00 ~ 4:00');
+                Yii::$app->session->setFlash('danger', '非交易时间. 早上10:00 ~ 12:30. 下午2:00 ~ 4:00');
             }
         } else {
             Yii::$app->session->setFlash('danger', '对不起,非交易日不能进行交易!');
