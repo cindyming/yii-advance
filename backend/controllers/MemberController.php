@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\OutRecord;
+use common\models\System;
 use Yii;
 use common\models\Member;
 use common\models\search\MemberSearch;
