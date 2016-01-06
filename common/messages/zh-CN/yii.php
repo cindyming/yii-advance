@@ -241,6 +241,7 @@ return [
     'Submit' => '提交',
     'Update Member: ' => '更新会员信息: ',
     'Update Stack: ' => '更新股票',
+    'Transaction Rule' => '',
     '' => '',
     '' => '',
     '' => '',
