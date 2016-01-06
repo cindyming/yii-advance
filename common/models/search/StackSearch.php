@@ -75,7 +75,9 @@ class StackSearch extends Stack
             'id' => $this->id,
             'status' => $this->status,
             'price' => $this->price,
-        ]);
+        ])
+            ->andFilterWhere(['like','stack.code',$this->code])
+            ->andFilterWhere(['like','stack.name',$this->name]);
 
         return $dataProvider;
     }

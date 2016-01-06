@@ -81,6 +81,7 @@ class StackTransactionSearch extends StackTransaction
             'stack_id' => $this->stack_id,
             'member_id' => $this->member_id,
             'volume' => $this->volume,
+            'type' => $this->type,
             'total_price' => $this->total_price,
             'status' => $this->status,
             'total' => $this->total,

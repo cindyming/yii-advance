@@ -65,9 +65,6 @@ class MemberSearch extends Member
             'locked' => $this->locked,
             'role_id' => $this->role_id,
             'investment' => $this->investment,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'approved_at' => $this->approved_at,
             'buy_stack' => $this->buy_stack,
             'added_by' => $this->added_by,
             'stack_fund' => $this->stack_fund,
@@ -77,8 +74,8 @@ class MemberSearch extends Member
         if ($this->approved_at) {
             $date = explode(' - ', $this->approved_at);
             if (count($date)  == 2) {
-                $query->andFilterWhere(['>=', $this::tableName() . '.approved_at', $date[0]]);
-                $query->andFilterWhere(['<=', $this::tableName() . '.approved_at', $date[1]]);
+                $query->andFilterWhere(['>=', $this::tableName() . '.approved_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.approved_at', $date[1] . ' 23:59:59']);
             }
         }
         if ($this->created_at) {
