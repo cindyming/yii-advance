@@ -76,7 +76,7 @@ class Date extends \yii\db\ActiveRecord
             'date' => Yii::t('app', 'Date'),
             'status' => Yii::t('app', 'Date Status'),
             'start_date' => Yii::t('app', 'Start Date'),
-            'end_start' => Yii::t('app', 'End Date'),
+            'end_start' => Yii::t('app', 'Ended Date'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
