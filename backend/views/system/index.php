@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'cash_factorage')->textInput() ?>
         <?= $form->field($model, 'sell_fee_rate')->textInput() ?>
         <?= $form->field($model, 'annual_fee')->textInput() ?>
-        <?= $form->field($model, 'transaction_rule')->textInput() ?>
+        <?= $form->field($model, 'transaction_rule')->textInput()->label(Yii::t('app', 'Transaction Rule')) ?>
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '保存' : '保存', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

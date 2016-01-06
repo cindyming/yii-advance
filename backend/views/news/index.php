@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     return Yii::$app->options->getOptionLabel('be_top', $model->be_top);
                 },
+                'filter' => Yii::$app->options->getOptions('be_top'),
             ],
             [
                 'attribute' => 'public_at',
