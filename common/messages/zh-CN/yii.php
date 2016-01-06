@@ -192,7 +192,7 @@ return [
     'Create Stack Fund' => '购买股票',
     'Dates' => '假日安排',
     'Start Date' => '开始日期',
-    'End Date' => '结束日期',
+    'Ended Date' => '结束日期',
     'Date' => '日期',
     'Date Status' => '状态',
     'First Page' => '首页',
