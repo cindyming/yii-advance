@@ -239,7 +239,7 @@ return [
     'Stacks List' => '交易中心',
     'Incorrect username or password.' => '会员编号或密码错误',
     'Submit' => '提交',
-    '' => '',
+    'Update Member: ' => '更新会员信息: ',
     '' => '',
     '' => '',
     '' => '',
