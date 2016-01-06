@@ -138,7 +138,7 @@ return [
     'Stack Updated At' => '更新日期',
     'Stack Created At' => '添加日期',
     'Stack Status' => '状态',
-    'Update Stack' => '修改股票',
+    'Update Stack' => '更新股票',
     'Stack Trends' => '股价动态',
     'Stack Transactions' => '股票交易记录',
     '交易类型' => '交易类型',
