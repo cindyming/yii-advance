@@ -26,11 +26,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
 
     <?php if($model->isNewRecord):?>
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'password_confirm')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password_confirm',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password2')->passwordInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'password2_confirm')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password2_confirm',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
     <?php else: ?>
         <?= $form->field($model, 'buy_stack')->dropDownList(Yii::$app->options->getOptions('buy_stack')) ?>
         <?= $form->field($model, 'locked')->dropDownList(Yii::$app->options->getOptions('locked')) ?>

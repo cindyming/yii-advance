@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'locknumber')->textInput(['maxlength' => true, 'value' => $memberStack->lock_volume ? $memberStack->lock_volume : 0 ,'readOnly' => ( true)]) ?>
 
         <?= $form->field($model, 'volume')->textInput(['maxlength' => true])->label(Yii::t('app', 'Exchange Volume')) ?>
-        <?= $form->field($model, 'password2')->passwordInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

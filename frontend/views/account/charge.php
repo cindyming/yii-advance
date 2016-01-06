@@ -21,7 +21,7 @@ $this->title = '申请提现';
     <?= $form->field($model, 'cardname')->textInput(['value' => Yii::$app->user->identity->cardname]); ?>
     <?= $form->field($model, 'backaddress')->textInput(['value' => Yii::$app->user->identity->bankaddress]); ?>
     <?= $form->field($model, 'amount') ?>
-    <?= $form->field($model, 'password2')->passwordInput() ?>
+    <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
