@@ -76,7 +76,7 @@ class StackTrendsSearch extends StackTrends
         $query->andFilterWhere([
             'id' => $this->id,
             'stack_id' => $this->stack_id,
-            'price' => $this->price,
+            $this::tableName() . '.price' => $this->price,
         ]) ->andFilterWhere(['like','stack.code',$this->code])
             ->andFilterWhere(['like','stack.name',$this->name])
             ->orderBy(['created_at' => SORT_DESC]);
