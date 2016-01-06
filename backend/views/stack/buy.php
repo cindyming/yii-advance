@@ -10,7 +10,7 @@ $this->title = Yii::t('app', 'Create Stack Fund');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Stacks'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="stack-create">
+<div class="stack-create sm-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

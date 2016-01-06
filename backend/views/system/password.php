@@ -14,7 +14,7 @@ $this->title = '密码修改';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="user-form">
+    <div class="user-form sm-form">
 
         <div id="changeFirstPassword" class="two-cols">
 
