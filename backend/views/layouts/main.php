@@ -47,7 +47,7 @@ AppAsset::register($this);
                     'url' => ['/fund/history'],
                     'items' => [
                         ['label' => '基金设置', 'url' => ['/fund/settings']],
-                        ['label' => '添加资产', 'url' => ['/fund/add']],
+                        ['label' => '添加基金资产', 'url' => ['/fund/add']],
                         ['label' => '基金资产', 'url' => ['/fund/history']],
                     ]
                 ],
@@ -59,7 +59,7 @@ AppAsset::register($this);
                         ['label' => '股价动态', 'url' => ['/stack/trends']],
                         ['label' => '股票交易', 'url' => ['/stack/transactions']],
                         ['label' => '股票资产', 'url' => ['/stack/fund']],
-                        ['label' => '添加资产', 'url' => ['/stack/buy']],
+                        ['label' => '购买股票', 'url' => ['/stack/buy']],
                         ['label' => '假日安排', 'url' => ['/date/index']],
                     ]
                 ],

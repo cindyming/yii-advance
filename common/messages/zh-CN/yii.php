@@ -225,7 +225,7 @@ return [
     'Sell Stack' => '卖出股票',
     'My Stacks' => '股票资产',
     'Stacks Record' => '股票资产',
-    '' => '',
+    'Create Fund History' => '添加基金资产',
     '' => '',
     '' => '',
     '' => '',
