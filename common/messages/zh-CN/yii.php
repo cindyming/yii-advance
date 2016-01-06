@@ -140,7 +140,7 @@ return [
     'Stack Status' => '状态',
     'Update Stack' => '修改股票',
     'Stack Trends' => '股价动态',
-    'Stack Transactions' => '股票交易',
+    'Stack Transactions' => '股票交易记录',
     '交易类型' => '交易类型',
     'Volume' => '购买数量',
     'In Price' => '股票价格',
@@ -232,6 +232,11 @@ return [
     'Update' => '更新',
     'Stack' => '股票',
     'Exchange Volume' => '交易股数',
+    'Exchange Status' => '状态',
+    'News List' => '新闻公告',
+    'Messages List' => '留言列表',
+    'Bank Address' => '开户行',
+    'Stacks List' => '交易中心',
     '' => '',
     '' => '',
     '' => '',
@@ -239,5 +244,5 @@ return [
     '' => '',
     '' => '',
     '' => '',
-    
+    '' => '',
 ];

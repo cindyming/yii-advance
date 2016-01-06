@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel common\models\search\MessageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Messages');
+$this->title = Yii::t('app', 'Messages List');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="message-index">

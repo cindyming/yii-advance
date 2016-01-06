@@ -55,7 +55,7 @@ AppAsset::register($this);
                         'label' => '业务中心', 'url' => ['/member/create'],
                         'items' => [
                             (\common\models\System::loadConfig('show_add_member')) ?
-                            ['label' => '会员注册', 'url' => ['/member/create']]:'',
+                            ['label' => '注册会员', 'url' => ['/member/create']]:'',
                             ['label' => '我的注册', 'url' => ['/member/index']],
                         ]
                     ],
@@ -68,7 +68,7 @@ AppAsset::register($this);
                         'items' => [
                             ['label' => '交易中心', 'url' => ['/stack/index']],
                             ['label' => '股价动态', 'url' => ['/stack/trends']],
-                            ['label' => '交易记录', 'url' => ['/stack/transactions']],
+                            ['label' => '股票交易记录', 'url' => ['/stack/transactions']],
                             ['label' => '股票资产', 'url' => ['/stack/fund']],
                         ]
                     ],
@@ -78,7 +78,7 @@ AppAsset::register($this);
                             ['label' => '入账明细', 'url' => ['/account/inlist']],
                             ['label' => '出账明细', 'url' => ['/account/outlist']],
                             [
-                                'label' => '提现管理', 'url' => ['/account/cashlist'],
+                                'label' => '提现记录', 'url' => ['/account/cashlist'],
                             ],
                             ['label' => '申请提现', 'url' => ['/account/charge']],
                         ]

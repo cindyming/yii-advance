@@ -16,12 +16,18 @@ body.login{
 .wrap > .container {
     padding: 20px 15px 20px;
 }
+.member-form .form-group{width:48%;margin-right:1%;display:inline-block;vertical-align: top;}
+.member-form .field-member-added_by{display:none;}
 table th{font-size:12px}
-.btn-primary{
+.btn-primary,
+.btn-success{
     background:#F61919;
-    border-color:#F61919
+    border:1px solid #F61919
 }
-.btn-primary:hover{
+.btn-primary:hover,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success.active{
     background:#E03434;
     border-color: #E03434
 }
