@@ -55,7 +55,7 @@ AppAsset::register($this);
                         'label' => '业务中心', 'url' => ['/member/create'],
                         'items' => [
                             (\common\models\System::loadConfig('show_add_member')) ?
-                            ['label' => '会员注册', 'url' => ['/member/create']]:'',
+                            ['label' => '注册会员', 'url' => ['/member/create']]:'',
                             ['label' => '我的注册', 'url' => ['/member/index']],
                         ]
                     ],

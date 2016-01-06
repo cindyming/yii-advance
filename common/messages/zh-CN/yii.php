@@ -234,7 +234,7 @@ return [
     'Exchange Status' => '状态',
     'News List' => '新闻公告',
     'Messages List' => '留言列表',
-    '' => '',
+    'Bank Address' => '开户行',
     '' => '',
     '' => '',
     '' => '',
