@@ -237,7 +237,7 @@ return [
     'Messages List' => '留言列表',
     'Bank Address' => '开户行',
     'Stacks List' => '交易中心',
-    '' => '',
+    'Incorrect username or password.' => '会员编号或密码错误',
     '' => '',
     '' => '',
     '' => '',

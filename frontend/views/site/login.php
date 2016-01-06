@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
 
                 <div style="color:#fff;margin:1em 0 1em 22%">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+                    忘记密码了么？ <?= Html::a('重置密码', ['site/request-password-reset']) ?>.
                 </div>
 
             <div class="form-group">
