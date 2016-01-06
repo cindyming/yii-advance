@@ -30,13 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'stackcode',
                 'value' => function($model) {
-                    return $model->stack->name;
+                    return $model->stack->code;
                 }
             ],
             [
                 'attribute' => 'stackname',
                 'value' => function($model) {
-                    return $model->stack->code;
+                    return $model->stack->name;
                 }
             ],
             'sell_volume',
