@@ -67,7 +67,7 @@ AppAsset::register($this);
                     'label' => '货币管理', 'url' => ['/account/list'],
                     'items' => [
                         ['label' => '增减货币', 'url' => yii\helpers\Url::to('/account/add?type=in')],
-                        ['label' => '账号管理', 'url' => yii\helpers\Url::to('/account/list')],
+                        ['label' => '账户管理', 'url' => yii\helpers\Url::to('/account/list')],
                         ['label' => '出账明细', 'url' => yii\helpers\Url::to('/account/outlist')],
                         ['label' => '入账明细', 'url' => yii\helpers\Url::to('/account/inlist')],
                         ['label' => '提现管理', 'url' => yii\helpers\Url::to('/account/cashlist')],
