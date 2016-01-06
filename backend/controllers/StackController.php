@@ -258,7 +258,7 @@ class StackController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $oldModel = $model;
+        $oldModel = $this->findModel($id);;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($oldModel->price != $model->price) {
