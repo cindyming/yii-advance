@@ -9,7 +9,7 @@ use kartik\datecontrol\DateControl;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="stack-form">
+<div class="date-form">
 
     <?php $form = ActiveForm::begin([
         'action' => '/date/create'
@@ -34,8 +34,10 @@ use kartik\datecontrol\DateControl;
                 'autoclose' => true
             ]
         ]
+
     ])->label(Yii::t('app', 'Ended Date')) ?>
     <div class="form-group">
+
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
