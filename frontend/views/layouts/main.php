@@ -78,7 +78,7 @@ AppAsset::register($this);
                             ['label' => '入账明细', 'url' => ['/account/inlist']],
                             ['label' => '出账明细', 'url' => ['/account/outlist']],
                             [
-                                'label' => '提现管理', 'url' => ['/account/cashlist'],
+                                'label' => '提现记录', 'url' => ['/account/cashlist'],
                             ],
                             ['label' => '申请提现', 'url' => ['/account/charge']],
                         ]

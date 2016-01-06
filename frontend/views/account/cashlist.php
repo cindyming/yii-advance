@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel common\models\CashSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '提现管理';
+$this->title = '提现记录';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cash-index">

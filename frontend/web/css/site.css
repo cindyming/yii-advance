@@ -17,11 +17,15 @@ body.login{
     padding: 20px 15px 20px;
 }
 table th{font-size:12px}
-.btn-primary{
+.btn-primary,
+.btn-success{
     background:#F61919;
     border-color:#F61919
 }
-.btn-primary:hover{
+.btn-primary:hover,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success.active{
     background:#E03434;
     border-color: #E03434
 }
