@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Sell Stack') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
