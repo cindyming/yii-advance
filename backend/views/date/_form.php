@@ -36,7 +36,7 @@ use kartik\datecontrol\DateControl;
         ]
 
     ])->label(Yii::t('app', 'Ended Date')) ?>
-    <div class="form-group">
+    <div class="form-group submit-date">
 
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
