@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\components\AccessRule;
 use backend\models\User;
 use common\models\FundTransaction;
+use common\models\Member;
 use common\models\search\FundTransactionSearch;
 use Yii;
 use common\models\Fund;
@@ -104,13 +105,18 @@ class FundController extends Controller
     {
         $model = new FundTransaction();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['history']);
-        } else {
-            return $this->render('add', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                $model->member_id = Member::find()->where(['=', 'username', $model->membername])->one()->id;
+                if ($model->save()) {
+                    return $this->redirect(['history']);
+                }
+            }
+
         }
+        return $this->render('add', [
+            'model' => $model,
+        ]);
     }
 
     /**

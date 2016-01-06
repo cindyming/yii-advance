@@ -172,7 +172,7 @@ class Member extends ActiveRecord
             'bank' => Yii::t('app', 'Bank'),
             'cardname' => Yii::t('app', 'Cardname'),
             'cardnumber' => Yii::t('app', 'Cardnumber'),
-            'bankaddress' => Yii::t('app', 'Bankaddress'),
+            'bankaddress' => Yii::t('app', 'Bank Address'),
             'email' => Yii::t('app', 'Email'),
             'qq' => Yii::t('app', 'QQ'),
             'created_at' => Yii::t('app', 'Registered At'),

@@ -61,15 +61,15 @@ class StackTrendsSearch extends StackTrends
         if ($this->created_at) {
             $date = explode(' - ', $this->created_at);
             if (count($date)  == 2) {
-                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0]]);
-                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1]]);
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1] . ' 23:59:59']);
             }
         }
         if ($this->updated_at) {
             $date = explode(' - ', $this->updated_at);
             if (count($date)  == 2) {
-                $query->andFilterWhere(['>=', $this::tableName() . '.updated_at', $date[0]]);
-                $query->andFilterWhere(['<=', $this::tableName() . '.updated_at', $date[1]]);
+                $query->andFilterWhere(['>=', $this::tableName() . '.updated_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.updated_at', $date[1] . ' 23:59:59']);
             }
         }
 
