@@ -28,10 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'imageOptions'=>['alt'=>'点击换图','title'=>'点击换图', 'style'=>'cursor:pointer']
                 ]) ?>
 
-                <div style="color:#fff;margin:1em 0 1em 22%">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
-                </div>
-
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
