@@ -16,8 +16,8 @@ body.login{
     padding: 20px 15px 20px;
 }
 .member-form .form-group{width:48%;margin-right:1%;display:inline-block;vertical-align: top;}
-.stack-form .form-group{width:25%;margin-right:1%;display:inline-block;vertical-align: top;}
-.form-group.submit-date{margin-top:27px}
+.date-form .form-group{width:25%;margin-right:1%;display:inline-block;vertical-align: top;}
+.date-form .form-group.submit-date{margin-top:27px}
 table th{font-size:12px}
 .btn-primary,
 .btn-success{
@@ -31,6 +31,7 @@ table th{font-size:12px}
     background:#E03434;
     border-color: #E03434
 }
+.news-date{margin:0 0 10px}
 .footer {
     height: 60px;
     background-color: #f5f5f5;

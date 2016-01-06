@@ -9,7 +9,7 @@ use kartik\datecontrol\DateControl;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="stack-form">
+<div class="date-form">
 
     <?php $form = ActiveForm::begin([
         'action' => '/date/create'
