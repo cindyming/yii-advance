@@ -71,9 +71,9 @@ class MemberStackSearch extends MemberStack
             'lock_volume' => $this->lock_volume,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ])->andFilterWhere(['=','member.username',$this->membername])
-            ->andFilterWhere(['=','stack.code',$this->stackcode])
-            ->andFilterWhere(['=','stack.name',$this->stackname])
+        ])->andFilterWhere(['like','member.username',$this->membername])
+            ->andFilterWhere(['like','stack.code',$this->stackcode])
+            ->andFilterWhere(['like','stack.name',$this->stackname])
             ->orderBy(['created_at' => SORT_DESC]);
 
         return $dataProvider;
