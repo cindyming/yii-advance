@@ -238,7 +238,7 @@ return [
     'Bank Address' => '开户行',
     'Stacks List' => '交易中心',
     'Incorrect username or password.' => '会员编号或密码错误',
-    '' => '',
+    'Submit' => '提交',
     '' => '',
     '' => '',
     '' => '',
