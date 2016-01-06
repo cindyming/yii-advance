@@ -86,6 +86,9 @@ class LoginForm extends Model
                     $this->_user = null;
                     $this->addError('username', '此帐户未被审核，请联系管理员');
                 }
+            }
+
+            if ($this->_user) {
                 if ($this->_user->locked) {
                     $this->_user = null;
                     $this->addError('username', '此帐户已被锁定，请联系管理员');
