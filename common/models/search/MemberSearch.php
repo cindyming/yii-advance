@@ -77,8 +77,8 @@ class MemberSearch extends Member
         if ($this->approved_at) {
             $date = explode(' - ', $this->approved_at);
             if (count($date)  == 2) {
-                $query->andFilterWhere(['>=', $this::tableName() . '.approved_at', $date[0]]);
-                $query->andFilterWhere(['<=', $this::tableName() . '.approved_at', $date[1]]);
+                $query->andFilterWhere(['>=', $this::tableName() . '.approved_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.approved_at', $date[1] . ' 23:59:59']);
             }
         }
         if ($this->created_at) {

@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['captchaAction'=>'site/captcha',
                     'imageOptions'=>['alt'=>'点击换图','title'=>'点击换图', 'style'=>'cursor:pointer']
                 ]) ?>
-            
+
             <div class="form-group">
                 <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
