@@ -240,7 +240,7 @@ return [
     'Incorrect username or password.' => '会员编号或密码错误',
     'Submit' => '提交',
     'Update Member: ' => '更新会员信息: ',
-    '' => '',
+    'Update Stack: ' => '更新股票',
     '' => '',
     '' => '',
     '' => '',

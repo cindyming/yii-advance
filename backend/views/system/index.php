@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\System */
+$this->title = '系统设置';
 ?>
 <div class="system-create">
 	<h1><?= Html::encode($this->title) ?></h1>
