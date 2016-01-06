@@ -21,11 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'password_confirm')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password', ['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password_confirm',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'password2')->passwordInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'password2_confirm')->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password2_confirm',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'identity')->textInput(['maxlength' => true]) ?>
 

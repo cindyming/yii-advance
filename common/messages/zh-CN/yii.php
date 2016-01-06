@@ -35,6 +35,7 @@ return [
     'Cardname' => '开户名',
     'Cardnumber' => '银行卡号',
     'Bankaddress' => '开户地址',
+    'Bank Address' => '开户地址',
     'Password Confirm' => '一级密码确认',
     'Password2 Confirm' => '二级密码确认',
     '(not set)' => '(未设置)',
