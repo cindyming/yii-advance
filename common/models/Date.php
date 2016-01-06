@@ -85,7 +85,7 @@ class Date extends \yii\db\ActiveRecord
     public static function isWorkingDay()
     {
         $data = Date::find()->where(['=', 'date', new Expression('curdate()')])->one();
-        return ($data->status == 0) ? true : false;
+        return ($data && $data->status == 0) ? true : false;
     }
 
     public static function isWorkingTime()
