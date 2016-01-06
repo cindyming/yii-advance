@@ -258,8 +258,17 @@ class StackController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $oldModel = $model;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($oldModel->price != $model->price) {
+                $stackTrends = new StackTrends();
+                $stackTrends->load(array(
+                    'stack_id' => $model->id,
+                    'price' => $model->price,
+                ), '');
+                $stackTrends->save();
+            }
             Yii::$app->session->setFlash('success', '信息修改成功');
             return $this->redirect(['index']);
         } else {
