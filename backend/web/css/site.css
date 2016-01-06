@@ -16,6 +16,8 @@ body.login{
     padding: 20px 15px 20px;
 }
 .member-form .form-group{width:48%;margin-right:1%;display:inline-block;vertical-align: top;}
+.stack-form .form-group{width:25%;margin-right:1%;display:inline-block;vertical-align: top;}
+.form-group.submit-date{margin-top:27px}
 table th{font-size:12px}
 .btn-primary,
 .btn-success{
