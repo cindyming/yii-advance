@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Cash;
 use common\models\InRecord;
 use common\models\Member;
 use common\models\OutRecord;
