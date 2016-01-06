@@ -17,6 +17,18 @@ body.login{
 }
 .member-form .form-group{width:48%;margin-right:1%;display:inline-block;vertical-align: top;}
 table th{font-size:12px}
+.btn-primary,
+.btn-success{
+    background:#F61919;
+    border:1px solid #F61919
+}
+.btn-primary:hover,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success.active{
+    background:#E03434;
+    border-color: #E03434
+}
 .footer {
     height: 60px;
     background-color: #f5f5f5;
