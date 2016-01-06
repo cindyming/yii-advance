@@ -227,7 +227,7 @@ return [
     'Stacks Record' => '股票资产',
     'Create Fund History' => '添加基金资产',
     'Stack Trends Updated At' => '更新日期',
-    '' => '',
+    'Stack Trends Created At' => '更新日期',
     '' => '',
     '' => '',
     '' => '',
