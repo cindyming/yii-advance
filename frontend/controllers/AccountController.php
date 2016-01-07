@@ -91,7 +91,7 @@ class AccountController extends \yii\web\Controller
                     'fee' => $model->fee,
                     'total' => $member->finance_fund,
                     'type' => 1,
-                    'note' => '会员提现'
+                    'note' => '会员提现(含银行转账手续费)'
                 );
                 $outRecord->load($data, '');
                 $outRecord->save();
