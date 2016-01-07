@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\components\AccessRule;
 use backend\models\User;
 use common\models\FundTransaction;
+use common\models\InRecord;
 use common\models\Member;
 use common\models\search\FundTransactionSearch;
 use Yii;
@@ -150,7 +151,27 @@ class FundController extends Controller
         $model =$this->findTransaction($id);
         $model->cleared = 1;
         $model->cleared_at = date('Y-m-d H:i:s');
-        $model->save();
+        $connection = Yii::$app->db;
+        try {
+            $member = $model->member;
+            $member->finance_fund += $model->investment;
+            $inRecord = InRecord::prepareModelForSellStack($model->member_id, ($model->investment),$member->finance_fund, 0);
+            $inRecord->note ='基金' . $model->fund->name . '清仓';
+            $inRecord->type = 5;
+            $transaction = $connection->beginTransaction();
+            if ($model->save() && $inRecord->save() && $member->save()) {
+                $transaction->commit();
+                return $this->redirect(['history']);
+            } else {
+                Yii::error('Fund Clear Failed');
+                Yii::error( json_encode($model->getErrors()));
+                Yii::error( json_encode($inRecord->getErrors()));
+                Yii::error( json_encode($member->getErrors()));
+                $transaction->rollback();
+            }
+        } catch (Exception $e) {
+
+        }
         return $this->redirect(['history']);
     }
 

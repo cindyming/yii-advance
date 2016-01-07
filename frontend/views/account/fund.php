@@ -64,10 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'cleared_at',
-                'label' => '状态',
-                'value' => function($model) {
-                    return $model->cleared ? $model->cleared_at : '';
-                }
+                'filterType'=>GridView::FILTER_DATE_RANGE,
             ],
             [
                 'attribute' => 'cleared',
