@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Cash;
+use common\models\System;
 use yii\filters\AccessControl;
 use common\models\Member;
 use common\models\OutRecord;
@@ -78,7 +79,8 @@ class AccountController extends \yii\web\Controller
             if ($validate) {
                 $member = Yii::$app->user->identity;
                 $member->finance_fund -= $model->amount;
-                $model->fee = 0;
+                $model->fee = $model->amount * System::loadConfig('cash_factorage');
+                $model->amount = $model->amount - $model->fee;
                 $member->save();
                 $model->save();
                 $outRecord = new OutRecord();
