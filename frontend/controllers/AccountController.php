@@ -88,7 +88,7 @@ class AccountController extends \yii\web\Controller
                     'member_id' => Yii::$app->user->identity->id,
                     'account_type' => 1,
                     'amount' => $model->amount,
-                    'fee' => $model->fee,,
+                    'fee' => $model->fee,
                     'total' => $member->finance_fund,
                     'type' => 1,
                     'note' => '会员提现'
