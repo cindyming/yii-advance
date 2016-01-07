@@ -64,6 +64,7 @@ class StackController extends Controller
         $fee = $transaction->total_price * 0.01;
         $member->finance_fund += ($transaction->total_price - $fee);
         $stackOutRecord = InRecord::prepareModelForSellStack($transaction->member_id, ($transaction->total_price - $fee),$member->finance_fund, $fee);
+        $stackOutRecord->note = '出售[' . $transaction->stack->code . ']' . $transaction->volume . '股';
         $stackOutRecord->save();
         $member->save();
         $memberStack->save();

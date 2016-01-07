@@ -126,11 +126,11 @@ class StackController extends \yii\web\Controller
 
                         if ($model->account_type == 1) {
                             $member->finance_fund -= $model->total_price;
-                            $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->finance_fund, 1);
                         } else {
                             $member->stack_fund -= $model->total_price;
                             $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->stack_fund, 2);
                         }
+                        $outRecord->note = '股买[' . $stack->code . ']' . $model->volume . '股';
                         $connection = Yii::$app->db;
                         try {
                             $transaction = $connection->beginTransaction();

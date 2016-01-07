@@ -100,7 +100,7 @@ class Cash extends \yii\db\ActiveRecord
             'member_id' => Yii::t('app', 'Member ID'),
             'bank' => Yii::t('app', 'Bank'),
             'cardname' => Yii::t('app', 'Cardname'),
-            'backaddress' => Yii::t('app', 'Back Address'),
+            'backaddress' => Yii::t('app', 'Bank Address'),
             'cardnumber' => Yii::t('app', 'Cardnumber'),
             'password2' => Yii::t('app', 'Password2'),
             'membername' => Yii::t('app', 'Member Name'),

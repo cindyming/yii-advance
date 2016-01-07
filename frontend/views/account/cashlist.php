@@ -58,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'开户行',
             ],
             'amount',
+            'fee',
             'real_amount',
             [
                 'attribute' => 'created_at',
