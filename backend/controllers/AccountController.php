@@ -119,7 +119,12 @@ class AccountController extends \yii\web\Controller
                     $model->fee = 0;
                     $model->member_id = $member->id;
                     if ($member->save() && $model->save())  {
-                        return $this->redirect(['list']);
+                        if (Yii::$app->request->get('type') == 'out') {
+                            return $this->redirect(['outlist']);
+                        } else {
+                            return $this->redirect(['inlist']);
+                        }
+
                     } else {
                         var_dump($member->getErrors());
                         var_dump($model->getErrors());die;
