@@ -19,7 +19,7 @@ $this->title = '系统设置';
         <?= $form->field($model, 'cash_factorage')->textInput() ?>
         <?= $form->field($model, 'sell_fee_rate')->textInput() ?>
         <?= $form->field($model, 'annual_fee')->textInput() ?>
-        <?= $form->field($model, 'transaction_rule')->textInput()->label(Yii::t('app', 'Transaction Rule')) ?>
+        <?= $form->field($model, 'transaction_rule')->textInput()->label('资金到账日') ?>
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '保存' : '保存', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
