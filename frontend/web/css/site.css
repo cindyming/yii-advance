@@ -274,3 +274,16 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
 .user-form > div:last-child {
   margin-right: 0;
 }
+
+
+@media (max-width: 768px) {
+    .navbar-collapse,
+    .site-login,
+    .sm-form,
+    .member-form .form-group{
+        width:100%
+    }
+    .field-loginform-captcha input{
+        width: 35%
+    }
+}
