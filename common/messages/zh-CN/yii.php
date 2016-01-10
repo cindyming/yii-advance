@@ -197,6 +197,7 @@ return [
     'Date Status' => '状态',
     'First Page' => '首页',
     'Last Page' => '末页',
+    'GO' => '跳至',
     'Amount' => '金额',
     'Account Type' => '账户类型',
     'Finance Fund' => '理财基金余额',
