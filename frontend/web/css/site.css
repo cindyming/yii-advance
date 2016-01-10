@@ -296,7 +296,14 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
     *display: inline
 }
 .btn-count{
-    background:#176899
+    background:#176899;
+    border-color:#176899;
+    margin:-73px 0 20px 62%
+}
+.btn-count:hover,
+.btn-count:focus{
+    background:#23527B;
+    border-color: #23527B
 }
 @media (max-width: 768px) {
     .navbar-collapse,
