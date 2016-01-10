@@ -119,6 +119,13 @@ AppAsset::register($this);
                             ['label' => '密码修改', 'url' => yii\helpers\Url::to('/system/password')],
                         ]
                     ],
+                    Yii::$app->user->isGuest ?
+                        ['label' => 'Login', 'url' => ['/site/login']] :
+                        [
+                            'label' => '(' . Yii::$app->user->identity->username . ')退出',
+                            'url' => ['/site/logout'],
+                            'linkOptions' => ['data-method' => 'post']
+                        ],
                     ];
             }
             echo Nav::widget([

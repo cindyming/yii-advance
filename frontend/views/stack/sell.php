@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'validateOnBlur' => true,
 //            'validationUrl' => '/account/validatebuy?' . ($model->id ? 'id=' . $model->id : ''),
         ]); ?>
-
+        <?= $form->field($model, 'account_type')->label('')->hiddenInput() ?>
         <?= $form->field($model, 'stackname')->textInput(['maxlength' => true, 'value' => $stack->name ,'readOnly' => ( true)]) ?>
         <?= $form->field($model, 'stackcode')->textInput(['maxlength' => true, 'value' => $stack->code ,'readOnly' => ( true)]) ?>
         <?= $form->field($model, 'stackprice')->textInput(['maxlength' => true, 'value' => $stack->price ,'readOnly' => ( true)]) ?>
@@ -28,10 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'locknumber')->textInput(['maxlength' => true, 'value' => $memberStack->lock_volume ? $memberStack->lock_volume : 0 ,'readOnly' => ( true)]) ?>
 
         <?= $form->field($model, 'volume')->textInput(['maxlength' => true])->label(Yii::t('app', 'Exchange Volume')) ?>
+        <?= $form->field($model, 'total_price')->textInput(['maxlength' => true, 'value' => $model->total_price ,'readOnly' => ( true)]) ?>
+        <?= Html::submitButton('计算总价', ['class' => 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(0)"]) ?>
         <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Sell Stack') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Sell Stack') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(1)"]) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
