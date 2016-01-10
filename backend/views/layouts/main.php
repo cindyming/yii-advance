@@ -16,8 +16,8 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <meta name=“renderer” content=”webkit” />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" ></meta>
+    <meta name="renderer" content="webkit" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
