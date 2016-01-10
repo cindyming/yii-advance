@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'locknumber')->textInput(['maxlength' => true, 'value' => $memberStack->lock_volume ? $memberStack->lock_volume : 0 ,'readOnly' => ( true)]) ?>
         <?= $form->field($model, 'volume')->textInput(['maxlength' => true])->label(Yii::t('app', 'Exchange Volume')) ?>
         <?= $form->field($model, 'total_price')->textInput(['maxlength' => true, 'value' => $model->total_price ,'readOnly' => ( true)]) ?>
-        <?= Html::submitButton('计算总价', ['class' => 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(0)"]) ?>
+        <?= Html::submitButton('计算总价', ['class' => 'btn btn-primary btn-count', 'onClick' => "$('#stacktransaction-account_type').val(0)"]) ?>
         <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
         <div class="form-group">
