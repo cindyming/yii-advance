@@ -16,7 +16,13 @@ body.login{
 .wrap > .container {
     padding: 20px 15px 20px;
 }
-.member-form .form-group{width:48%;margin-right:1%;display:inline-block;vertical-align: top;}
+.member-form .form-group{
+    width:48%;
+    margin-right:1%;
+    display:inline-block;
+    *display:inline;
+    vertical-align: top;
+}
 .member-form .field-member-added_by{display:none;}
 table th{font-size:12px}
 .btn-primary,
@@ -25,6 +31,8 @@ table th{font-size:12px}
     border:1px solid #F61919
 }
 .btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.active,
 .btn-success:hover,
 .btn-success:focus,
 .btn-success.active{
@@ -142,12 +150,14 @@ a.desc:after {
     color: #fff;
     width:22%;
     display: inline-block;
+    *display:inline;
     text-align: left;
 }
 .site-login input{
     height: 35px;
     border: 0px;
     display: inline-block;
+    *display:inline;
     width: 75%;
     line-height: 28px;
     margin-bottom: 3px;
@@ -191,6 +201,7 @@ a.desc:after {
 }
 .top-header ul li{
     display:inline-block;
+    *display:inline;
     margin-left:15px;
     font-size:13px;
     line-height:32px
@@ -246,6 +257,7 @@ table span.glyphicon{
 #system-lowest_cash_amount{
     width:60%;
     display:inline-block;
+    *display:inline;
     margin-right:0.5%
 }
 .panel-primary > .panel-heading{float:left;padding: 10px 0;color: #333;background:transparent;border-color:transparent;}
@@ -263,19 +275,36 @@ input#pageNo{width:34px;height:34px;border:1px solid #ddd;padding:5px;margin-rig
 button.goToButon{background-color: #337ab7;border: 1px solid #337ab7;color: #fff;height: 34px;}
 
 ul.tabswitch{padding:0;list-style:none;margin-bottom:25px}
-ul.tabswitch li{border-bottom:3px solid transparent;display:inline-block;padding:1% 2% .5%;}
+ul.tabswitch li{border-bottom:3px solid transparent;display:inline-block;*display:inline;padding:1% 2% .5%;}
 ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
 
 .user-form > div {
   width: 48%;
   margin-right: 2%;
   display: inline-block;
+  *display:inline;
 }
 .user-form > div:last-child {
   margin-right: 0;
 }
-
-
+.field-stacktransaction-total_price label{
+    width: 100%
+}
+.field-stacktransaction-total_price input{
+    width: 60%;
+    display: inline-block;
+    *display: inline
+}
+.btn-count{
+    background:#176899;
+    border-color:#176899;
+    margin:-73px 0 20px 62%
+}
+.btn-count:hover,
+.btn-count:focus{
+    background:#23527B;
+    border-color: #23527B
+}
 @media (max-width: 768px) {
     .navbar-collapse,
     .site-login,

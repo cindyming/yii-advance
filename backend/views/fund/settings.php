@@ -22,7 +22,6 @@ $this->title = Yii::t('app', 'Fund Settings')
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '保存' : '保存', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
-'
         <?php ActiveForm::end(); ?>
 
     </div>
