@@ -195,7 +195,7 @@ class AccountController extends \yii\web\Controller
                 'fee' => 0,
                 'total' => $user->finance_fund,
                 'type' => 4,
-                'note' => '拒绝提现'
+                'note' => '系统拒绝提现申请'
             );
             $model->note .= '拒绝提现,货币返还.';
             Yii::$app->session->setFlash('success', '提现申请拒绝成功');

@@ -156,7 +156,7 @@ class FundController extends Controller
             $member = $model->member;
             $member->finance_fund += $model->investment;
             $inRecord = InRecord::prepareModelForSellStack($model->member_id, ($model->investment),$member->finance_fund, 0);
-            $inRecord->note ='基金' . $model->fund->name . '清仓';
+            $inRecord->note ='基金[' . $model->fund->name . ']清仓';
             $inRecord->type = 5;
             $transaction = $connection->beginTransaction();
             if ($model->save() && $inRecord->save() && $member->save()) {

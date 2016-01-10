@@ -103,57 +103,61 @@ class StackController extends \yii\web\Controller
             if (Date::isWorkingTime()||true) {
                 $open = true;
                 if ($model->load(Yii::$app->request->post())) {
-                    $data = Yii::$app->request->post();
-                    $model->price = $stack->price;
-                    $model->member_id = Yii::$app->user->identity->id;
-                    $model->stack_id = $stack->id;
-                    $model->type = 0;
-                    $model->total_price = $model->price * $model->volume;
-                    $validate = true;;
-                    if (!Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
-                        $validate = false;
-                        $model->addError('password2', '第二密码不正确, 请确认后重新输入.');
-                    }
-                    if ((($model->account_type == 1) && Yii::$app->user->identity->finance_fund < $model->total_price) ||
-                        (($model->account_type == 2) && Yii::$app->user->identity->stack_fund < $model->total_price)) {
+                    if($model->account_type) {
+                        $data = Yii::$app->request->post();
+                        $model->price = $stack->price;
+                        $model->member_id = Yii::$app->user->identity->id;
+                        $model->stack_id = $stack->id;
+                        $model->type = 0;
+                        $model->total_price = $stack->price * $model->volume;
+                        $validate = true;;
+                        if (!Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
+                            $validate = false;
+                            $model->addError('password2', '第二密码不正确, 请确认后重新输入.');
+                        }
+                        if ((($model->account_type == 1) && Yii::$app->user->identity->finance_fund < $model->total_price) ||
+                            (($model->account_type == 2) && Yii::$app->user->identity->stack_fund < $model->total_price)) {
                             $validate = false;
                             $model->addError('volume', '账户余额不足. 理财基金:.' . Yii::$app->user->identity->finance_fund . '. 购股账户:'. Yii::$app->user->identity->stack_fund);
-                    }
-                    if ($validate) {
-
-                        $memberStack = MemberStack::getMemberStack($model);
-                        $member = Member::findOne($model->member_id);
-
-                        if ($model->account_type == 1) {
-                            $member->finance_fund -= $model->total_price;
-                            $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->finance_fund, 1);
-
-                        } else {
-                            $member->stack_fund -= $model->total_price;
-                            $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->stack_fund, 2);
                         }
-                        $outRecord->note = '股买[' . $stack->code . ']' . $model->volume . '股';
-                        $connection = Yii::$app->db;
-                        try {
-                            $transaction = $connection->beginTransaction();
-                            $success = false;
-                            if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save()) {
-                                $success = true;
-                            }
-                            if ($success) {
-                                $transaction->commit();
-                                return $this->redirect(['transactions']);
+                        if ($validate) {
+
+                            $memberStack = MemberStack::getMemberStack($model);
+                            $member = Member::findOne($model->member_id);
+
+                            if ($model->account_type == 1) {
+                                $member->finance_fund -= $model->total_price;
+                                $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->finance_fund, 1);
+
                             } else {
-                                Yii::error('Stack Buy Failed');
-                                Yii::error(json_encode($model->getErrors()));
-                                Yii::error(json_encode($memberStack->getErrors()));
-                                Yii::error(json_encode($member->getErrors()));
-                                Yii::error(json_encode($outRecord->getErrors()));
-                                $transaction->rollback();
+                                $member->stack_fund -= $model->total_price;
+                                $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->stack_fund, 2);
                             }
+                            $outRecord->note = '股买[' . $stack->code . ']' . $model->volume . '股';
+                            $connection = Yii::$app->db;
+                            try {
+                                $transaction = $connection->beginTransaction();
+                                $success = false;
+                                if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save()) {
+                                    $success = true;
+                                }
+                                if ($success) {
+                                    $transaction->commit();
+                                    return $this->redirect(['transactions']);
+                                } else {
+                                    Yii::error('Stack Buy Failed');
+                                    Yii::error(json_encode($model->getErrors()));
+                                    Yii::error(json_encode($memberStack->getErrors()));
+                                    Yii::error(json_encode($member->getErrors()));
+                                    Yii::error(json_encode($outRecord->getErrors()));
+                                    $transaction->rollback();
+                                }
 
-                        } catch (Exception $e) {
+                            } catch (Exception $e) {
+                            }
                         }
+                    } else {
+                        $model->total_price = $stack->price * $model->volume;
                     }
                 }
             } else {
