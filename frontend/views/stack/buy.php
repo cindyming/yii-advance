@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="stack-create">
     <?php if ($open|| true): ?>
     <h1><?= Html::encode($this->title) ?></h1>
-    <div class="stack-form">
+    <div class="stack-form sm-form">
 
         <?php $form = ActiveForm::begin([
             'enableAjaxValidation' => true,

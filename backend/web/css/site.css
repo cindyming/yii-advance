@@ -157,3 +157,11 @@ a.desc:after {
 .site-login button{
     width:100%
 }
+.field-stacktransaction-total_price label{
+    width: 100%
+}
+.field-stacktransaction-total_price input{
+    width: 60%;
+    display: inline-block;
+    *display: inline
+}
