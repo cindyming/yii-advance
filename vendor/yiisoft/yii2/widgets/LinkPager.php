@@ -86,13 +86,13 @@ class LinkPager extends Widget
      * If it's specified as true, page number will be used as label.
      * Default is false that means the "first" page button will not be displayed.
      */
-    public $firstPageLabel = 'First Page';
+    public $firstPageLabel = '首页';
     /**
      * @var string|boolean the text label for the "last" page button. Note that this will NOT be HTML-encoded.
      * If it's specified as true, page number will be used as label.
      * Default is false that means the "last" page button will not be displayed.
      */
-    public $lastPageLabel = 'Last Page';
+    public $lastPageLabel = '尾页';
     /**
      * @var boolean whether to register link tags in the HTML header for prev, next, first and last page.
      * Defaults to `false` to avoid conflicts when multiple pagers are used on one page.

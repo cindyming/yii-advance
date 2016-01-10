@@ -43,7 +43,7 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content'], 'required'],
+            [['title', 'content', 'public_at'], 'required'],
             [['content'], 'string'],
             [['created_at', 'updated_at', 'public_at','be_top'], 'safe'],
             [['title'], 'string', 'max' => 250]

@@ -230,6 +230,7 @@ return [
     'Stack Trends Updated At' => '更新日期',
     'Stack Trends Created At' => '更新日期',
     'Update' => '更新',
+    'Update News: ' => '更新公告: ',
     'Stack' => '股票',
     'Exchange Volume' => '交易股数',
     'Exchange Status' => '状态',
