@@ -31,6 +31,8 @@ table th{font-size:12px}
     border:1px solid #F61919
 }
 .btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.active,
 .btn-success:hover,
 .btn-success:focus,
 .btn-success.active{
@@ -285,8 +287,17 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
 .user-form > div:last-child {
   margin-right: 0;
 }
-
-
+.field-stacktransaction-total_price label{
+    width: 100%
+}
+.field-stacktransaction-total_price input{
+    width: 60%;
+    display: inline-block;
+    *display: inline
+}
+.btn-count{
+    background:#176899
+}
 @media (max-width: 768px) {
     .navbar-collapse,
     .site-login,
