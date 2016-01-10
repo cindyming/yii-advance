@@ -68,23 +68,31 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->redirect(['/news/index']);
+        return $this->gohome();
     }
     public function gohome()
     {
-        return $this->redirect(['/news/index']);
+        if (!Yii::$app->user->isGuest) {
+            if (Yii::$app->user->identity->isSupperAdmin()) {
+                return $this->redirect(['/news/index']);
+            } else {
+                return $this->redirect(['/stack/index']);
+            }
+        } else {
+            return $this->redirect(['/site/login']);
+        }
     }
 
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
-            return $this->redirect(['/news/index']);
+            return $this->gohome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             Yii::$app->systemlog->add('管理员', '登录');
-            return $this->redirect(['/news/index']);
+            return $this->gohome();
         } else {
             if ($model && $model->username) {
                 Yii::$app->systemlog->add('管理员:' . $model->username, '登录', '失败', json_encode($model->getErrors()));

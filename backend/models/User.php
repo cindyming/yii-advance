@@ -231,4 +231,14 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return false;
     }
+
+    public function isSupperAdmin()
+    {
+        return Yii::$app->user->identity->role_id == 1;
+    }
+
+    public function isStackAdmin()
+    {
+        return Yii::$app->user->identity->role_id == 1;
+    }
 }
