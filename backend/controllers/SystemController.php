@@ -33,6 +33,11 @@ class SystemController extends Controller
                         'actions' => ['password', 'log', 'index', 'backup', 'backupindex'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['password'],
+                        'roles' => [User::STACK_ADMIN]
+                    ],
                 ]
             ],
             'verbs' => [

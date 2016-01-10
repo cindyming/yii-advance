@@ -13,11 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="stack-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php if (Yii::$app->user->identity->isSupperAdmin()): ?>
     <p>
         <?= Html::a(Yii::t('app', 'Create Stack'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?php endif ?>
 
 
     <?= GridView::widget([
