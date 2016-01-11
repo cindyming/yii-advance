@@ -79,8 +79,8 @@ class AccountController extends \yii\web\Controller
             if ($validate) {
                 $member = Yii::$app->user->identity;
                 $member->finance_fund -= $model->amount;
-                $model->fee = $model->amount * System::loadConfig('cash_factorage');
-                $model->amount = $model->amount - $model->fee;
+                $model->fee = $model->amount - System::loadConfig('cash_factorage');
+                $model->real_amount = $model->amount - $model->fee;
                 $member->save();
                 $model->save();
                 $outRecord = new OutRecord();
