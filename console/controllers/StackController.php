@@ -61,7 +61,7 @@ class StackController extends Controller
         $memberStack = $transaction->getMemberStack()->one();
         $memberStack->lock_volume -= $transaction->volume;
         $member = $transaction->getMember()->one();
-        $fee = $transaction->total_price * 0.01;
+        $fee = round($transaction->total_price * System::loadConfig('sell_fee_rate'), 2);
         $member->finance_fund += ($transaction->total_price - $fee);
         $stackOutRecord = InRecord::prepareModelForSellStack($transaction->member_id, ($transaction->total_price - $fee),$member->finance_fund, $fee);
         $stackOutRecord->note = '出售[' . $transaction->stack->code . ']' . $transaction->volume . '股';
