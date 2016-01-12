@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\InRecord;
 use common\models\Member;
 use common\models\MemberStack;
 use common\models\OutRecord;
