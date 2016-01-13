@@ -89,7 +89,7 @@ class StackController extends Controller
                 $fee = round($stackTransaction->total_price * System::loadConfig('sell_fee_rate'), 2);
                 $member->finance_fund += ($stackTransaction->total_price - $fee);
                 $stackOutRecord = InRecord::prepareModelForSellStack($stackTransaction->member_id, ($stackTransaction->total_price - $fee), $member->finance_fund, $fee);
-                $stackOutRecord->note = '管理员自主解锁[' .date('Y-m-d H:i:s'). ']出售[' . $stackTransaction->stack->code . ']' . $stackTransaction->volume . '股';
+                $stackOutRecord->note = '管理员自主解锁[' .$stackTransaction->created_at. ']出售[' . $stackTransaction->stack->code . ']' . $stackTransaction->volume . '股';
                 if ($memberStack->save() && $stackTransaction->save() && $member->save() && $stackOutRecord->save()) {
                     $transaction->commit();
                     Yii::$app->session->setFlash('success', '交易解锁成功');
