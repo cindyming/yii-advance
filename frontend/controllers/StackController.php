@@ -205,7 +205,7 @@ class StackController extends \yii\web\Controller
                 $member->stack_fund += ($stackTransaction->total_price - $fee);
                 $stackOutRecord = InRecord::prepareModelForSellStack($stackTransaction->member_id, ($stackTransaction->total_price - $fee), $member->stack_fund, $fee);
                 $stackOutRecord->account_type = 2;
-                $stackOutRecord->note = '自主解锁[' .date('Y-m-d'). ']出售股票[' . $stackTransaction->stack->code . ']' . $stackTransaction->volume . '股';
+                $stackOutRecord->note = '自主解锁[' .date('Y-m-d H:i:s'). ']出售股票[' . $stackTransaction->stack->code . ']' . $stackTransaction->volume . '股';
                 if ($memberStack->save() && $stackTransaction->save() && $member->save() && $stackOutRecord->save()) {
                     $transaction->commit();
                     Yii::$app->session->setFlash('success', '交易自主解锁成功');
