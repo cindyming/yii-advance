@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Date;
+use common\models\InRecord;
 use common\models\Member;
 use common\models\MemberStack;
 use common\models\OutRecord;
@@ -11,6 +12,7 @@ use common\models\search\StackTransactionSearch;
 use common\models\search\StackTrendsSearch;
 use common\models\StackTransaction;
 use common\models\StackTrends;
+use common\models\System;
 use Yii;
 use common\models\Stack;
 use common\models\search\StackSearch;
@@ -38,7 +40,7 @@ class StackController extends \yii\web\Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['buy', 'validatebuy','sell', 'index', 'trends', 'fund', 'transactions'],
+                        'actions' => ['buy', 'validatebuy','sell', 'index', 'trends', 'fund', 'transactions', 'unlock'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -173,6 +175,50 @@ class StackController extends \yii\web\Controller
             'memberStack' => $memberStack,
             'open' => $open
         ]);
+    }
+
+    public function actionUnlock()
+    {
+        $id = Yii::$app->request->get('id');
+        $stackTransaction = StackTransaction::findOne($id);
+        $connection = Yii::$app->db;
+        try {
+            $transaction = $connection->beginTransaction();
+            if ($stackTransaction->type == 0) {
+                $stackTransaction->status = 1;
+                $memberStack = $stackTransaction->getMemberStack()->one();
+                $memberStack->sell_volume += $stackTransaction->volume;
+                $memberStack->lock_volume -= $stackTransaction->volume;
+                if ($memberStack->save() && $stackTransaction->save()) {
+                    $transaction->commit();
+                    Yii::$app->session->setFlash('success', '交易自主解锁成功');
+                } else {
+                    $transaction->rollBack();
+                    Yii::$app->session->setFlash('danger', '交易自主解锁失败, 请稍后再试或联系管理员');
+                }
+            } else {
+                $stackTransaction->status = 1;
+                $memberStack = $stackTransaction->getMemberStack()->one();
+                $memberStack->lock_volume -= $stackTransaction->volume;
+                $member = $stackTransaction->getMember()->one();
+                $fee = round($stackTransaction->total_price * System::loadConfig('sell_fee_rate'), 2);
+                $member->stack_fund += ($stackTransaction->total_price - $fee);
+                $stackOutRecord = InRecord::prepareModelForSellStack($stackTransaction->member_id, ($stackTransaction->total_price - $fee), $member->stack_fund, $fee);
+                $stackOutRecord->account_type = 2;
+                $stackOutRecord->note = '自主解锁[' .date('Y-m-d'). ']出售股票[' . $stackTransaction->stack->code . ']' . $stackTransaction->volume . '股';
+                if ($memberStack->save() && $stackTransaction->save() && $member->save() && $stackOutRecord->save()) {
+                    $transaction->commit();
+                    Yii::$app->session->setFlash('success', '交易自主解锁成功');
+                } else {
+                    $transaction->rollBack();
+                    Yii::$app->session->setFlash('danger', '交易自主解锁失败, 请稍后再试或联系管理员');
+                }
+            }
+        } catch (Exception $e) {
+            $transaction->rollBack();
+        }
+        $this->redirect(Yii::$app->request->referrer);
+        return;
     }
 
     public function actionSell($id)
