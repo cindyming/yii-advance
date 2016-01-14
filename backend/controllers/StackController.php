@@ -48,7 +48,8 @@ class StackController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'unlock','update'],
+                        'actions' => ['index', 'trends', 'transactions', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
+
                         'roles' => [User::STACK_ADMIN]
                     ],
                 ],
@@ -232,53 +233,20 @@ class StackController extends Controller
                 $model->type = 0;
                 $model->total_price = $model->price * $model->volume;
                 $memberStack = MemberStack::getMemberStack($model);
-                $member = Member::findOne($model->member_id);
-                $stackFund = $member->stack_fund;
-                $financeMisFund = 0;
-                $stackOutRecord = null;
-                $financeOutRecord = null;
-                if ($stackFund > $model->total_price) {
-                    $member->stack_fund -= $model->total_price;
-                    $stackOutRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->stack_fund, 2);
-                } else if ($member->stack_fund > 0){
-                    $financeMisFund = $model->total_price - $member->stack_fund;
-                    $member->stack_fund = 0;
-                    $stackOutRecord = OutRecord::prepareModelForBuyStack($model->member_id, ($model->total_price - $financeMisFund), 0, 2);
-
-                } else {
-                    $financeMisFund = $model->total_price;
-                }
-                $financeOutRecord = null;
-                if ($financeMisFund) {
-                    $member->finance_fund -= $financeMisFund;
-                    $financeOutRecord = OutRecord::prepareModelForBuyStack($model->member_id, $financeMisFund, $member->finance_fund, 1);
-                }
-
+                $memberStack->lock_volume -= $model->volume;
+                $memberStack->sell_volume += $model->volume;
                 $connection = Yii::$app->db;
                 try {
                     $transaction = $connection->beginTransaction();
-                    $success = false;
-                    if ($stackOutRecord && $financeOutRecord && $model->save() && $memberStack->save() && $member->save() && $stackOutRecord->save() && $financeOutRecord->save()) {
-                        $success = true;
-                    } elseif ($financeOutRecord && $model->save() && $memberStack->save() && $member->save() && $financeOutRecord->save()) {
-                        $success = true;
-                    }elseif ($stackOutRecord && $model->save() && $memberStack->save() && $member->save() && $stackOutRecord->save()) {
-                        $success = true;
-                    }
-                    if ($success) {
+                    if ($memberStack->save() && $model->save()) {
+                        Yii::$app->session->setFlash('success', '股票添加成功');
                         $transaction->commit();
                         return $this->redirect(['transactions']);
                     } else {
+                        Yii::$app->session->setFlash('success', '股票添加失败，请稍后再试或者联系管理员');
                         Yii::error('Stack Buy Failed');
                         Yii::error( json_encode($model->getErrors()));
                         Yii::error( json_encode($memberStack->getErrors()));
-                        Yii::error( json_encode($member->getErrors()));
-                        if ($stackOutRecord) {
-                            Yii::error( json_encode($stackOutRecord->getErrors()));
-                        }
-                        if ($financeOutRecord) {
-                            Yii::error( json_encode($financeOutRecord->getErrors()));
-                        }
                         $transaction->rollback();
                     }
 

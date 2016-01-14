@@ -150,10 +150,10 @@ class AccountController extends \yii\web\Controller
             $transaction = $connection->beginTransaction();
 
             $model->status = 2;
-            $user = User::findById($model->user_id);
+            $user = Member::findOne($model->member_id);
             $model->total = $user->finance_fund;
             $model->note = '提现成功';
-            Yii::$app->session->setFlash('success', '会员(' . $model->user_id . ')提现申请发放成功');
+            Yii::$app->session->setFlash('success', '会员(' . $user->username. ')提现申请发放成功');
             $model->save();
             $user->save();
             $transaction->commit();
@@ -186,7 +186,7 @@ class AccountController extends \yii\web\Controller
             $transaction = $connection->beginTransaction();
             $model->status = 3;
 
-            $user = Member::findById($model->member_id);
+            $user = Member::findOne($model->member_id);
             $user->finance_fund += $model->amount;
             $data = array(
                 'member_id' => Yii::$app->user->identity->id,
@@ -195,7 +195,7 @@ class AccountController extends \yii\web\Controller
                 'fee' => 0,
                 'total' => $user->finance_fund,
                 'type' => 4,
-                'note' => '系统拒绝提现申请'
+                'note' => '拒绝提现,货币返还.'
             );
             $model->note .= '拒绝提现,货币返还.';
             Yii::$app->session->setFlash('success', '提现申请拒绝成功');
@@ -212,7 +212,7 @@ class AccountController extends \yii\web\Controller
             ]);
         }
 
-        return $this->redirect(['adminindex', 'id' => $model->id]);
+        return $this->redirect(['cashlist', 'id' => $model->id]);
     }
 
     public function actionList()

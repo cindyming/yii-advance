@@ -83,8 +83,8 @@ class Cash extends \yii\db\ActiveRecord
         return [
             [[ 'bank', 'cardname', 'backaddress', 'cardnumber', 'amount', 'fee'], 'required'],
             [['member_id', 'status'], 'integer'],
-            [['amount', 'fee', 'real_amount'], 'number'],
-            [['created_at', 'updated_at', 'membername', 'password2'], 'safe'],
+            [['amount', 'fee', 'real_amount','total'], 'number'],
+            [['created_at', 'updated_at', 'membername', 'password2', 'note'], 'safe'],
             [['bank'], 'string', 'max' => 100],
             [['cardname', 'backaddress', 'cardnumber'], 'string', 'max' => 250]
         ];
