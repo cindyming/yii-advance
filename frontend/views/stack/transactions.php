@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => false,
                 'hiddenFromExport' => true,
                 'content' => function($model) {
-                    return ($model->status) ? '' :( Html::a('手动解锁', '/stack/unlock?id='.$model->id, ['data-confirm'=>"你确定要解锁[" . $model->stack->code . "]" . $model->volume ."股的交易"]));
+                    return (($model->status==0) && ($model->type == 1)) ? ( Html::a('手动解锁', '/stack/unlock?id='.$model->id, ['data-confirm'=>"你确定要解锁[" . $model->stack->code . "]" . $model->volume ."股的交易"])) :  '';
                 }
             ],
         ],
