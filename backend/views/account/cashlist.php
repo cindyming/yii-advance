@@ -57,9 +57,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'backaddress',
                 'label'=>'开户行',
             ],
-            'amount',
-            'fee',
-            'real_amount',
+            [
+                'attribte' => 'amount',
+                'format' => 'decimal',
+            ],
+            [
+                'attribte' => 'fee',
+                'format' => 'decimal',
+            ],
+            [
+                'attribte' => 'real_amount',
+                'format' => 'decimal',
+            ],
             [
                 'attribute' => 'created_at',
                 'filterType'=>GridView::FILTER_DATE_RANGE,

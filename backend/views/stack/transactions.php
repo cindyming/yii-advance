@@ -64,9 +64,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'volume',
-            'price',
-            'total_price',
-            'charge',
+            [
+                'attribte' => 'price',
+                'format' => 'decimal',
+            ],
+            [
+                'attribte' => 'total_price',
+                'format' => 'decimal',
+            ],
+            [
+                'attribte' => 'charge',
+                'format' => 'decimal',
+            ],
             [
                 'attribute' =>  'created_at',
                 'filterType'=>GridView::FILTER_DATE_RANGE,
