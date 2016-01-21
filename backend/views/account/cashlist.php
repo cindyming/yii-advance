@@ -79,6 +79,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Yii::$app->options->getOptionLabel('cash_status', $model->status);
                 },
                 'filter' => Yii::$app->options->getOptions('cash_status',true),
+                'filter'=> true,
+                'filterType'=>GridView::FILTER_SELECT2,
             ],
             [
                 'attribute' => 'status',
