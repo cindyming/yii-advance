@@ -77,8 +77,10 @@ class AccountController extends \yii\web\Controller
     {
         if (Yii::$app->request->get('type') == 'out') {
             $model = new OutRecord();
+            $model->type = 4;
         } else {
             $model = new InRecord();
+            $model->type = 1;
         }
 
         if ($model->load(Yii::$app->request->post())) {
