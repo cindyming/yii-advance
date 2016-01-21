@@ -67,7 +67,7 @@ class CashSearch extends Cash
             'amount' => $this->amount,
             'fee' => $this->fee,
             'real_amount' => $this->real_amount,
-            'status' => $this->status,
+            'cash.status' => $this->status,
         ]);
 
         if ($this->created_at) {
