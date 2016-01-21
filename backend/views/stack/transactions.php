@@ -65,15 +65,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'volume',
             [
-                'attribte' => 'price',
+                'attribute' => 'price',
                 'format' => 'decimal',
             ],
             [
-                'attribte' => 'total_price',
+                'attribute' => 'total_price',
                 'format' => 'decimal',
             ],
             [
-                'attribte' => 'charge',
+                'attribute' => 'charge',
                 'format' => 'decimal',
             ],
             [

@@ -58,15 +58,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'开户行',
             ],
             [
-                'attribte' => 'amount',
+                'attribute' => 'amount',
                 'format' => 'decimal',
             ],
             [
-                'attribte' => 'fee',
+                'attribute' => 'fee',
                 'format' => 'decimal',
             ],
             [
-                'attribte' => 'real_amount',
+                'attribute' => 'real_amount',
                 'format' => 'decimal',
             ],
             [
