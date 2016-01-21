@@ -18,8 +18,8 @@ class CashSearch extends Cash
     public function rules()
     {
         return [
-            [['id', 'member_id', 'status'], 'integer'],
-            [['bank', 'cardname', 'backaddress', 'cardnumber', 'created_at', 'updated_at', 'membername'], 'safe'],
+            [['id', 'member_id'], 'integer'],
+            [['bank', 'cardname', 'backaddress', 'cardnumber', 'created_at', 'updated_at', 'membername', 'status'], 'safe'],
             [['amount', 'fee', 'real_amount'], 'number'],
         ];
     }

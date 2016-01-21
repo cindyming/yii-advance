@@ -116,7 +116,7 @@ class AccountController extends \yii\web\Controller
                             $model->total = $member->stack_fund;
                         }
                     }
-                    
+
                     $model->fee = 0;
                     $model->member_id = $member->id;
                     if ($member->save() && $model->save())  {
