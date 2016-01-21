@@ -59,14 +59,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'amount',
+                'filter' => false,
                 'format' => 'decimal',
             ],
             [
                 'attribute' => 'fee',
+                'filter' => false,
                 'format' => 'decimal',
             ],
             [
                 'attribute' => 'real_amount',
+                'filter' => false,
                 'format' => 'decimal',
             ],
             [
@@ -82,8 +85,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterType'=>GridView::FILTER_SELECT2,
             ],
             [
-                'attribute' => 'status',
+                'attribute' => 'id',
                 'label' => '操作',
+                'filter' => false,
                 'hiddenFromExport' => true,
                 'hiddenFromExport' => true,
                 'content' => function($model) {
