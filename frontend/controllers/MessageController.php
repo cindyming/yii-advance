@@ -77,7 +77,7 @@ class MessageController extends Controller
         $model = new Message();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', '留言提交成功,我们会经快回复');
+            Yii::$app->session->setFlash('success', '留言提交成功,我们会尽快回复');
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
