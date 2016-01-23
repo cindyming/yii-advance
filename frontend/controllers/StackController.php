@@ -144,10 +144,12 @@ class StackController extends \yii\web\Controller
                                     $success = true;
                                 }
                                 if ($success) {
+                                    Yii::$app->session->setFlash('success', '购买成功');
                                     $transaction->commit();
                                     return $this->redirect(['transactions']);
                                 } else {
                                     Yii::error('Stack Buy Failed');
+                                    Yii::$app->session->setFlash('danger', '购买失败,请稍后再试.');
                                     Yii::error(json_encode($model->getErrors()));
                                     Yii::error(json_encode($memberStack->getErrors()));
                                     Yii::error(json_encode($member->getErrors()));
