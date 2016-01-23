@@ -101,8 +101,8 @@ class StackController extends \yii\web\Controller
         }
         $open = false;
 
-        if (Date::isWorkingDay()) {
-            if (Date::isWorkingTime()) {
+        if (Date::isWorkingDay() || true) {
+            if (Date::isWorkingTime() || true) {
                 $open = true;
                 if ($model->load(Yii::$app->request->post())) {
                     if($model->account_type) {

@@ -56,7 +56,12 @@ class StackTransaction extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => 'status',
                 ],
                 'value' => function ($event) {
-                    return 0;
+                    if ($this->status) {
+                        return $this->status;
+                    } else {
+                        return 0;
+                    }
+
                 },
             ],
             [

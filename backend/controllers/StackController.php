@@ -232,8 +232,9 @@ class StackController extends Controller
                 $model->setMemberId();
                 $model->type = 0;
                 $model->total_price = $model->price * $model->volume;
+                $model->status = 1;
                 $memberStack = MemberStack::getMemberStack($model);
-                $memberStack->lock_volume += $model->volume;
+                $memberStack->sell_volume += $model->volume;
                 $connection = Yii::$app->db;
                 try {
                     $transaction = $connection->beginTransaction();
