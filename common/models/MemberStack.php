@@ -92,14 +92,14 @@ class MemberStack extends ActiveRecord
         return $this->hasOne(Stack::className(), ['id' => 'stack_id']);
     }
 
-    public static function getMemberStack($transaction)
+    public static function getMemberStack($transaction, $calculeteVolume = true)
     {
         $volume = $transaction->volume;
         $member_id = $transaction->member_id;
         $stack_id = $transaction->stack_id;
         $model = MemberStack::find()->where(['=', 'member_id', $member_id])->andWhere(['=', 'stack_id', $stack_id])->one();
 
-        if ($model && $model->id) {
+        if ($model && $model->id && $calculeteVolume) {
             if ($transaction->type === 0) {
                 $model->lock_volume += $volume;
             } else {
@@ -111,7 +111,7 @@ class MemberStack extends ActiveRecord
                 $data = array(
                     'member_id' => $member_id,
                     'stack_id' => $stack_id,
-                    'lock_volume' => $volume,
+                    'lock_volume' => $calculeteVolume ? $volume : 0,
                     'sell_volume' => 0
                 );
                 $model->load($data, '');
