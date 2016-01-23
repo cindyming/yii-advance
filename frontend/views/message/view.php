@@ -10,26 +10,25 @@ $this->title = 'Message Detail';
 ?>
 <div class="message-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>[<?php echo Yii::$app->options->getOptions('question_type',$model->type) ?>]<?= Html::encode($this->title) ?></h1>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'title',
-            'content:ntext',
-            [
-                'attribute' => 'replied_content',
-                'content' => function($model) {
-                    if ($model->replied_content) {
-                        return $model->replied_content;
-                    } else {
-                        return '';
-                    }
-                }
-            ]
-        ],
-    ]) ?>
+    <div>
+         <div>
+             留言内容[<?php echo $model->created_at; ?>]
+         </div>
+        <p>
+            <?php echo $model->content; ?>
+        </p>
+    </div>
 
+    <div>
+        <div>
+            客服回复[<?php echo $model->updated_at ?>]
+        </div>
+        <p>
+            <?php echo $model->replied_content; ?>
+        </p>
+    </div>
     <p>
         <?= Html::a('返回', ['index'], ['class' => 'btn btn-primary']) ?>
     </p>
