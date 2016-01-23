@@ -138,6 +138,7 @@ class MemberController extends Controller
         $model = new Member();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', '会员添加成功');
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [

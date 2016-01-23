@@ -97,6 +97,8 @@ class AccountController extends \yii\web\Controller
                 $outRecord->save();
                 Yii::$app->session->setFlash('success', '提现申请提交成功');
                 $this->redirect(['cashlist']);
+            } else {
+                Yii::$app->session->setFlash('danger', '提现申请失败,清输入正确的信息');
             }
         }
 

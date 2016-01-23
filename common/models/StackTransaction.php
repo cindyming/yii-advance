@@ -71,7 +71,7 @@ class StackTransaction extends ActiveRecord
                 ],
                 'value' => function ($event) {
                     if ($this->type) {
-                        return $this->price * $this->volume * 0.001;
+                        return round($this->total_price * System::loadConfig('sell_fee_rate'), 2);
                     } else {
                         return 0;
                     }
