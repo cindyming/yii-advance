@@ -11,9 +11,9 @@ use yii\widgets\ActiveForm;
 <div class="stack-form">
 
     <?php $form = ActiveForm::begin([
-     //   'enableAjaxValidation' => true,
-     //   'validateOnBlur' => true,
-      //  'validationUrl' => '/stack/validatebuy?' . ($model->id ? 'id=' . $model->id : ''),
+        'enableAjaxValidation' => true,
+        'validateOnBlur' => true,
+        'validationUrl' => '/stack/validatebuy?' . ($model->id ? 'id=' . $model->id : ''),
     ]); ?>
 
     <?= $form->field($model, 'membername')->textInput(['maxlength' => true, 'readOnly' => ($model->isNewRecord ? false : true)]) ?>
