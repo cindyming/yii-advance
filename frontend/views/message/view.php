@@ -10,7 +10,7 @@ $this->title = 'Message Detail';
 ?>
 <div class="message-view">
 
-    <h1>[<?php echo Yii::$app->options->getOptionLabel('question_type',$model->type) ?>]<?= Html::encode($this->title) ?></h1>
+    <h1>[<?php echo Yii::$app->options->getOptionLabel('question_type',$model->type) ?>]<?= Html::encode($model->title) ?></h1>
 
     <div>
          <div>
