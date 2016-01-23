@@ -6,6 +6,7 @@ use Yii;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "stack".
@@ -87,5 +88,11 @@ class Stack extends ActiveRecord
     public function getStackTrends()
     {
         return $this->hasMany(StackTrends::className(), ['stack_id' => 'id']);
+    }
+
+    public static function getStackOptions()
+    {
+        $stacks = Stack::findAll(array('status' => 0));
+        return ArrayHelper::map($stacks, 'code', 'code');
     }
 }
