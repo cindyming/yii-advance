@@ -36,9 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => Yii::$app->options->getOptions('account_type',true),
             ],
-            'amount',
-            'fee',
-            'total',
+            [
+                'attribute' => 'amount',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'fee',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'total',
+                'filter' => false,
+            ],
             [
                 'attribute' =>  'created_at',
                 'filterType'=>GridView::FILTER_DATE_RANGE,

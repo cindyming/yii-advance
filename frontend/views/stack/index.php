@@ -23,7 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'code',
             'name',
-            'price',
+            [
+                'attribute' => 'price',
+                'filter' => false,
+            ],
             [
                 'attribute' =>  'updated_at',
                 'filterType'=>GridView::FILTER_DATE_RANGE,

@@ -190,7 +190,7 @@ class AccountController extends \yii\web\Controller
             $user = Member::findOne($model->member_id);
             $user->finance_fund += $model->amount;
             $data = array(
-                'member_id' => Yii::$app->user->identity->id,
+                'member_id' => $model->member_id,
                 'account_type' => 1,
                 'amount' => $model->amount,
                 'fee' => 0,

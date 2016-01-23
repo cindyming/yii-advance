@@ -27,8 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->getMember()->one()->username;
                 }
             ],
-            'investment',
-            'revenue',
+            [
+                'attribute' => 'investment',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'revenue',
+                'filter' => false,
+            ],
             [
                 'attribute' => 'created_at',
                 'filterType'=>GridView::FILTER_DATE_RANGE,

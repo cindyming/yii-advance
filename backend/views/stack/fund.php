@@ -39,8 +39,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->stack->name;
                 }
             ],
-            'sell_volume',
-            'lock_volume',
+            [
+                'attribute' => 'sell_volume',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'lock_volume',
+                'filter' => false,
+            ],
             [
                 'attribute' => 'current_price',
                 'value' => function($model) {

@@ -29,9 +29,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => '序号'
             ],
             'username',
-            'investment',
-            'finance_fund',
-            'stack_fund',
+            [
+                'attribute' => 'investment',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'finance_fund',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'stack_fund',
+                'filter' => false,
+            ],
             [
                 'class' => 'kartik\grid\ActionColumn',
                 'header' => '操作',

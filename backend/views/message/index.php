@@ -38,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'replied_content',
                 'label' => '是否回复',
+                'filter' => false,
                 'value' => function($model) {
                     return $model->isReplied();
                 }

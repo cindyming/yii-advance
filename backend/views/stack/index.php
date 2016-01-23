@@ -35,7 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'inputType' => \kartik\editable\Editable::INPUT_TEXT,
                         'size'=>'sm',
                     ];
-                }
+                },
+                'filter' => false,
 
             ],
 

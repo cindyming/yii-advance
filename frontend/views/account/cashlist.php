@@ -57,9 +57,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'backaddress',
                 'label'=>'开户行',
             ],
-            'amount',
-            'fee',
-            'real_amount',
+            [
+                'attribute' => 'amount',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'fee',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'real_amount',
+                'filter' => false,
+            ],
             [
                 'attribute' => 'created_at',
                 'filter' => true,

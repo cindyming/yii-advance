@@ -28,36 +28,45 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'attribute' => 'membername',
+                'attribute' => 'id',
                 'label' => '基金名称',
+                'filter' => false,
                 'value' => function($model) {
                     return $model->getFund()->one()->name;
                 }
             ],
             [
-                'attribute' => 'membername',
+                'attribute' => 'id',
                 'label' => '今日收益率',
+                'filter' => false,
                 'value' => function($model) {
                     return $model->getFund()->one()->daily;
                 }
             ],
             [
-                'attribute' => 'membername',
+                'attribute' => 'id',
                 'label' => '月收益率',
+                'filter' => false,
                 'value' => function($model) {
                     return $model->getFund()->one()->monthly;
                 }
             ],
             [
-                'attribute' => 'membername',
+                'attribute' => 'id',
                 'label' => '预期收益率',
+                'filter' => false,
                 'value' => function($model) {
                     return $model->getFund()->one()->excepted;
                 }
             ],
-            'investment',
-            'revenue',
-
+            [
+                'attribute' => 'investment',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'revenue',
+                'filter' => false,
+            ],
             [
                 'attribute' => 'created_at',
                 'filter' => false

@@ -100,8 +100,9 @@ class StackController extends \yii\web\Controller
             $memberStack = new MemberStack();
         }
         $open = false;
-
-        if (Date::isWorkingDay() || true) {
+        if($stack->status) {
+            Yii::$app->session->setFlash('danger', '股票已锁定,请选择其它股票进行购买.');
+        } else if (Date::isWorkingDay() || true) {
             if (Date::isWorkingTime() || true) {
                 $open = true;
                 if ($model->load(Yii::$app->request->post())) {

@@ -23,7 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'username',
             'nickname',
-            'investment',
+            [
+                'attribute' => 'investment',
+                'filter' => false,
+            ],
             [
                 'attribute' => 'added_by',
                 'value' => function($model) {

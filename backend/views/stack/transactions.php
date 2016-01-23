@@ -63,18 +63,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->stack->name;
                 }
             ],
-            'volume',
+            [
+                'attribute' => 'volume',
+                'filter' => false,
+            ],
             [
                 'attribute' => 'price',
                 'format' => 'decimal',
+                'filter' => false,
             ],
             [
                 'attribute' => 'total_price',
                 'format' => 'decimal',
+                'filter' => false,
             ],
             [
                 'attribute' => 'charge',
                 'format' => 'decimal',
+                'filter' => false,
             ],
             [
                 'attribute' =>  'created_at',

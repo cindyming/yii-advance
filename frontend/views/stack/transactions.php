@@ -46,10 +46,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->stack->name;
                 }
             ],
-            'volume',
-            'price',
-            'total_price',
-            'charge',
+            [
+                'attribute' => 'volume',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'price',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'total_price',
+                'filter' => false,
+            ],
+            [
+                'attribute' => 'charge',
+                'filter' => false,
+            ],
             [
                 'attribute' =>  'created_at',
                 'filterType'=>GridView::FILTER_DATE_RANGE,
