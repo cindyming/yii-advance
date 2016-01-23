@@ -99,11 +99,13 @@ class MemberStack extends ActiveRecord
         $stack_id = $transaction->stack_id;
         $model = MemberStack::find()->where(['=', 'member_id', $member_id])->andWhere(['=', 'stack_id', $stack_id])->one();
 
-        if ($model && $model->id && $calculeteVolume) {
-            if ($transaction->type === 0) {
-                $model->lock_volume += $volume;
-            } else {
-                $model->lock_volume -= $volume;
+        if ($model && $model->id) {
+            if ($calculeteVolume) {
+                if ($transaction->type === 0) {
+                    $model->lock_volume += $volume;
+                } else {
+                    $model->lock_volume -= $volume;
+                }
             }
         } else {
             if ($transaction->type === 0) {
