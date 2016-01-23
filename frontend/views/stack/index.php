@@ -23,17 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'code',
             'name',
-            [
-                'class' => 'kartik\grid\EditableColumn',
-                'attribute'=>'price',
-                'editableOptions'=> function ($model, $key, $index) {
-                    return [
-                        'inputType' => \kartik\editable\Editable::INPUT_TEXT,
-                        'size'=>'sm',
-                    ];
-                }
-
-            ],
+            'price',
             [
                 'attribute' =>  'updated_at',
                 'filterType'=>GridView::FILTER_DATE_RANGE,
@@ -55,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => Yii::t('yii', '购买'),
                             'aria-label' => Yii::t('yii', '购买'),
                         ];
-                        return Html::a('购买', $url, $options);
+                        return ($model->status) ? '' : Html::a('购买', $url, $options);
                     },
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
