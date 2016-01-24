@@ -81,7 +81,7 @@ class CashSearch extends Cash
         $query->andFilterWhere(['like', 'cash.bank', $this->bank])
             ->andFilterWhere(['like', 'cash.cardname', $this->cardname])
             ->andFilterWhere(['like', 'cash.backaddress', $this->backaddress])
-            ->andFilterWhere(['like', 'cash.cardnumber', $this->backaddress])
+            ->andFilterWhere(['like', 'cash.cardnumber', $this->cardnumber])
             ->andFilterWhere(['like','member.username',$this->membername])
             ->orderBy(['created_at' => SORT_DESC]);
 
