@@ -9,7 +9,6 @@ return [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => '@kvgrid/messages',
                 'forceTranslation' => true,
-                'language' => 'zh'
             ]
         ],
         'datecontrol' =>  [
