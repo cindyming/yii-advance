@@ -216,8 +216,9 @@ class MemberController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', '会员删除成功');
 
-        return $this->redirect(['index']);
+        return $this->redirect(['unapprovedindex']);
     }
 
     /**
