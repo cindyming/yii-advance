@@ -42,9 +42,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '拒绝',
-                'template' => '{reject} {delete}',
+                'template' => '{delete}',
                 'buttons' => [
-                    'reject' => function ($url, $model, $key) {
+                    'delete' => function ($url, $model, $key) {
                         $options = [
                             'title' => Yii::t('yii', '拒绝'),
                             'aria-label' => Yii::t('yii', '拒绝'),
@@ -55,8 +55,30 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
-                    if ($action === 'reject') {
+                    if ($action === 'delete') {
                         $url ='/member/reject?id='.$model->id;
+                        return $url;
+                    }
+                }
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => '删除',
+                'template' => '{delete}',
+                'buttons' => [
+                    'delete' => function ($url, $model, $key) {
+                        $options = [
+                            'title' => Yii::t('yii', '拒绝'),
+                            'aria-label' => Yii::t('yii', '拒绝'),
+                            'data-confirm' => Yii::t('yii', '你确定要拒绝会员[' . $model->username . ']吗?'),
+                            'data-method' => 'post',
+                        ];
+                        return Html::a('拒绝', $url, $options);
+                    },
+                ],
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    if ($action === 'delete') {
+                        $url ='/member/delete?id='.$model->id;
                         return $url;
                     }
                 }
