@@ -18,7 +18,7 @@
  */
 return [
     'Clear selection' => '',
-    'There are {totalCount} records. Are you sure you want to display them all?' => '',
+    'There are {totalCount} records. Are you sure you want to display them all?' => '总共有{totalCount}条记录,要全部显示吗?',
     'Actions' => '动作',
     'Active' => '已激活',
     'Add Book' => '新增书籍',
