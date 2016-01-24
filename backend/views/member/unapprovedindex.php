@@ -42,9 +42,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '拒绝',
-                'template' => '{delete}',
+                'template' => '{reject} {delete}',
                 'buttons' => [
-                    'delete' => function ($url, $model, $key) {
+                    'reject' => function ($url, $model, $key) {
                         $options = [
                             'title' => Yii::t('yii', '拒绝'),
                             'aria-label' => Yii::t('yii', '拒绝'),
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
-                    if ($action === 'delete') {
+                    if ($action === 'reject') {
                         $url ='/member/reject?id='.$model->id;
                         return $url;
                     }
