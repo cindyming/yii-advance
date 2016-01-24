@@ -81,9 +81,14 @@ class MessageSearch extends Message
         }
         $query->andFilterWhere(['like', 'message.title', $this->title])
             ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'replied_content', $this->replied_content])
+
             ->andFilterWhere(['like','member.username',$this->membername])
             ->orderBy(['created_at' => SORT_DESC]);
+        if ($this->replied_content  == 1) {
+            $query->andFilterWhere(['>', 'replied_content', '']);
+        } else if($this->replied_content  == 2) {
+            $query->andFilterWhere(['=', 'replied_content', '']);
+        }
 
 
         return $dataProvider;
