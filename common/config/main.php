@@ -8,7 +8,8 @@ return [
             'i18n' => [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => '@kvgrid/messages',
-                'forceTranslation' => true
+                'forceTranslation' => true,
+                'language' => 'zh'
             ]
         ],
         'datecontrol' =>  [
