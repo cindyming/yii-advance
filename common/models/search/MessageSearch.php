@@ -79,7 +79,7 @@ class MessageSearch extends Message
                 $query->andFilterWhere(['<=', $this::tableName() . '.updated_at', $date[1] . ' 23:59:59']);
             }
         }
-        $query->andFilterWhere(['like', 'title', $this->title])
+        $query->andFilterWhere(['like', 'message.title', $this->title])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'replied_content', $this->replied_content])
             ->andFilterWhere(['like','member.username',$this->membername])
