@@ -230,43 +230,51 @@ class StackController extends \yii\web\Controller
         $model = new StackTransaction();
         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
         if ($model->load(Yii::$app->request->post())) {
-            if($model->account_type) {
-                $data = Yii::$app->request->post();
-                $validate = true;
-                if (!Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
-                    $validate = false;
-                    $model->addError('password2', '第二密码不正确, 请确认后重新输入.');
-                }
-                if (!$model->checkSellVolume($memberStack, $model->volume)) {
-                    $validate = false;
-                }
-                if ($validate) {
-                    $model->price = $stack->price;
-                    $model->member_id = Yii::$app->user->identity->id;
-                    $model->stack_id = $stack->id;
-                    $model->type = 1;
-                    $model->total_price = $stack->price * $model->volume;
-                    $memberStack->sell_volume -= $model->volume;
-                    $memberStack->lock_volume += $model->volume;
-
-                    $connection = Yii::$app->db;
-                    try {
-                        $transaction = $connection->beginTransaction();
-                        if ($model->save() && $memberStack->save()) {
-                            $transaction->commit();
-                            return $this->redirect(['transactions']);
-                        } else {
-                            Yii::error('Sell Stack Failed');
-                            Yii::error(json_encode($model->getErrors()));
-                            Yii::error(json_encode($memberStack->getErrors()));
-                            $transaction->rollback();
+            if (Date::isWorkingDay() || true) {
+                if (Date::isWorkingTime() || true) {
+                    if($model->account_type) {
+                        $data = Yii::$app->request->post();
+                        $validate = true;
+                        if (!Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
+                            $validate = false;
+                            $model->addError('password2', '第二密码不正确, 请确认后重新输入.');
                         }
-                    } catch (Exception $e) {
+                        if (!$model->checkSellVolume($memberStack, $model->volume)) {
+                            $validate = false;
+                        }
+                        if ($validate) {
+                            $model->price = $stack->price;
+                            $model->member_id = Yii::$app->user->identity->id;
+                            $model->stack_id = $stack->id;
+                            $model->type = 1;
+                            $model->total_price = $stack->price * $model->volume;
+                            $memberStack->sell_volume -= $model->volume;
+                            $memberStack->lock_volume += $model->volume;
 
+                            $connection = Yii::$app->db;
+                            try {
+                                $transaction = $connection->beginTransaction();
+                                if ($model->save() && $memberStack->save()) {
+                                    $transaction->commit();
+                                    return $this->redirect(['transactions']);
+                                } else {
+                                    Yii::error('Sell Stack Failed');
+                                    Yii::error(json_encode($model->getErrors()));
+                                    Yii::error(json_encode($memberStack->getErrors()));
+                                    $transaction->rollback();
+                                }
+                            } catch (Exception $e) {
+
+                            }
+                        }
+                    } else {
+                        $model->total_price = $stack->price * $model->volume;
                     }
+                } else {
+                    Yii::$app->session->setFlash('danger', '非交易时间. 早上10:00 ~ 12:30. 下午2:00 ~ 4:00');
                 }
             } else {
-                $model->total_price = $stack->price * $model->volume;
+                Yii::$app->session->setFlash('danger', '对不起,非交易日不能进行交易!');
             }
         }
         return $this->render('sell', [

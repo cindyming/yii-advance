@@ -120,7 +120,7 @@ class OutRecord extends \yii\db\ActiveRecord
     {
         $data = array(
             'member_id' => $member_id,
-            'type' => 2,
+            'type' => 4,
             'fee' => 0,
             'amount' => System::loadConfig('annual_fee'),
             'total' => $total,
