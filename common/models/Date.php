@@ -91,7 +91,8 @@ class Date extends \yii\db\ActiveRecord
     public static function isWorkingTime()
     {
         $hours = date('H');
-        if (((10 < $hours) && ($hours < 12)) || ((14 < $hours) && ($hours < 16))) {
+        $mins = data('i');
+        if (((10 < $hours) && ($hours < 12)) || ((14 < $hours) && ($hours < 16)) || (($hours == 12) && ($mins <= 30))) {
             return true;
         } else {
             return false;
