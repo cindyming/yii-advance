@@ -16,10 +16,10 @@ $this->title = '申请提现';
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'bank')->dropDownList(Yii::$app->options->getOptions('bank'), ['value' => Yii::$app->user->identity->bank]) ?>
-    <?= $form->field($model, 'cardnumber')->textInput(['value' => Yii::$app->user->identity->cardnumber]); ?>
-    <?= $form->field($model, 'cardname')->textInput(['value' => Yii::$app->user->identity->cardname]); ?>
-    <?= $form->field($model, 'backaddress')->textInput(['value' => Yii::$app->user->identity->bankaddress]); ?>
+    <?= $form->field($model, 'bank')->dropDownList(Yii::$app->options->getOptions('bank'), ['value' => Yii::$app->user->identity->bank, 'readonly' => true]) ?>
+    <?= $form->field($model, 'cardnumber')->textInput(['value' => Yii::$app->user->identity->cardnumber, 'readonly' => true ]); ?>
+    <?= $form->field($model, 'cardname')->textInput(['value' => Yii::$app->user->identity->cardname, 'readonly' => true]); ?>
+    <?= $form->field($model, 'backaddress')->textInput(['value' => Yii::$app->user->identity->bankaddress, 'readonly' => true]); ?>
     <?= $form->field($model, 'amount') ?>
     <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput() ?>
 
