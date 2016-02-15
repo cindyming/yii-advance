@@ -73,15 +73,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Yii::$app->options->getOptionLabel('transcation_status', $model->status);
                 }
             ],
-            [
-                'attribute' => 'status',
-                'label' => '操作',
-                'filter' => false,
-                'hiddenFromExport' => true,
-                'content' => function($model) {
-                    return (($model->status==0) && ($model->type == 1)) ? ( Html::a('手动解锁', '/stack/unlock?id='.$model->id, ['data-confirm'=>"你确定要解锁[" . $model->stack->code . "]" . $model->volume ."股的交易"])) :  '';
-                }
-            ],
         ],
     ]); ?>
 
