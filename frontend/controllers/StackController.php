@@ -102,8 +102,8 @@ class StackController extends \yii\web\Controller
         $open = false;
         if($stack->status) {
             Yii::$app->session->setFlash('danger', '股票已锁定,请选择其它股票进行购买.');
-        } else if (Date::isWorkingDay() || true) {
-            if (Date::isWorkingTime() || true) {
+        } else if (Date::isWorkingDay()) {
+            if (Date::isWorkingTime()) {
                 $open = true;
                 if ($model->load(Yii::$app->request->post())) {
                     if($model->account_type) {
@@ -230,8 +230,8 @@ class StackController extends \yii\web\Controller
         $model = new StackTransaction();
         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
         if ($model->load(Yii::$app->request->post())) {
-            if (Date::isWorkingDay() || true) {
-                if (Date::isWorkingTime() || true) {
+            if (Date::isWorkingDay()) {
+                if (Date::isWorkingTime()) {
                     if($model->account_type) {
                         $data = Yii::$app->request->post();
                         $validate = true;
