@@ -41,7 +41,7 @@ class DateSearch extends Date
      */
     public function search($params)
     {
-        $query = Date::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = Date::find()->orderBy(['date' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -66,7 +66,7 @@ class DateSearch extends Date
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ])->orderBy(['created_at' => SORT_DESC]);
+        ])->orderBy(['date' => SORT_DESC]);
 
 
         return $dataProvider;
