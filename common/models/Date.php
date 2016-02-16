@@ -92,7 +92,7 @@ class Date extends \yii\db\ActiveRecord
     {
         $hours = date('H');
         $mins = date('i');
-        if (((10 < $hours) && ($hours < 12)) || ((14 < $hours) && ($hours < 16)) || (($hours == 12) && ($mins <= 30))) {
+        if (((10 <= $hours) && ($hours < 12)) || ((14 <= $hours) && ($hours < 16)) || (($hours == 12) && ($mins <= 30))) {
             return true;
         } else {
             return false;
