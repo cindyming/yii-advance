@@ -218,7 +218,19 @@ h2.site-name{
 }
 .sm-form {
   width: 50%;
+  position:relative;
 }
+.stack-form.sm-form .form-group{
+    width:48%;
+    margin-right:1%;
+    display:inline-block;
+    vertical-align: top;
+}
+.stack-form.sm-form .field-stacktransaction-account_type{display:none;}
+.stack-form.sm-form .field-stacktransaction-total_price{width:100%}
+.stack-form.sm-form .field-stacktransaction-volume{width:48%;clear:both;}
+.stack-form.sm-form .stack-button{width:100%;clear:both;}
+
 .navbar-collapse{
     float:right;
 }
@@ -291,14 +303,15 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
     width: 100%
 }
 .field-stacktransaction-total_price input{
-    width: 60%;
+    width: 48%;
     display: inline-block;
     *display: inline
 }
 .btn-count{
     background:#176899;
     border-color:#176899;
-    margin:-73px 0 20px 62%
+    margin:-62px 0 20px 49%;
+    position: absolute;
 }
 .btn-count:hover,
 .btn-count:focus{

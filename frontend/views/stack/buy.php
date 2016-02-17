@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::submitButton('计算总价', ['class' => 'btn btn-primary btn-count', 'onClick' => "$('#stacktransaction-account_type').val(0)"]) ?>
         <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
-        <div class="form-group">
+        <div class="form-group stack-button">
             <?= Html::submitButton('确认[理财账户]购买', ['class' => 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(1)"]) ?>
             <?= Html::submitButton('确认[购股账户]购买', ['class' => 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(2)"]) ?>
         </div>
