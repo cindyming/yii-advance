@@ -255,3 +255,10 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
         width: 35%
     }
 }
+@media (min-width: 1230px) {
+  .container {
+    width: 1230px;
+    padding-right:0!important;
+    padding-left: 0!important;
+  }
+}
