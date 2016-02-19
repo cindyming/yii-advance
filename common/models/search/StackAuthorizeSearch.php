@@ -20,7 +20,7 @@ class StackAuthorizeSearch extends StackAuthorize
         return [
             [['id', 'stack_id', 'status', 'member_id'], 'integer'],
             [['price', 'real_price'], 'number'],
-            [['created_at', 'updated_at', 'stackcode', 'membername', 'type'], 'safe'],
+            [['created_at', 'updated_at', 'stackcode', 'membername', 'type', 'note'], 'safe'],
         ];
     }
 
@@ -85,7 +85,8 @@ class StackAuthorizeSearch extends StackAuthorize
             $this::tableName() . '.status' => $this->status,
             'type' => $this->type,
             'member_id' => $this->member_id,
-        ])->andFilterWhere(['like','stack.code',$this->stackcode])
+        ])->andFilterWhere(['like',$this::tableName() . '.note',$this->note])
+            ->andFilterWhere(['like','stack.code',$this->stackcode])
             ->andFilterWhere(['like','member.username',$this->membername])
             ->orderBy(['created_at' => SORT_DESC]);
 
