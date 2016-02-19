@@ -79,12 +79,12 @@ class AuthorizeController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->setStackId();
-            $model->type = 1;
+            $model->type = 0;
             $model->member_id = Yii::$app->user->identity->id;
             $totalPrice = $model->volume * $model->price;
             if ((($model->account_type == 1) && Yii::$app->user->identity->finance_fund < $totalPrice) ||
                 (($model->account_type == 2) && Yii::$app->user->identity->stack_fund < $totalPrice)) {
-                $model->addError('volume', '账户余额不足. 理财基金:.' . Yii::$app->user->identity->finance_fund . '. 购股账户:'. Yii::$app->user->identity->stack_fund);
+                $model->addError('volume', '账户余额不足. 理财基金:' . Yii::$app->user->identity->finance_fund . '. 购股账户:'. Yii::$app->user->identity->stack_fund);
             } else if ($model->save()) {
                 Yii::$app->session->setFlash('success', '委托提交成功');
                 return $this->redirect(['index']);
@@ -106,7 +106,7 @@ class AuthorizeController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->setStackId();
-            $model->type = 2;
+            $model->type = 1;
             $model->account_type = 0;
             $model->member_id = Yii::$app->user->identity->id;
             $memberStack = Yii::$app->user->identity->getMemberStack($model->stack_id);
