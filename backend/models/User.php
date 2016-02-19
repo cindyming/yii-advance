@@ -29,6 +29,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
     const SUPPER_ADMIN = 1;
     const STACK_ADMIN = 2;
+    const AUTO_ADMIN = 3;
 
     public $password_old;
     public $username_old;
@@ -40,7 +41,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return '{{%auto_admin}}';
     }
 
     public function attributeLabels()

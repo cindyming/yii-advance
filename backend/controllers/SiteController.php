@@ -74,9 +74,9 @@ class SiteController extends Controller
     {
         if (!Yii::$app->user->isGuest) {
             if (Yii::$app->user->identity->isSupperAdmin()) {
-                return $this->redirect(['/news/index']);
+                return $this->redirect(['/authorize/index']);
             } else {
-                return $this->redirect(['/stack/index']);
+                return $this->redirect(['/authorize/index']);
             }
         } else {
             return $this->redirect(['/site/login']);

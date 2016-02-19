@@ -80,6 +80,15 @@ class Options
         'transcation_status' => array(
             0 => '交易锁定',
             1 => '交易完成'
+        ),
+        'authorize_status' => array(
+            1 => '委托等候中',
+            2 => '委托交易完成',
+            3 => '委托交易失败',
+        ),
+        'authorize_type' => array(
+            0 => '买入',
+            1 => '卖出',
         )
     );
 

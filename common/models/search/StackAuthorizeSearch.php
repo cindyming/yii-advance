@@ -5,12 +5,12 @@ namespace common\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\StackTransaction;
+use common\models\StackAuthorize;
 
 /**
- * StackTransactionSearch represents the model behind the search form about `common\models\StackTransaction`.
+ * StackAuthorizeSearch represents the model behind the search form about `common\models\StackAuthorize`.
  */
-class StackTransactionSearch extends StackTransaction
+class StackAuthorizeSearch extends StackAuthorize
 {
     /**
      * @inheritdoc
@@ -18,9 +18,9 @@ class StackTransactionSearch extends StackTransaction
     public function rules()
     {
         return [
-            [['id', 'stack_id', 'member_id', 'volume', 'type'], 'integer'],
-            [['price', 'total_price', 'charge'], 'number'],
-            [['created_at', 'updated_at', 'stackname', 'stackcode', 'membername', 'status', 'note'], 'safe'],
+            [['id', 'stack_id', 'status', 'member_id'], 'integer'],
+            [['price', 'real_price'], 'number'],
+            [['created_at', 'updated_at', 'stackcode', 'membername', 'type'], 'safe'],
         ];
     }
 
@@ -42,16 +42,17 @@ class StackTransactionSearch extends StackTransaction
      */
     public function search($params)
     {
-        $query = StackTransaction::find()
-                 ->joinWith(['stack' => function($query) { $query->from(['stack' => 'stack']);}])
-                 ->joinWith(['member' => function($query) { $query->from(['member' => 'member']);}])
-                 ->orderBy(['created_at' => SORT_DESC]);
+        $query = StackAuthorize::find()
+            ->joinWith(['stack' => function($query) { $query->from(['stack' => 'stack']);}])
+            ->joinWith(['member' => function($query) { $query->from(['member' => 'member']);}])
+            ->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
         $this->load($params);
+
         if (!Yii::$app->user->identity->isAdmin()) {
             $this->member_id = Yii::$app->user->identity->id;
         }
@@ -79,15 +80,12 @@ class StackTransactionSearch extends StackTransaction
         $query->andFilterWhere([
             'id' => $this->id,
             'stack_id' => $this->stack_id,
-            'member_id' => $this->member_id,
-            'volume' => $this->volume,
+            'price' => $this->price,
+            'real_price' => $this->real_price,
+            $this::tableName() . '.status' => $this->status,
             'type' => $this->type,
-            'total_price' => $this->total_price,
-            'stack_transaction.status' => $this->status,
-            'total' => $this->total,
-        ])->andFilterWhere(['like',$this::tableName() . '.note',$this->note])
-            ->andFilterWhere(['like','stack.code',$this->stackcode])
-            ->andFilterWhere(['like','stack.name',$this->stackname])
+            'member_id' => $this->member_id,
+        ])->andFilterWhere(['like','stack.code',$this->stackcode])
             ->andFilterWhere(['like','member.username',$this->membername])
             ->orderBy(['created_at' => SORT_DESC]);
 
