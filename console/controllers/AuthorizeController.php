@@ -16,13 +16,13 @@ use yii\console\Controller;
 use yii\db\Expression;
 
 
-class StackController extends Controller
+class AuthorizeController extends Controller
 {
     public function actionIndex()
     {
-        if (Date::isWorkingDay() && Date::isWorkingTime()) {
+        if (Date::isWorkingDay() && Date::isWorkingTime() || true) {
             $date = date('Y-m-d H:i:s', time()-2);
-            $stacks = Stack::find()->where(['>=', 'updated_at', $date]);
+            $stacks = Stack::find()->where(['>=', 'updated_at', $date])->all();
             if (count($stacks)) {
                 $stackPrice = array();
                 foreach ($stacks as $stack) {
@@ -30,18 +30,18 @@ class StackController extends Controller
                 }
 
                 $authorizes = StackAuthorize::find()->where(['=', 'status', 1])->andWhere(['in', 'stack_id', array_keys($stackPrice)])->all();
-                StackAuthorize::updateAll(array('status' => 4), array('status' => 1));
+                StackAuthorize::updateAll(array('status' => 4), 'status=1 AND stack_id in (' . implode(',', array_keys($stackPrice)) . ')');
 
                 foreach ($authorizes as $auth) {
-                    if ($auth->type == 1) {
-                        if ($auth->price <= $stackPrice[$auth->stack_id]) {
+                    if ($auth->type == 0) {
+                        if ($auth->price >= $stackPrice[$auth->stack_id]) {
                             $this->dealBuyAction($auth, $stackPrice[$auth->stack_id]);
                         } else {
                             $auth->status = 1;
                             $auth->save();
                         }
-                    } else if ($auth->type == 2) {
-                        if ($auth->price >= $stackPrice[$auth->stack_id]) {
+                    } else if ($auth->type == 1) {
+                        if ($auth->price <= $stackPrice[$auth->stack_id]) {
                             $this->dealSellAction($auth, $stackPrice[$auth->stack_id]);
                         } else {
                             $auth->status = 1;
@@ -67,7 +67,6 @@ class StackController extends Controller
 
         $totalPrice = $price * $auth->volume;
 
-        $message = array();
 
         if ((($auth->account_type == 1) && $member->finance_fund < $totalPrice) ||
             (($auth->account_type == 2) && $member->stack_fund < $totalPrice)) {
@@ -165,7 +164,6 @@ class StackController extends Controller
                 $transaction = $connection->beginTransaction();
                 if ($model->save() && $memberStack->save() && $auth->save()) {
                     $transaction->commit();
-                    return $this->redirect(['transactions']);
                 } else {
                     Yii::error('Sell Stack Failed');
                     Yii::error(json_encode($model->getErrors()));

@@ -20,7 +20,7 @@ class StackTransactionSearch extends StackTransaction
         return [
             [['id', 'stack_id', 'member_id', 'volume', 'type'], 'integer'],
             [['price', 'total_price', 'charge'], 'number'],
-            [['created_at', 'updated_at', 'stackname', 'stackcode', 'membername', 'status', 'note'], 'safe'],
+            [['created_at', 'updated_at', 'stackname', 'stackcode', 'membername', 'status'], 'safe'],
         ];
     }
 
@@ -85,7 +85,7 @@ class StackTransactionSearch extends StackTransaction
             'total_price' => $this->total_price,
             'stack_transaction.status' => $this->status,
             'total' => $this->total,
-        ])->andFilterWhere(['like',$this::tableName() . '.note',$this->note])
+        ])
             ->andFilterWhere(['like','stack.code',$this->stackcode])
             ->andFilterWhere(['like','stack.name',$this->stackname])
             ->andFilterWhere(['like','member.username',$this->membername])
