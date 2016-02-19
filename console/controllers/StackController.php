@@ -29,7 +29,7 @@ class StackController extends Controller
                 $date = array_pop($dates);
                 $date = $date->date;
             }
-
+            $date .= ' 23:59:59';
             $transactions = StackTransaction::find()->where(['=', 'status', 0])->andWhere(['<', 'created_at', $date])->all();
             foreach ($transactions as $transaction) {
                 if ($transaction->type == 0) {
