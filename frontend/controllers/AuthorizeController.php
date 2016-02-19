@@ -147,7 +147,9 @@ class AuthorizeController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->status = 5;
+        $model->save();
 
         return $this->redirect(['index']);
     }

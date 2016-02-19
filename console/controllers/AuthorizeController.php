@@ -103,6 +103,7 @@ class StackController extends Controller
             try {
                 $transaction = $connection->beginTransaction();
                 $auth->status = 2;
+                $auth->real_price = $price;
                 $auth->note = '成功购买[' . $stack->code . ']' . $model->volume . '股[' . date('Y-m-d H:i:s') . ']';
                 $success = false;
                 if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save() && $auth->save()) {
@@ -156,6 +157,7 @@ class StackController extends Controller
             $memberStack->sell_volume -= $model->volume;
             $memberStack->lock_volume += $model->volume;
             $auth->status = 2;
+            $auth->real_price = $price;
             $auth->note = '成功出售[' . $stack->code . ']' . $model->volume . '股[' . date('Y-m-d H:i:s') . ']';
 
             $connection = Yii::$app->db;

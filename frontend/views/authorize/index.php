@@ -67,6 +67,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' =>  'created_at',
                 'filterType'=>GridView::FILTER_DATE_RANGE,
             ],
+            [
+                'attribute' => 'id',
+                'label' => '操作',
+                'filter' => false,
+                'hiddenFromExport' => true,
+                'content' => function($model) {
+                    return ($model->status == 1) ? ( Html::a('取消', '/authroize/delete?id='.$model->id, ['data-confirm'=>"你确定要取消当前委托"])) : '';
+                }
+            ],
         ],
     ]); ?>
 
