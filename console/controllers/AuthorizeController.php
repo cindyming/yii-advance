@@ -22,7 +22,7 @@ class AuthorizeController extends Controller
     {
         if (Date::isWorkingDay() && Date::isWorkingTime() || true) {
             $date = date('Y-m-d H:i:s', time()-2);
-            $stacks = Stack::find()->where(['>=', 'updated_at', $date])->all();
+            $stacks = Stack::find()->where(['=', 'status', 0])->all();
             if (count($stacks)) {
                 $stackPrice = array();
                 foreach ($stacks as $stack) {
