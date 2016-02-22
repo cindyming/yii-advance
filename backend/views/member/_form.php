@@ -16,45 +16,8 @@ use yii\widgets\ActiveForm;
         'validationUrl' => '/member/validate?' . ($model->id ? 'id=' . $model->id : ''),
     ]); ?>
 
-    <?php if($model->isNewRecord):?>
+    <?= $form->field($model, 'login_auth')->dropDownList(Yii::$app->options->getOptions('login_auth')) ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-    <?php endif ?>
-    
-    <?= $form->field($model, 'title')->dropDownList(Yii::$app->options->getOptions('title')) ?>
-
-    <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
-
-    <?php if($model->isNewRecord):?>
-    <?= $form->field($model, 'password',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true, 'value' => '123456']) ?>
-    <?= $form->field($model, 'password_confirm',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true, 'value' => '123456']) ?>
-
-    <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true, 'value' => '123456']) ?>
-    <?= $form->field($model, 'password2_confirm',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true, 'value' => '123456']) ?>
-    <?php else: ?>
-        <?= $form->field($model, 'buy_stack')->dropDownList(Yii::$app->options->getOptions('buy_stack')) ?>
-        <?= $form->field($model, 'locked')->dropDownList(Yii::$app->options->getOptions('locked')) ?>
-    <?php endif ?>
-
-    <?= $form->field($model, 'identity')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
-
-    <?php if($model->isNewRecord):?>
-    <?= $form->field($model, 'investment')->textInput(['maxlength' => true]) ?>
-    <?php endif ?>
-
-    <?= $form->field($model, 'bank')->dropDownList(Yii::$app->options->getOptions('bank')) ?>
-
-    <?= $form->field($model, 'cardname')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'cardnumber')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'bankaddress')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'qq')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

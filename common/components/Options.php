@@ -91,6 +91,10 @@ class Options
         'authorize_type' => array(
             0 => '买入',
             1 => '卖出',
+        ),
+        'login_auth' => array(
+            0 => '否',
+            1 => '是'
         )
     );
 

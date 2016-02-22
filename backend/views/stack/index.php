@@ -28,16 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'code',
             'name',
             [
-                'class' => 'kartik\grid\EditableColumn',
                 'attribute'=>'price',
-                'editableOptions'=> function ($model, $key, $index) {
-                    return [
-                        'inputType' => \kartik\editable\Editable::INPUT_TEXT,
-                        'size'=>'sm',
-                    ];
-                },
                 'filter' => false,
-
             ],
 
             [
