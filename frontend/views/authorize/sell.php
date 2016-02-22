@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_sellform', [
         'model' => $model,
-        'stack_code' => $stack_code
     ]) ?>
 
 </div>
