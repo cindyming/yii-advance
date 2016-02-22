@@ -28,7 +28,7 @@ class AuthorizeController extends Controller
                     [
                         'actions' => ['index', 'create','view', 'update', 'delete', 'sell'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [User::AUTO_ADMIN],
                     ],
                 ],
             ],
