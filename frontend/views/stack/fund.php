@@ -60,10 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'sell' => function ($url, $model, $key) {
                         $options = [
-                            'title' => Yii::t('yii', '卖出'),
-                            'aria-label' => Yii::t('yii', '卖出'),
+                            'title' => Yii::t('yii', '委托卖出'),
+                            'aria-label' => Yii::t('yii', '委托卖出'),
                         ];
-                        return Html::a('卖出', $url, $options);
+                        return Html::a('委托卖出', $url, $options);
                     },
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {

@@ -10,7 +10,7 @@ $this->title = Yii::t('app', 'Create Stack Sell Authorize');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Stack Authorizes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="stack-authorize-create">
+<div class="stack-authorize-create sm-form">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
