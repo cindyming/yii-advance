@@ -123,6 +123,7 @@ class AuthorizeController extends Controller
                 }
 
             } catch (Exception $e) {
+                $transaction->rollback();
                 $auth->note = '委托失败';
                 $auth->status = 3;
                 $auth->save();
@@ -176,6 +177,7 @@ class AuthorizeController extends Controller
                     $auth->save();
                 }
             } catch (Exception $e) {
+                $transaction->rollback();
                 $auth->note = '委托失败';
                 $auth->status = 3;
                 $auth->save();
