@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'account_type')->label('')->hiddenInput() ?>
 
-    <?= $form->field($model, 'stackcode')->dropDownList(\common\models\Stack::getStackOptions(), array('value' => $stack_code)) ?>
+    <?= $form->field($model, 'stackcode')->dropDownList(\common\models\Stack::getStackOptions(), array('selected' => $stack_code)) ?>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'volume')->textInput(['maxlength' => true]) ?>
