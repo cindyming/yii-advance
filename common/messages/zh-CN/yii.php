@@ -208,7 +208,6 @@ return [
     'Total' => '出账后余额',
     'In Records' => '入账明细',
     'In Type' => '入账类型',
-    '' => '',
     'Real Amount' => '实发金额',
     'status' => '状态',
     'If you forgot your password you can' => '如果您忘记密码，您可以',
@@ -244,7 +243,6 @@ return [
     'Update Member: ' => '更新会员信息: ',
     'Update Stack: ' => '更新股票',
     'Transaction Rule' => '',
-    '' => '',
     'Stack Authorizes' => '股票委托',
     'Create Stack Buy Authorize' => '创建股票买入委托',
     'Create Stack Sell Authorize' => '创建股票卖出委托',
@@ -252,7 +250,5 @@ return [
     'Authorize Price' => '委托价',
     'Real Price' => '成交价',
     'Login Auth' => '委托权限',
-    '' => '',
-    '' => '',
-    '' => '',
+
 ];
