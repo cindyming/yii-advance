@@ -251,7 +251,7 @@ return [
     'Authorize Type' => '委托类型',
     'Authorize Price' => '委托价',
     'Real Price' => '成交价',
-    '' => '',
+    'Login Auth' => '委托权限',
     '' => '',
     '' => '',
     '' => '',
