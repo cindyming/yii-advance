@@ -27,27 +27,29 @@ class AuthorizeController extends Controller
                 $stackPrice = array();
                 foreach ($stacks as $stack) {
                     $stackPrice[$stack->id] = $stack->price;
-                }
+                    $stackId = $stack->id;
+                    $stackPrice = $stack->price;
 
-                $authorizes = StackAuthorize::find()->where(['=', 'status', 1])->andWhere(['in', 'stack_id', array_keys($stackPrice)])->all();
-                StackAuthorize::updateAll(array('status' => 4), 'status=1 AND stack_id in (' . implode(',', array_keys($stackPrice)) . ')');
-
-                foreach ($authorizes as $auth) {
-                    if ($auth->type == 0) {
-                        if ($auth->price >= $stackPrice[$auth->stack_id]) {
-                            $this->dealBuyAction($auth, $stackPrice[$auth->stack_id]);
-                        } else {
-                            $auth->status = 1;
-                            $auth->save();
+                    $inAuthrizes = StackAuthorize::find()->where(['=', 'status', 1])
+                        ->andWhere(['=', 'stack_id', $stackId])
+                        ->andWhere(['=', 'type', 0])
+                        ->andWhere(['>=', 'price', $stackPrice])->all();
+                    StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=0 AND price>={$stackPrice}");
+                    foreach ($inAuthrizes as $auth) {
+                        if ($auth->price >= $stackPrice) {
+                            $this->dealBuyAction($auth, $stackPrice);
                         }
-                    } else if ($auth->type == 1) {
-                        if ($auth->price <= $stackPrice[$auth->stack_id]) {
-                            $this->dealSellAction($auth, $stackPrice[$auth->stack_id]);
-                        } else {
-                            $auth->status = 1;
-                            $auth->save();
-                        }
+                    }
 
+                    $inAuthrizes = StackAuthorize::find()->where(['=', 'status', 1])
+                        ->andWhere(['=', 'stack_id', $stackId])
+                        ->andWhere(['=', 'type', 1])
+                        ->andWhere(['<=', 'price', $stackPrice])->all();
+                    StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=1 AND price<={$stackPrice}");
+                    foreach ($inAuthrizes as $auth) {
+                        if ($auth->price <= $stackPrice) {
+                            $this->dealSellAction($auth, $stackPrice);
+                        }
                     }
                 }
             }
