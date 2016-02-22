@@ -60,10 +60,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'attribute' => 'login_auth',
+                'filter' => Yii::$app->options->getOptions('login_auth'),
+                'value' => function($model) {
+                    return Yii::$app->options->getOptionLabel('login_auth', $model->login_auth);
+                }
+            ],
+            [
                 'class' => 'kartik\grid\ActionColumn',
                 'header' => '修改',
                 'hiddenFromExport' => true,
-                'template' => '{update} {resetpassword}',
+                'template' => '{update}',
                 'buttons' => [
                     'resetpassword' => function ($url, $model, $key) {
                         $options = [

@@ -120,7 +120,7 @@ class Member extends ActiveRecord
             [[ 'username', 'identity', 'phone', 'title', 'investment', 'bank', 'cardname', 'cardnumber', 'bankaddress','nickname'], 'required'],
             [['status', 'locked', 'role_id', 'investment', 'buy_stack', 'added_by'], 'integer'],
             [['password_old', 'password2_old', 'password_hash', 'password_hash2', 'password', 'password2', 'password_confirm', 'password2_confirm'], 'string', 'min' => 6],
-            [['created_at', 'updated_at', 'approved_at'], 'safe'],
+            [['created_at', 'updated_at', 'approved_at', 'login_auth'], 'safe'],
             [['stack_fund', 'finance_fund'], 'number'],
             [['username'], 'checkUsername'],
             [['password_confirm'], 'compare', 'compareAttribute' => 'password'],
@@ -182,6 +182,7 @@ class Member extends ActiveRecord
             'added_by' => Yii::t('app', 'Added By'),
             'stack_fund' => Yii::t('app', 'Stack Fund'),
             'finance_fund' => Yii::t('app', 'Finance Fund'),
+            'login_auth' => Yii::t('app', 'Login Auth'),
         ];
     }
 

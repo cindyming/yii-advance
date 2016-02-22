@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
                     if ($action === 'buy') {
-                        $url = '/stack/buy?id='.$model->id;
+                        $url = '/authorize/create?id='.$model->id;
                         return $url;
                     }
                 }

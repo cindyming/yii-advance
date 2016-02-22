@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
                     if ($action === 'sell') {
-                        $url = '/stack/sell?id='.$model->stack->id;
+                        $url = '/authorize/sell?id='.$model->stack->id;
                         return $url;
                     }
                 }

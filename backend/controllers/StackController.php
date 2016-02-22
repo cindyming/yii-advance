@@ -48,7 +48,7 @@ class StackController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
+                        'actions' => ['index', 'trends', 'transactions', 'view','validatebuy', 'fund'],
                         'roles' => [User::AUTO_ADMIN]
                     ],
                     [
