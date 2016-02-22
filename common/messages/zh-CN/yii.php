@@ -142,7 +142,7 @@ return [
     'Stack Trends' => '股价动态',
     'Stack Transactions' => '股票交易记录',
     '交易类型' => '交易类型',
-    'Volume' => '购买数量',
+    'Volume' => '交易股数',
     'In Price' => '股票价格',
     'Member Name' => '会员编号',
     'Total Price' => '交易金额',
