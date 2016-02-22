@@ -22,7 +22,7 @@ class AuthorizeController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'ruleConfig' => [
-                    'class' => \frontend\components\AccessRule::className(),
+                    'class' => \backend\components\AccessRule::className(),
                 ],
                 'rules' => [
                     [
@@ -30,12 +30,6 @@ class AuthorizeController extends Controller
                         'allow' => true,
                         'roles' => [User::AUTO_ADMIN],
                     ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
                 ],
             ],
         ];

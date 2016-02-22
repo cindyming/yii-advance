@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => false,
                 'hiddenFromExport' => true,
                 'content' => function($model) {
-                    return ($model->status == 1) ? ( Html::a('取消', '/authroize/delete?id='.$model->id, ['data-confirm'=>"你确定要取消当前委托"])) : '';
+                    return ($model->status == 1) ? ( Html::a('取消', '/authorize/delete?id='.$model->id, ['data-confirm'=>"你确定要取消当前委托"])) : '';
                 }
             ],
         ],

@@ -33,12 +33,6 @@ class AuthorizeController extends Controller
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
         ];
     }
 
@@ -156,8 +150,9 @@ class AuthorizeController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
+        $id = Yii::$app->request->get('id');
         $model = $this->findModel($id);
         $model->status = 5;
         $model->save();
