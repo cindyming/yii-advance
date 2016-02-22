@@ -92,13 +92,13 @@ class AuthorizeController extends Controller
                 Yii::$app->session->setFlash('success', '委托提交成功');
                 return $this->redirect(['index']);
             }
-        } else {
+        }  else {
             $stack_code = $stack->code;
+            $model->stackcode = $stack->code;
         }
 
         return $this->render('create', [
             'model' => $model,
-            'stack_code' => $stack_code
         ]);
     }
 
