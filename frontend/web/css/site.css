@@ -3,7 +3,6 @@ body {
     height: 100%;
 }
 body.login{
-    background:url(/bg.jpeg) no-repeat center center;
     background-size: cover;
 }
 .wrap {
@@ -27,8 +26,8 @@ body.login{
 table th{font-size:12px}
 .btn-primary,
 .btn-success{
-    background:#F61919;
-    border:1px solid #F61919
+    background:#2D4279;
+    border:1px solid #2D4279
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -143,11 +142,12 @@ a.desc:after {
     border-bottom:1px solid #fff;
     text-align:center;
     padding-bottom:2%;
-    margin-bottom:5%
+    margin-bottom:5%;
+    display:none;
 }
 .site-login label{
     padding: 0;
-    color: #fff;
+    color: #333!important;
     width:22%;
     display: inline-block;
     *display:inline;
@@ -155,7 +155,7 @@ a.desc:after {
 }
 .site-login input{
     height: 35px;
-    border: 0px;
+    border: 1px solid #ccc;
     display: inline-block;
     *display:inline;
     width: 75%;
@@ -187,11 +187,11 @@ a.desc:after {
     width:100%
 }
 .header{
-    background-color:#2E363F;
+    background-color:#F2F2F2;
     color:#fff
 }
 .top-header{
-    background-color:#435060;
+    background-color:#346F93;
     color:#eee;
 }
 .top-header ul{
@@ -208,7 +208,7 @@ a.desc:after {
 }
 h1{font-size:28px;}
 h2.site-name{
-    display: inline;
+    display: none;
     color: #fff;
     float: left;
     margin: 0;
@@ -305,6 +305,8 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
     background:#23527B;
     border-color: #23527B
 }
+
+.field-stackauthorize-account_type{display: none;}
 @media (max-width: 768px) {
     .navbar-collapse,
     .site-login,
