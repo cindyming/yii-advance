@@ -125,11 +125,11 @@ class AuthorizeController extends Controller
             }
         } else {
             $stack_code = $stack->code;
+            $model->stackcode = $stack->code;
         }
 
         return $this->render('sell', [
             'model' => $model,
-            'stack_code' => $stack_code
         ]);
     }
 
