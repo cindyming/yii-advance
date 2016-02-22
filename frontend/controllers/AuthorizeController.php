@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Stack;
 use Yii;
 use common\models\StackAuthorize;
 use common\models\search\StackAuthorizeSearch;
@@ -76,6 +77,8 @@ class AuthorizeController extends Controller
     public function actionCreate()
     {
         $model = new StackAuthorize();
+        $stack = Stack::findOne(Yii::$app->request->get('id'));
+        $stack_code = '';
 
         if ($model->load(Yii::$app->request->post())) {
             $model->setStackId();
@@ -89,9 +92,13 @@ class AuthorizeController extends Controller
                 Yii::$app->session->setFlash('success', '委托提交成功');
                 return $this->redirect(['index']);
             }
+        } else {
+            $stack_code = $stack->code;
         }
+
         return $this->render('create', [
             'model' => $model,
+            'stack_code' => $stack_code
         ]);
     }
 
@@ -103,6 +110,8 @@ class AuthorizeController extends Controller
     public function actionSell()
     {
         $model = new StackAuthorize();
+        $stack = Stack::findOne(Yii::$app->request->get('id'));
+        $stack_code = '';
 
         if ($model->load(Yii::$app->request->post())) {
             $model->setStackId();
@@ -114,9 +123,13 @@ class AuthorizeController extends Controller
                 Yii::$app->session->setFlash('success', '委托提交成功');
                 return $this->redirect(['index']);
             }
+        } else {
+            $stack_code = $stack->code;
         }
+
         return $this->render('sell', [
             'model' => $model,
+            'stack_code' => $stack_code
         ]);
     }
 

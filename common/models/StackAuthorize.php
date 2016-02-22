@@ -65,8 +65,8 @@ class StackAuthorize extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['stack_id', 'price', 'member_id', 'account_type', 'type', 'volume'], 'required'],
-            [['stack_id', 'status', 'member_id'], 'integer'],
+            [['stack_id', 'price', 'member_id', 'type', 'volume'], 'required'],
+            [['stack_id', 'status',  'account_type','member_id'], 'integer'],
             [['price', 'real_price'], 'number'],
             [['membername'], 'checkUsername'],
             [['stackcode'], 'checkStackcode'],
