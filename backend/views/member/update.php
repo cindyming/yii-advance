@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Members'), 'url' => 
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
-<div class="member-update">
+<div class="member-update sm-form">
 
     <h1><?= Html::encode($this->title) ?> (投资额: <?= $model->investment  ?>)</h1>
 
