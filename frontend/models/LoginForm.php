@@ -96,6 +96,13 @@ class LoginForm extends Model
                 }
             }
 
+            if ($this->_user) {
+                if (!$this->_user->login_auth) {
+                    $this->_user = null;
+                    $this->addError('username', '此帐户无法登录委托平台，请联系管理员');
+                }
+            }
+
         }
 
         return $this->_user;
