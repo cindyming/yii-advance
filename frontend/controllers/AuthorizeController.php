@@ -93,8 +93,7 @@ class AuthorizeController extends Controller
                 return $this->redirect(['index']);
             }
         }  else {
-            $stack_code = $stack->code;
-            $model->stackcode = $stack->code;
+            $model->stackcode = $stack ? $stack->code : '';
         }
 
         return $this->render('create', [
@@ -124,8 +123,7 @@ class AuthorizeController extends Controller
                 return $this->redirect(['index']);
             }
         } else {
-            $stack_code = $stack->code;
-            $model->stackcode = $stack->code;
+            $model->stackcode = $stack ? $stack->code : '';
         }
 
         return $this->render('sell', [
