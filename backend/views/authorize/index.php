@@ -46,6 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'attribute' => 'volume',
+                'format' => 'number',
+                'filter' => false,
+            ],
+            [
                 'attribute' => 'price',
                 'format' => 'decimal',
                 'filter' => false,
