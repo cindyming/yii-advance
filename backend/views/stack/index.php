@@ -46,11 +46,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Yii::$app->options->getOptionLabel('status', $model->status);
                 },
                 'filter' => Yii::$app->options->getOptions('status',true),
-            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'header' => '修改',
-                'template' => '{update}',
             ]
         ],
     ]); ?>
