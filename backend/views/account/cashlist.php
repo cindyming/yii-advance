@@ -84,16 +84,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Yii::$app->options->getOptions('cash_status',true),
                 'filterType'=>GridView::FILTER_SELECT2,
             ],
-            [
-                'attribute' => 'id',
-                'label' => '操作',
-                'filter' => false,
-                'hiddenFromExport' => true,
-                'hiddenFromExport' => true,
-                'content' => function($model) {
-                    return (in_array($model->status, array(2, 3))) ? '' :( Html::a('发放', '/account/approve?id='.$model->id, ['data-confirm'=>"你确定要发放[" . $model->getMember()->one()->username. "]"  . $model->amount . "的提现申请"]) . '   ' . Html::a('拒绝', '/account/reject?id='.$model->id, ['data-confirm'=>"你确定要拒绝[" . $model->getMember()->one()->username. "]"  . $model->amount . "的提现申请"]) );
-                }
-            ],
         ],
     ]); ?>
 

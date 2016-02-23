@@ -30,6 +30,7 @@ class User extends ActiveRecord implements IdentityInterface
     const SUPPER_ADMIN = 1;
     const STACK_ADMIN = 2;
     const AUTO_ADMIN = 3;
+    const AUTO_STACK_ADMIN = 4;
 
     public $password_old;
     public $username_old;

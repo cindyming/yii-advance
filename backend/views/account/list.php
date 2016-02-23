@@ -40,28 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'stack_fund',
                 'filter' => false,
-            ],
-            [
-                'class' => 'kartik\grid\ActionColumn',
-                'header' => '操作',
-                'template' => '{add}',
-                'buttons' => [
-                    'add' => function ($url, $model, $key) {
-                        $options = [
-                            'title' => Yii::t('yii', '增减货币'),
-                            'aria-label' => Yii::t('yii', '增减货币'),
-                            'data-ajax' => 0
-                        ];
-                        return Html::a('增减货币', $url, $options);
-                    },
-                ],
-                'urlCreator' => function ($action, $model, $key, $index) {
-                    if ($action === 'add') {
-                        $url ='/account/add?type=in&id='.$model->username;
-                        return $url;
-                    }
-                }
-            ],
+            ]
         ],
     ]); ?>
 
