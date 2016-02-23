@@ -33,42 +33,73 @@ AppAsset::register($this);
             <h2 class="site-name">管理平台</h2>
             <?php
             NavBar::begin();
-            $menuItems = [
-                [
-                    'label' => '会员管理',
-                    'url' => ['/member/approvedindex'],
-                ],
-                [
-                    'label' => '股票管理',
-                    'url' => ['/stack/index'],
-                    'items' => [
-                        ['label' => '股票记录', 'url' => ['/stack/index']],
-                        ['label' => '股价动态', 'url' => ['/stack/trends']],
-                        ['label' => '股票交易', 'url' => ['/stack/transactions']],
-                        ['label' => '股票资产', 'url' => ['/stack/fund']],
-                        ['label' => '委托', 'url' => ['/authorize/index']]
-                    ]
-                ],
-                [
-                    'label' => '货币管理', 'url' => ['/account/list'],
-                    'items' => [
-                        ['label' => '账户管理', 'url' => yii\helpers\Url::to('/account/list')],
-                        ['label' => '出账明细', 'url' => yii\helpers\Url::to('/account/outlist')],
-                        ['label' => '入账明细', 'url' => yii\helpers\Url::to('/account/inlist')],
-                        ['label' => '提现管理', 'url' => yii\helpers\Url::to('/account/cashlist')],
-                    ]
-                ],
-                [
-                    'label' => '密码修改', 'url' => ['/system/password'],
-                ],
-                Yii::$app->user->isGuest ?
-                    ['label' => 'Login', 'url' => ['/site/login']] :
+            if ($user->identity->role_id === User::AUTO_STACK_ADMIN) {
+                $menuItems = [
                     [
-                        'label' => '(' . Yii::$app->user->identity->username . ')退出',
-                        'url' => ['/site/logout'],
-                        'linkOptions' => ['data-method' => 'post']
+                        'label' => '会员管理',
+                        'url' => ['/member/approvedindex'],
                     ],
-            ];
+                    [
+                        'label' => '股票管理',
+                        'url' => ['/stack/index'],
+                        'items' => [
+                            ['label' => '股票记录', 'url' => ['/stack/index']],
+                            ['label' => '股价动态', 'url' => ['/stack/trends']],
+                            ['label' => '股票交易', 'url' => ['/stack/transactions']],
+                            ['label' => '股票资产', 'url' => ['/stack/fund']],
+                            ['label' => '委托', 'url' => ['/authorize/index']]
+                        ]
+                    ],
+                    [
+                        'label' => '密码修改', 'url' => ['/system/password'],
+                    ],
+                    Yii::$app->user->isGuest ?
+                        ['label' => 'Login', 'url' => ['/site/login']] :
+                        [
+                            'label' => '(' . Yii::$app->user->identity->username . ')退出',
+                            'url' => ['/site/logout'],
+                            'linkOptions' => ['data-method' => 'post']
+                        ],
+                ];
+            } else {
+                $menuItems = [
+                    [
+                        'label' => '会员管理',
+                        'url' => ['/member/approvedindex'],
+                    ],
+                    [
+                        'label' => '股票管理',
+                        'url' => ['/stack/index'],
+                        'items' => [
+                            ['label' => '股票记录', 'url' => ['/stack/index']],
+                            ['label' => '股价动态', 'url' => ['/stack/trends']],
+                            ['label' => '股票交易', 'url' => ['/stack/transactions']],
+                            ['label' => '股票资产', 'url' => ['/stack/fund']],
+                            ['label' => '委托', 'url' => ['/authorize/index']]
+                        ]
+                    ],
+                    [
+                        'label' => '货币管理', 'url' => ['/account/list'],
+                        'items' => [
+                            ['label' => '账户管理', 'url' => yii\helpers\Url::to('/account/list')],
+                            ['label' => '出账明细', 'url' => yii\helpers\Url::to('/account/outlist')],
+                            ['label' => '入账明细', 'url' => yii\helpers\Url::to('/account/inlist')],
+                            ['label' => '提现管理', 'url' => yii\helpers\Url::to('/account/cashlist')],
+                        ]
+                    ],
+                    [
+                        'label' => '密码修改', 'url' => ['/system/password'],
+                    ],
+                    Yii::$app->user->isGuest ?
+                        ['label' => 'Login', 'url' => ['/site/login']] :
+                        [
+                            'label' => '(' . Yii::$app->user->identity->username . ')退出',
+                            'url' => ['/site/logout'],
+                            'linkOptions' => ['data-method' => 'post']
+                        ],
+                ];
+            }
+
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => $menuItems,
