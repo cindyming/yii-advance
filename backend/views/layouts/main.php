@@ -33,7 +33,7 @@ AppAsset::register($this);
             <h2 class="site-name">管理平台</h2>
             <?php
             NavBar::begin();
-            if ($user->identity->role_id === \backend\models\User::AUTO_STACK_ADMIN) {
+            if (Yii::$app->user->identity->role_id === \backend\models\User::AUTO_STACK_ADMIN) {
                 $menuItems = [
                     [
                         'label' => '会员管理',
