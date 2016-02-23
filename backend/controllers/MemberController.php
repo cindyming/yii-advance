@@ -44,6 +44,11 @@ class MemberController extends Controller
                     ],
                     [
                         'allow' => true,
+                        'actions' => ['approvedindex'],
+                        'roles' => [User::AUTO_STACK_ADMIN]
+                    ],
+                    [
+                        'allow' => true,
                         'actions' => ['index', 'create','out', 'validate'],
                         'roles' => [User::STACK_ADMIN],
                     ],
