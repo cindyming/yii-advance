@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'aria-label' => Yii::t('yii', '增减货币'),
                             'data-ajax' => 0
                         ];
-                        return Html::a('增减货币', $url, $options);
+                        return Yii::$app->user->identity->isStackTwoAdmin() ? '' : Html::a('增减货币', $url, $options);
                     },
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
