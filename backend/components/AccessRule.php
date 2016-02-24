@@ -21,7 +21,11 @@ class AccessRule extends \yii\filters\AccessRule
                 if ((!$user->getIsGuest()) && ($user->identity->role_id === User::STACK_ADMIN)) {
                     return true;
                 }
-            } elseif ($role === '?') {
+            }  else if (($role === User::STACK_TWO_ADMIN)) {
+                if ((!$user->getIsGuest()) && ($user->identity->role_id === User::STACK_TWO_ADMIN)) {
+                    return true;
+                }
+            }elseif ($role === '?') {
                 if ($user->getIsGuest()) {
                     return true;
                 }

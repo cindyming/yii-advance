@@ -29,6 +29,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
     const SUPPER_ADMIN = 1;
     const STACK_ADMIN = 2;
+    const STACK_TWO_ADMIN = 6;
 
     public $password_old;
     public $username_old;
@@ -235,6 +236,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function isSupperAdmin()
     {
         return Yii::$app->user->identity->role_id == 1;
+    }
+
+    public function isStackTwoAdmin()
+    {
+        return Yii::$app->user->identity->role_id == 6;
     }
 
     public function isStackAdmin()

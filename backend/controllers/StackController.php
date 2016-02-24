@@ -52,6 +52,11 @@ class StackController extends Controller
 
                         'roles' => [User::STACK_ADMIN]
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'trends', 'transactions', 'unlock', 'view', 'fund'],
+                        'roles' => [User::STACK_TWO_ADMIN]
+                    ],
                 ],
             ],
             'verbs' => [

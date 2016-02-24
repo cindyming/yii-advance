@@ -30,6 +30,11 @@ class AccountController extends \yii\web\Controller
                         'actions' => ['list', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve', 'validateadd'],
                         'roles' => [\backend\models\User::SUPPER_ADMIN]
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['list', 'cashlist', 'inlist', 'outlist'],
+                        'roles' => [\backend\models\User::STACK_TWO_ADMIN]
+                    ],
                 ],
             ],
         ];
