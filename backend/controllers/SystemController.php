@@ -38,6 +38,11 @@ class SystemController extends Controller
                         'actions' => ['password'],
                         'roles' => [User::STACK_ADMIN]
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['password'],
+                        'roles' => [User::STACK_TWO_ADMIN]
+                    ],
                 ]
             ],
             'verbs' => [
