@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= HTML::a('增减货币', ['/account/add?type=in'],['class' => 'btn btn-success'])?>
+        <?= Yii::$app->user->identity->isStackTwoAdmin() ? '' :HTML::a('增减货币', ['/account/add?type=in'],['class' => 'btn btn-success'])?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
