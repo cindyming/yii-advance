@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Yii::$app->options->getOptionLabel('transcation_status', $model->status);
                 }
             ],
-            
+
         ],
     ]); ?>
 
