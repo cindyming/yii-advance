@@ -183,7 +183,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
             StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=1 AND price<={$stackPrice}");
             foreach ($inAuthrizes as $auth) {
                 if ($auth->price <= $stackPrice) {
-                    $auth->dealBuyAction($stackPrice);
+                    $auth->dealSellAction($stackPrice);
                 }
             }
         }
@@ -235,7 +235,8 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 $this->note = '成功购买[' . $stack->code . ']' . $model->volume . '股[' . date('Y-m-d H:i:s') . ']';
                 $success = false;
                 if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save() && $this->save()) {
-                    $date = date('Y-m-d H:i:s', strtotime($outRecord->created_at)+rand(1,5));
+                    $model = StackTransaction::findOne($model->id);
+                    $date = date('Y-m-d H:i:s', strtotime($model)+rand(1,5));
                     $outRecord->created_at = $date;
                     $model->created_at = $date;
                     $outRecord->save();
@@ -303,7 +304,8 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 $transaction = $connection->beginTransaction();
                 if ($model->save() && $memberStack->save() && $this->save()) {
                     $transaction->commit();
-                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+rand(1,5));
+                    $model = StackTransaction::findOne($model->id);
+                    $date = date('Y-m-d H:i:s', strtotime($model)+rand(1,5));
                     $model->created_at = $date;
                     $model->save();
                 } else {
