@@ -236,7 +236,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 $success = false;
                 if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save() && $this->save()) {
                     $model = StackTransaction::findOne($model->id);
-                    $date = date('Y-m-d H:i:s', strtotime($model)+rand(1,5));
+                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+rand(1,5));
                     $outRecord->created_at = $date;
                     $model->created_at = $date;
                     $outRecord->save();
@@ -305,7 +305,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 if ($model->save() && $memberStack->save() && $this->save()) {
                     $transaction->commit();
                     $model = StackTransaction::findOne($model->id);
-                    $date = date('Y-m-d H:i:s', strtotime($model)+rand(1,5));
+                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+rand(1,5));
                     $model->created_at = $date;
                     $model->save();
                 } else {
