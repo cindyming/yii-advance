@@ -78,7 +78,7 @@ class AuthorizeController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->setStackId();
-            $model->type = 1;
+            $model->type = 0;
             $model->setMemberId();
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', '委托提交成功');
@@ -101,7 +101,7 @@ class AuthorizeController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->setStackId();
-            $model->type = 2;
+            $model->type = 1;
             $model->setMemberId();
             $model->account_type = 0;
             if ($model->save()) {
