@@ -165,7 +165,6 @@ class StackAuthorize extends \yii\db\ActiveRecord
         if (Date::isWorkingDay() && Date::isWorkingTime() || true) {
             $stackId = $stack->id;
             $stackPrice = $stack->price;
-
             $inAuthrizes = StackAuthorize::find()->where(['=', 'status', 1])
                 ->andWhere(['=', 'stack_id', $stackId])
                 ->andWhere(['=', 'type', 0])
@@ -197,9 +196,6 @@ class StackAuthorize extends \yii\db\ActiveRecord
         $member = Member::findOne($this->member_id);
 
         $totalPrice = $price * $this->volume;
-        $time = time() + rand(1,5);
-        $date = date('Y-m-d H:i:s', $time);
-
 
         if ((($this->account_type == 1) && $member->finance_fund < $totalPrice) ||
             (($this->account_type == 2) && $member->stack_fund < $totalPrice)) {
@@ -218,7 +214,6 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 'account_type' => $this->account_type,
                 'type' => 0,
                 'volume' => $this->volume,
-                'created_at' => $date
             );
             $model->load($data, '');
             $model->total_price = $model->price * $model->volume;
@@ -231,16 +226,16 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->stack_fund, 2);
             }
             $outRecord->note = '股买[' . $stack->code . ']' . $model->volume . '股';
-            $outRecord->created_at = $date;
 
             $connection = Yii::$app->db;
             try {
                 $transaction = $connection->beginTransaction();
                 $this->status = 2;
                 $this->real_price = $price;
-                $this->note = '成功购买[' . $stack->code . ']' . $model->volume . '股[' . $date . ']';
+                $this->note = '成功购买[' . $stack->code . ']' . $model->volume . '股[' . date('Y-m-d H:i:s') . ']';
                 $success = false;
                 if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save() && $this->save()) {
+                    $date = date('Y-m-d H:i:s', strtotime($outRecord->created_at)+rand(1,5));
                     $outRecord->created_at = $date;
                     $model->created_at = $date;
                     $outRecord->save();
@@ -301,13 +296,14 @@ class StackAuthorize extends \yii\db\ActiveRecord
             $memberStack->lock_volume += $model->volume;
             $this->status = 2;
             $this->real_price = $price;
-            $this->note = '成功出售[' . $stack->code . ']' . $model->volume . '股[' . $date . ']';
+            $this->note = '成功出售[' . $stack->code . ']' . $model->volume . '股[' . date('Y-m-d H:i:s') . ']';
 
             $connection = Yii::$app->db;
             try {
                 $transaction = $connection->beginTransaction();
                 if ($model->save() && $memberStack->save() && $this->save()) {
                     $transaction->commit();
+                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+rand(1,5));
                     $model->created_at = $date;
                     $model->save();
                 } else {
