@@ -241,6 +241,10 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 $this->note = '成功购买[' . $stack->code . ']' . $model->volume . '股[' . $date . ']';
                 $success = false;
                 if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save() && $this->save()) {
+                    $outRecord->created_at = $date;
+                    $model->created_at = $date;
+                    $outRecord->save();
+                    $model->save();
                     $success = true;
                 }
                 if ($success) {
@@ -304,6 +308,8 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 $transaction = $connection->beginTransaction();
                 if ($model->save() && $memberStack->save() && $this->save()) {
                     $transaction->commit();
+                    $model->created_at = $date;
+                    $model->save();
                 } else {
                     Yii::error('Sell Stack Failed');
                     Yii::error(json_encode($model->getErrors()));
