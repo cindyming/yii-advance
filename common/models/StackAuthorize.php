@@ -158,4 +158,169 @@ class StackAuthorize extends \yii\db\ActiveRecord
             $this->member_id = Yii::$app->user->identity->id;
         }
     }
+
+
+    public static function dealAuth($stack)
+    {
+        if (Date::isWorkingDay() && Date::isWorkingTime() || true) {
+            $stackId = $stack->id;
+            $stackPrice = $stack->price;
+
+            $inAuthrizes = StackAuthorize::find()->where(['=', 'status', 1])
+                ->andWhere(['=', 'stack_id', $stackId])
+                ->andWhere(['=', 'type', 0])
+                ->andWhere(['>=', 'price', $stackPrice])->all();
+            StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=0 AND price>={$stackPrice}");
+            foreach ($inAuthrizes as $auth) {
+                if ($auth->price >= $stackPrice) {
+                    $auth->dealBuyAction($stackPrice);
+                }
+            }
+
+            $inAuthrizes = StackAuthorize::find()->where(['=', 'status', 1])
+                ->andWhere(['=', 'stack_id', $stackId])
+                ->andWhere(['=', 'type', 1])
+                ->andWhere(['<=', 'price', $stackPrice])->all();
+            StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=1 AND price<={$stackPrice}");
+            foreach ($inAuthrizes as $auth) {
+                if ($auth->price <= $stackPrice) {
+                    $auth->dealBuyAction($stackPrice);
+                }
+            }
+        }
+    }
+
+    protected function dealBuyAction($price)
+    {
+
+
+        $member = Member::findOne($this->member_id);
+
+        $totalPrice = $price * $this->volume;
+        $time = time() + rand(1,5);
+        $date = date('Y-m-d H:i:s', $time);
+
+
+        if ((($this->account_type == 1) && $member->finance_fund < $totalPrice) ||
+            (($this->account_type == 2) && $member->stack_fund < $totalPrice)) {
+            $this->status = 3;
+            $this->note = '账户余额不足. 理财基金:.' . $member->finance_fund . '. 购股账户:'. $member->stack_fund;
+            $this->save();
+        } else {
+            $stack = Stack::findOne($this->stack_id);
+            $memberStack = MemberStack::getMemberStack($this);
+
+            $model = new StackTransaction();
+            $data = array(
+                'member_id' => $member->id,
+                'stack_id' => $this->stack_id,
+                'price' => $price,
+                'account_type' => $this->account_type,
+                'type' => 0,
+                'volume' => $this->volume,
+                'created_at' => $date
+            );
+            $model->load($data, '');
+            $model->total_price = $model->price * $model->volume;
+            if ($model->account_type == 1) {
+                $member->finance_fund -= $model->total_price;
+                $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->finance_fund, 1);
+
+            } else {
+                $member->stack_fund -= $model->total_price;
+                $outRecord = OutRecord::prepareModelForBuyStack($model->member_id, $model->total_price, $member->stack_fund, 2);
+            }
+            $outRecord->note = '股买[' . $stack->code . ']' . $model->volume . '股';
+            $outRecord->created_at = $date;
+
+            $connection = Yii::$app->db;
+            try {
+                $transaction = $connection->beginTransaction();
+                $this->status = 2;
+                $this->real_price = $price;
+                $this->note = '成功购买[' . $stack->code . ']' . $model->volume . '股[' . $date . ']';
+                $success = false;
+                if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save() && $this->save()) {
+                    $success = true;
+                }
+                if ($success) {
+                    $transaction->commit();
+                } else {
+                    $transaction->rollback();
+                    $this->note = ('委托失败');
+                    $this->note .= (json_encode($model->getErrors()));
+                    $this->note .= (json_encode($memberStack->getErrors()));
+                    $this->note .= (json_encode($member->getErrors()));
+                    $this->note .= (json_encode($outRecord->getErrors()));
+                    $this->note .= (json_encode($this->getErrors()));
+                    $this->status = 3;
+                    $this->save();
+                }
+
+            } catch (Exception $e) {
+                $transaction->rollback();
+                $this->note = '委托失败';
+                $this->status = 3;
+                $this->save();
+            }
+        }
+
+
+    }
+    protected function dealSellAction($price)
+    {
+        $stack = Stack::findOne($this->stack_id);
+        $memberStack = MemberStack::getMemberStack($this);
+
+        $time = time() + rand(1,5);
+        $date = date('Y-m-d H:i:s', $time);
+
+        $model = new StackTransaction();
+        $data = array(
+            'member_id' => $this->member_id,
+            'stack_id' => $this->stack_id,
+            'price' => $price,
+            'account_type' => 1,
+            'type' => 1,
+            'volume' => $this->volume,
+            'created_at' => $date
+        );
+        $model->load($data, '');
+
+        if (!$model->checkSellVolume($memberStack, $model->volume)) {
+            $this->status = 3;
+            $this->note = '股票可出售数量不足[' . $stack->code . ']';
+            $this->save();
+        } else {
+            $model->total_price = $model->price * $model->volume;
+            $memberStack->sell_volume -= $model->volume;
+            $memberStack->lock_volume += $model->volume;
+            $this->status = 2;
+            $this->real_price = $price;
+            $this->note = '成功出售[' . $stack->code . ']' . $model->volume . '股[' . $date . ']';
+
+            $connection = Yii::$app->db;
+            try {
+                $transaction = $connection->beginTransaction();
+                if ($model->save() && $memberStack->save() && $this->save()) {
+                    $transaction->commit();
+                } else {
+                    Yii::error('Sell Stack Failed');
+                    Yii::error(json_encode($model->getErrors()));
+                    Yii::error(json_encode($memberStack->getErrors()));
+                    $transaction->rollback();
+                    $this->note = '委托失败';
+                    $this->note .= (json_encode($model->getErrors()));
+                    $this->note .= (json_encode($memberStack->getErrors()));
+                    $this->status = 3;
+                    $this->save();
+                }
+            } catch (Exception $e) {
+                $transaction->rollback();
+                $this->note = '委托失败';
+                $this->status = 3;
+                $this->save();
+            }
+        }
+    }
 }

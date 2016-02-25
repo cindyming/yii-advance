@@ -9,6 +9,7 @@ use common\models\OutRecord;
 use common\models\search\MemberStackSearch;
 use common\models\search\StackTransactionSearch;
 use common\models\search\StackTrendsSearch;
+use common\models\StackAuthorize;
 use common\models\StackTransaction;
 use common\models\StackTrends;
 use common\models\System;
@@ -133,6 +134,7 @@ class StackController extends Controller
                 ), '');
                 $stackTrends->save();
                 $model->save();
+                StackAuthorize::dealAuth($model);
 
                 // return JSON encoded output in the below format
                 return ['output' => $price, 'message' => ''];
@@ -286,6 +288,7 @@ class StackController extends Controller
                     'price' => $model->price,
                 ), '');
                 $stackTrends->save();
+                StackAuthorize::dealAuth($model);
             }
             Yii::$app->session->setFlash('success', '信息修改成功');
             return $this->redirect(['index']);
