@@ -60,6 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => false,
             ],
             [
+                'attribute' => 'note',
+                'filter' => false,
+            ],
+            [
                 'attribute' => 'status',
                 'filter' => Yii::$app->options->getOptions('authorize_status'),
                 'value' => function($model) {
