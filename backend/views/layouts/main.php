@@ -111,6 +111,8 @@ AppAsset::register($this);
                             ['label' => '股价动态', 'url' => ['/stack/trends']],
                             ['label' => '股票交易', 'url' => ['/stack/transactions']],
                             ['label' => '假日安排', 'url' => ['/date/index']],
+                            ['label' => '股票资产', 'url' => ['/stack/fund']],
+                            ['label' => '股票资产', 'url' => ['/stack/fund']],
                         ]
                     ],
                     [
