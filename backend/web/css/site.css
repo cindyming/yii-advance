@@ -3,7 +3,7 @@ body {
     height: 100%;
 }
 body.login{
-    background:#2E363F
+    background:#333
 }
 .wrap {
     min-height: 100%;

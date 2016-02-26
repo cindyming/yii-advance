@@ -250,5 +250,6 @@ return [
     'Authorize Price' => '委托价',
     'Real Price' => '成交价',
     'Login Auth' => '委托权限',
-
+    'Authorize Created At' => '委托提交时间',
+    'Authorize Updated At' => '委托成交时间',
 ];
