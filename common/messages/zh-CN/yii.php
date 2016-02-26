@@ -184,7 +184,7 @@ return [
     'Updated At' => '更新日期',
     'membername' => '会员编号',
     'Stack Type' => '交易类型',
-    'Stackcode' => '股票代码',
+    'Stackcode' => '代码',
     'Stackname' => '股票名称',
     'Total Price' => '交易金额',
     'Charge' => '交易手续费',
