@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = Yii::t('app', 'QC股票管理平臺');
+$this->title = Yii::t('app', '股票委托平台');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
