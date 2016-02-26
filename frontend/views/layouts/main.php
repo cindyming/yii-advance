@@ -50,7 +50,6 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-left'],
                 'items' => [
-                    ['label' => '首页', 'url' => ['/authorize/index']],
                     [
                         'label' => '股票管理',
                         'url' => ['/authorize/index'],
