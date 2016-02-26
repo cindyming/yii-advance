@@ -50,13 +50,7 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-left'],
                 'items' => [
-                    [
-                        'label' => '股票管理',
-                        'url' => ['/authorize/index'],
-                        'items' => [
-                            ['label' => '我的委托', 'url' => ['/authorize/index']]
-                        ]
-                    ],
+                    ['label' => '我的委托', 'url' => ['/authorize/index']],
                     Yii::$app->user->isGuest ?
                         ['label' => '安全退出', 'url' => ['/site/login']] :
                         [

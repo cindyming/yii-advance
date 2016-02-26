@@ -39,13 +39,7 @@ AppAsset::register($this);
                         'label' => '会员管理',
                         'url' => ['/member/approvedindex'],
                     ],
-                    [
-                        'label' => '股票管理',
-                        'url' => ['/authorize/index'],
-                        'items' => [
-                            ['label' => '委托', 'url' => ['/authorize/index']]
-                        ]
-                    ],
+                    ['label' => '委托', 'url' => ['/authorize/index']],
                     [
                         'label' => '密码修改', 'url' => ['/system/password'],
                     ],
