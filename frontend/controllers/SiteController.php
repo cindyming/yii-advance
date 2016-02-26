@@ -76,6 +76,11 @@ class SiteController extends Controller
         return $this->redirect(['/authorize/index']);
     }
 
+    public function goHome()
+    {
+        return $this->redirect(['/authorize/index']);
+    }
+
     /**
      * Logs in a user.
      *
