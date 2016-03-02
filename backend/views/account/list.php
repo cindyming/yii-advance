@@ -19,10 +19,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'striped'=> true,
-        'hover'=> true,
+        'export'=>[
+            'fontAwesome'=>true,
+            'showConfirmAlert'=>false,
+            'target'=>GridView::TARGET_BLANK
+        ],
+        'exportConfig' => [
+            GridView::EXCEL => ['label' => '保存为Excel文件']
+        ],
+        'toolbar'=>[
+            '{export}',
+            '{toggleData}'
+        ],
+        'panel'=>[
+            'type'=>GridView::TYPE_PRIMARY,
+        ],
+        'autoXlFormat' => true,
         'layout' => '{items} {summary} {pager}',
-        'pjax' => true,
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',
