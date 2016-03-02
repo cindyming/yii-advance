@@ -31,14 +31,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'username',
             [
                 'attribute' => 'investment',
+                'format' => 'decimal',
                 'filter' => false,
             ],
             [
                 'attribute' => 'finance_fund',
+                'format' => 'decimal',
                 'filter' => false,
             ],
             [
                 'attribute' => 'stack_fund',
+                'format' => 'decimal',
                 'filter' => false,
             ],
             [

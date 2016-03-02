@@ -17,6 +17,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'export'=>[
+            'fontAwesome'=>true,
+            'showConfirmAlert'=>false,
+            'target'=>GridView::TARGET_BLANK
+        ],
+        'exportConfig' => [
+            GridView::EXCEL => ['label' => '保存为Excel文件']
+        ],
+        'toolbar'=>[
+            '{export}',
+            '{toggleData}'
+        ],
+        'panel'=>[
+            'type'=>GridView::TYPE_PRIMARY,
+        ],
+        'autoXlFormat' => true,
         'layout' => '{items} {summary} {pager}',
         'pjax' => true,
         'columns' => [
@@ -41,20 +57,24 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'sell_volume',
+                'format' => 'decimal',
                 'filter' => false,
             ],
             [
                 'attribute' => 'lock_volume',
+                'format' => 'decimal',
                 'filter' => false,
             ],
             [
                 'attribute' => 'current_price',
+                'format' => 'decimal',
                 'value' => function($model) {
                     return $model->stack->price;
                 }
             ],
             [
                 'attribute' => 'total_price',
+                'format' => 'decimal',
                 'value' => function($model) {
                     return $model->stack->price * ($model->sell_volume + $model->lock_volume);
                 }
