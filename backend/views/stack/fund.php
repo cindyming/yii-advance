@@ -57,12 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'sell_volume',
-                'format' => 'decimal',
                 'filter' => false,
             ],
             [
                 'attribute' => 'lock_volume',
-                'format' => 'decimal',
                 'filter' => false,
             ],
             [
