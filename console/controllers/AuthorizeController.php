@@ -137,7 +137,7 @@ class AuthorizeController extends Controller
     protected function dealSellAction($auth, $price)
     {
         $stack = Stack::findOne($auth->stack_id);
-        $memberStack = MemberStack::getMemberStack($auth);
+        $memberStack = MemberStack::getMemberStack($auth, false);
 
         $model = new StackTransaction();
         $data = array(
