@@ -210,8 +210,9 @@ class AccountController extends \yii\web\Controller
             $revenue->save();
             $user->save();
             $model->save();
-            $this->redirect(Yii::$app->request->referrer);
             $transaction->commit();
+            $this->redirect(Yii::$app->request->referrer);
+            return;
         } catch (Exception $e) {
             $transaction->rollback();//回滚函数
             return $this->render('create', [
