@@ -270,7 +270,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
     protected function dealSellAction($price)
     {
         $stack = Stack::findOne($this->stack_id);
-        $memberStack = MemberStack::getMemberStack($this);
+        $memberStack = MemberStack::getMemberStack($this, false);
 
         $time = time() + rand(1,5);
         $date = date('Y-m-d H:i:s', $time);
