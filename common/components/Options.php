@@ -79,7 +79,8 @@ class Options
         ),
         'transcation_status' => array(
             0 => '交易锁定',
-            1 => '交易完成'
+            1 => '交易完成',
+            2 => '交易失败',
         )
     );
 

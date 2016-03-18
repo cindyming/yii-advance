@@ -56,6 +56,18 @@ class StackController extends Controller
             $memberStack->lock_volume -= $transaction->volume;
             $memberStack->save();
             $transaction->save();
+        } else {
+            $transaction->status = 2;
+            $memberStack = $transaction->getMemberStack()->one();
+            $memberStack->lock_volume -= $transaction->volume;
+            $fee = 0;
+            $member->finance_fund += ($transaction->total_price - $fee);
+            $stackOutRecord = InRecord::prepareModelForSellStack($transaction->member_id, ($transaction->total_price - $fee),$member->finance_fund, $fee);
+            $stackOutRecord->note = '股票购买失败 系统退回['  . $transaction->created_at .  ']购买[' . $transaction->stack->code . ']' . $transaction->volume . '股';
+            $stackOutRecord->type = 5;
+            $stackOutRecord->save();
+            $memberStack->save();
+            $transaction->save();
         }
 
 
