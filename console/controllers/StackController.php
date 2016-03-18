@@ -3,6 +3,7 @@
 namespace console\controllers;
 
 use common\models\InRecord;
+use common\models\Member;
 use common\models\StackTransaction;
 use common\models\Date;
 use common\models\System;
@@ -47,12 +48,16 @@ class StackController extends Controller
 
     protected function dealBuyAction($transaction)
     {
-        $transaction->status = 1;
-        $memberStack = $transaction->getMemberStack()->one();
-        $memberStack->sell_volume += $transaction->volume;
-        $memberStack->lock_volume -= $transaction->volume;
-        $memberStack->save();
-        $transaction->save();
+        $member = Member::find($transaction->member_id);
+        if (($member->finance_fund  >= 0) && ($member->stack_fund  >= 0)) {
+            $transaction->status = 1;
+            $memberStack = $transaction->getMemberStack()->one();
+            $memberStack->sell_volume += $transaction->volume;
+            $memberStack->lock_volume -= $transaction->volume;
+            $memberStack->save();
+            $transaction->save();
+        }
+
 
     }
     protected function dealSellAction($transaction)

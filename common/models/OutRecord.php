@@ -66,6 +66,7 @@ class OutRecord extends \yii\db\ActiveRecord
             [['member_id', 'account_type', 'amount', 'total'], 'required'],
             [['member_id', 'account_type', 'type'], 'integer'],
             [['amount', 'fee', 'total'], 'number'],
+            [['total'], 'checkTotal'],
             [['created_at', 'updated_at', 'membername'], 'safe'],
             [['note'], 'string', 'max' => 250]
         ];
@@ -131,4 +132,12 @@ class OutRecord extends \yii\db\ActiveRecord
         $model->load($data, '');
         return $model;
     }
+
+    public function checkTotal($attribute, $param)
+    {
+        if($this->total < 0){
+            $this->addError($attribute, '账户余额不足,请稍后再试试');
+        }
+    }
+
 }
