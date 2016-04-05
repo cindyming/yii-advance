@@ -34,15 +34,31 @@ class MemberStack extends ActiveRecord
         return 'member_stack';
     }
 
+
     public function behaviors()
     {
         return [
             [
                 'class' => TimestampBehavior::className(),
                 'value' => new Expression('NOW()'),
-            ],];
-    }
+            ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'lock_volume',
+                ],
+                'value' => function ($event) {
+                    if ($this->lock_volume < 0) {
+                        Yii::$app->systemlog->add('会员:' . $this->member_id, '资产更新', '成功', '负数:' . $this->lock_volume);
+                        return 0;
+                    } else {
+                        return $this->lock_volume;
+                    }
 
+                },
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
