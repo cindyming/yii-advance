@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\db\Expression;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
 
 /**
