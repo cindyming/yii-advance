@@ -30,7 +30,7 @@ class StackController extends Controller
                 $date = array_pop($dates);
                 $date = $date->date;
             }
-            $date .= ' 23:59:59';
+            $date .= ' 23:59:59';var_dump($date);
             $transactions = StackTransaction::find()->where(['=', 'status', 0])->andWhere(['<', 'created_at', $date])->all();
             foreach ($transactions as $transaction) {
                 if ($transaction->type == 0) {
@@ -48,7 +48,7 @@ class StackController extends Controller
 
     protected function dealBuyAction($transaction)
     {
-        $member = Member::find($transaction->member_id);
+        $member = Member::findOne($transaction->member_id);
         if (($member->finance_fund  >= 0) && ($member->stack_fund  >= 0)) {
             $transaction->status = 1;
             $memberStack = $transaction->getMemberStack()->one();
@@ -56,7 +56,7 @@ class StackController extends Controller
             $memberStack->lock_volume -= $transaction->volume;
             $memberStack->save();
             $transaction->save();
-        } else {
+        } else if (false){
             $transaction->status = 2;
             $memberStack = $transaction->getMemberStack()->one();
             $memberStack->lock_volume -= $transaction->volume;
