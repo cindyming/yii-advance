@@ -44,7 +44,7 @@ class MemberStack extends ActiveRecord
             [
                 'class' => AttributeBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'lock_volume',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'lock_volume',
                 ],
                 'value' => function ($event) {
                     if ($this->lock_volume < 0) {
