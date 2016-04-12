@@ -44,8 +44,7 @@ class InRecordSearch extends InRecord
     {
         $query = InRecord::find()
             ->joinWith(['member' => function($query) { $query->from(['member' => 'member']);}])
-            ->orderBy(['created_at' => SORT_DESC]);
-
+            ->orderBy(['id' => SORT_DESC]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -81,7 +80,7 @@ class InRecordSearch extends InRecord
 
         $query->andFilterWhere(['like', 'note', $this->note])
             ->andFilterWhere(['like','member.username',$this->membername])
-            ->orderBy(['created_at' => SORT_DESC]);
+            ->orderBy(['id' => SORT_DESC]);
 
         return $dataProvider;
     }

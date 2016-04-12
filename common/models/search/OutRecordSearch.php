@@ -44,7 +44,7 @@ class OutRecordSearch extends OutRecord
     {
         $query = OutRecord::find()
             ->joinWith(['member' => function($query) { $query->from(['member' => 'member']);}])
-            ->orderBy(['created_at' => SORT_DESC]);
+            ->orderBy(['id' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -82,7 +82,7 @@ class OutRecordSearch extends OutRecord
 
         $query->andFilterWhere(['like', 'note', $this->note])
             ->andFilterWhere(['like','member.username',$this->membername])
-            ->orderBy(['created_at' => SORT_DESC]);
+            ->orderBy(['id' => SORT_DESC]);
 
         return $dataProvider;
     }
