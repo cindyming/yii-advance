@@ -214,6 +214,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 'account_type' => $this->account_type,
                 'type' => 0,
                 'volume' => $this->volume,
+                'note' => '委托购入' . $this->id
             );
             $model->load($data, '');
             $model->total_price = $model->price * $model->volume;
@@ -283,7 +284,8 @@ class StackAuthorize extends \yii\db\ActiveRecord
             'account_type' => 1,
             'type' => 1,
             'volume' => $this->volume,
-            'created_at' => $date
+            'created_at' => $date,
+            'note' => '委托出售' . $this->id
         );
         $model->load($data, '');
 

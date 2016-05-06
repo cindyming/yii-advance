@@ -91,7 +91,7 @@ class StackTransaction extends ActiveRecord
             [['price', 'total_price'], 'number'],
             [['membername'], 'checkUsername'],
             [['stackcode'], 'checkStackcode'],
-            [['created_at', 'updated_at','membername', 'stackcode', 'account_type', 'password2'], 'safe']
+            [['created_at', 'updated_at','membername', 'stackcode', 'account_type', 'password2', 'note'], 'safe']
         ];
     }
 
