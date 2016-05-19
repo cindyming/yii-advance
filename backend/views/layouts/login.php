@@ -27,11 +27,12 @@ AppAsset::register($this);
             var _hmt = _hmt || [];
             (function() {
                 var hm = document.createElement("script");
-                hm.src = "//hm.baidu.com/hm.js?fa364959c32dcc5cd35a84502c3767c0";
+                hm.src = "//hm.baidu.com/hm.js?4e1df86634a878c620abca5391c2c7d3";
                 var s = document.getElementsByTagName("script")[0];
                 s.parentNode.insertBefore(hm, s);
             })();
         </script>
+
     </head>
     <body class="login">
         <?php $this->beginBody() ?>
