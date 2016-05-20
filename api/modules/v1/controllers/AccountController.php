@@ -31,7 +31,7 @@ class AccountController extends ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['contentNegotiator']['formats']['text/html'] = Response::FORMAT_JSON; //setting JSON as default reply
+       // $behaviors['contentNegotiator']['formats']['text/html'] = Response::FORMAT_JSON; //setting JSON as default reply
         $behaviors['authenticator'] = [
             'class' => HttpBasicAuth::className(),
             'auth' => array($this, 'auth')
