@@ -56,7 +56,7 @@ class Account extends ActiveRecord
             [['member_id', 'account_type', 'type'], 'integer'],
             [['amount', 'fee', 'total'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
-            [['note'], 'string', 'max' => 250]
+            [['note', 'refer_id'], 'string', 'max' => 250]
         ];
     }
 
