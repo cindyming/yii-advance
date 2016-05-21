@@ -148,6 +148,10 @@ AppAsset::register($this);
             } else {
                 $menuItems = [
                     [
+                        'label' => '会员管理',
+                        'url' => ['/member/approvedindex'],
+                        ],
+                    [
                         'label' => '股票管理',
                         'url' => ['/stack/index'],
                         'items' => [

@@ -257,6 +257,6 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function isStackAdmin()
     {
-        return Yii::$app->user->identity->role_id == 1;
+        return Yii::$app->user->identity->role_id == 2;
     }
 }

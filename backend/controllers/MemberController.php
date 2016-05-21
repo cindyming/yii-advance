@@ -39,7 +39,7 @@ class MemberController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create','out', 'validate'],
+                        'actions' => ['index', 'create','out', 'validate', 'approvedindex'],
                         'roles' => [User::STACK_ADMIN],
                     ],
                 ],
