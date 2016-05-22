@@ -87,6 +87,7 @@ class Account extends ActiveRecord
             $this->member_id = $member->id;
             $this->account_type = 1;
             $this->fee = 0;
+            $this->type = 3;
             $member->finance_fund += $this->amount;
             $this->total = $member->finance_fund;
             $this->note = '投资网站资金转移, 对方系统转出纪录ID:' . $this->refer_id;
