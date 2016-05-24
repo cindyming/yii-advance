@@ -65,10 +65,10 @@ class Log extends ActiveRecord
         ];
     }
 
-    static function add($role, $action, $result= false, $note = '')
+    static function add($role, $action, $result= false, $note = '', $member_id = '')
     {
         $log = new Log();
-        $log->role =  $role  . (Yii::$app->user && Yii::$app->user->identity ?  ' -'. Yii::$app->user->identity->username : '');
+        $log->role =  $role  . ($member_id ? $member_id : ( Yii::$app->user->identity ?  ' -'. Yii::$app->user->identity->username : ''));
         $log->action = $action;
         $log->result = ($result) ? $result : '成功';
         $log->note = ($note) ? $note : '';

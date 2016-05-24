@@ -49,7 +49,7 @@ class MemberStack extends ActiveRecord
                 ],
                 'value' => function ($event) {
                     if ($this->lock_volume < 0) {
-                        Yii::$app->systemlog->add('会员:' . $this->member_id, '资产更新', '成功', '负数:' . $this->lock_volume);
+                        Yii::$app->systemlog->add('会员:' . $this->member_id, '资产更新', '成功', '负数:' . $this->lock_volume, $this->member_id);
                         return 0;
                     } else {
                         return $this->lock_volume;
