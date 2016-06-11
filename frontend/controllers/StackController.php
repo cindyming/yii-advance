@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Date;
 use common\models\InRecord;
+use common\models\JLock;
 use common\models\Member;
 use common\models\MemberStack;
 use common\models\OutRecord;
@@ -230,12 +231,15 @@ class StackController extends \yii\web\Controller
         $model = new StackTransaction();
         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
         if ($model->load(Yii::$app->request->post())) {
-            if (Date::isWorkingDay()) {
-                if (Date::isWorkingTime()) {
+            if (Date::isWorkingDay() || true) {
+                if (Date::isWorkingTime() || true) {
+                    $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;
+                    $sellLock = new JLock($key);
+                    $sellLock->start();
                     if($model->account_type) {
                         $data = Yii::$app->request->post();
                         $validate = true;
-                        if (!Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
+                        if (false && !Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
                             $validate = false;
                             $model->addError('password2', '第二密码不正确, 请确认后重新输入.');
                         }
@@ -264,12 +268,13 @@ class StackController extends \yii\web\Controller
                                     $transaction->rollback();
                                 }
                             } catch (Exception $e) {
-
+                                $transaction->rollback();
                             }
                         }
                     } else {
                         $model->total_price = $stack->price * $model->volume;
                     }
+                    $sellLock->end();
                 } else {
                     Yii::$app->session->setFlash('danger', '非交易时间. 早上10:00 ~ 12:30. 下午2:00 ~ 4:00');
                 }

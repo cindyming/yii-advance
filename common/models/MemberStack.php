@@ -68,7 +68,8 @@ class MemberStack extends ActiveRecord
         return [
             [['member_id', 'stack_id', 'sell_volume', 'lock_volume'], 'required'],
             [['member_id', 'stack_id', 'sell_volume', 'lock_volume'], 'integer'],
-            [['created_at', 'updated_at'], 'safe']
+            [['created_at', 'updated_at'], 'safe'],
+            [['lock_volume'], 'checkVolume'],
         ];
     }
 
@@ -138,5 +139,12 @@ class MemberStack extends ActiveRecord
 
         }
         return $model;
+    }
+
+    public function checkVolume($attribute, $param)
+    {
+        if($this->lock_volume < 0){
+            $this->addError($attribute, '可解锁数量不对!');
+        }
     }
 }
