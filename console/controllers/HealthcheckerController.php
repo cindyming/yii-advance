@@ -21,7 +21,7 @@ class HealthcheckerController extends Controller
     {
         $date = date('Y-m-d H:i:s',  strtotime("-24 hour"));
 
-        $trans = Yii::$app->db->createCommand("SELECT member_id, stack_id FROM stack_transaction group by member_id, stack_id")->query();
+        $trans = Yii::$app->db->createCommand("SELECT member_id, stack_id FROM stack_transaction WHERE created_at>'{$date}' group by member_id, stack_id")->query();
 
         foreach ($trans as $tr) {
             $member_id = $tr['member_id'];
