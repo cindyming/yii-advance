@@ -232,8 +232,6 @@ class StackController extends \yii\web\Controller
         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
         if ($model->load(Yii::$app->request->post())) {
             $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;
-            if (!Yii::$app->session->get($key, 0)) {
-                Yii::$app->session->set($key, 1);
                 if (Date::isWorkingDay() || true) {
                     if (Date::isWorkingTime() || true) {
                         $sellLock = new JLock($key);
@@ -286,9 +284,6 @@ class StackController extends \yii\web\Controller
                 } else {
                     Yii::$app->session->setFlash('danger', '对不起,非交易日不能进行交易!');
                 }
-
-                Yii::$app->session->set($key, 0);
-            }
 
         }
         return $this->render('sell', [
