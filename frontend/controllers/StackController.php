@@ -231,7 +231,7 @@ class StackController extends \yii\web\Controller
         $model = new StackTransaction();
         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
         if ($model->load(Yii::$app->request->post())) {
-            $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;
+            $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;var_dump(Yii::$app->session->get($key, 0));die;
             if (!Yii::$app->session->get($key, 0)) {
                 Yii::$app->session->set($key, 1);
                 if (Date::isWorkingDay() || true) {
