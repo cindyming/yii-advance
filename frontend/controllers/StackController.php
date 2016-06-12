@@ -238,6 +238,7 @@ class StackController extends \yii\web\Controller
                     if (Date::isWorkingTime() || true) {
                         $sellLock = new JLock($key);
                         $sellLock->start();
+                        $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
                         if($model->account_type) {
                             $data = Yii::$app->request->post();
                             $validate = true;
