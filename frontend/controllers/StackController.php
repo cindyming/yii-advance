@@ -231,15 +231,15 @@ class StackController extends \yii\web\Controller
         $model = new StackTransaction();
         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
         if ($model->load(Yii::$app->request->post())) {
-            if (Date::isWorkingDay() || true) {
-                if (Date::isWorkingTime() || true) {
+            if (Date::isWorkingDay()) {
+                if (Date::isWorkingTime()) {
                     $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;
                     $sellLock = new JLock($key);
                     $sellLock->start();
                     if($model->account_type) {
                         $data = Yii::$app->request->post();
                         $validate = true;
-                        if (false && !Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
+                        if (!Yii::$app->user->identity->validatePassword2($data['StackTransaction']['password2'])) {
                             $validate = false;
                             $model->addError('password2', '第二密码不正确, 请确认后重新输入.');
                         }
