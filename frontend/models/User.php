@@ -230,4 +230,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return MemberStack::find()->where(['member_id' => Yii::$app->user->identity->id,  'stack_id' => $stack_id])->one();
     }
+
+    public  function canBuyStock()
+    {
+        return (($this->buy_stack == 1)) ? true : false;
+    }
 }

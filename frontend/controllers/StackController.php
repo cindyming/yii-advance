@@ -101,7 +101,9 @@ class StackController extends \yii\web\Controller
             $memberStack = new MemberStack();
         }
         $open = false;
-        if($stack->status) {
+        if(!Yii::$app->user->identity->canBuyStock()) {
+            Yii::$app->session->setFlash('danger', '账号没有购股权限, 请联系管理员.');
+        } else if ($stack->status) {
             Yii::$app->session->setFlash('danger', '股票已锁定,请选择其它股票进行购买.');
         } else if (Date::isWorkingDay()) {
             if (Date::isWorkingTime()) {
@@ -230,10 +232,19 @@ class StackController extends \yii\web\Controller
         $stack = Stack::findOne($id);
         $model = new StackTransaction();
         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
-        if ($model->load(Yii::$app->request->post())) {
-            $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;
-                if (Date::isWorkingDay()) {
-                    if (Date::isWorkingTime()) {
+        $show = true;
+
+        if(!Yii::$app->user->identity->canBuyStock()) {
+            $show = false;
+            Yii::$app->session->setFlash('danger', '账号没有购股权限, 请联系管理员.');
+        } else if ($stack->status) {
+            $show = false;
+            Yii::$app->session->setFlash('danger', '股票已锁定,请选择其它股票进行购买.');
+        } else if (Date::isWorkingDay()) {
+            if (Date::isWorkingTime()) {
+                if ($model->load(Yii::$app->request->post())) {
+                     $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;
+
                         $sellLock = new JLock($key);
                         $sellLock->start();
                         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
@@ -278,17 +289,20 @@ class StackController extends \yii\web\Controller
                             $model->total_price = $stack->price * $model->volume;
                         }
                         $sellLock->end();
-                    } else {
-                        Yii::$app->session->setFlash('danger', '非交易时间. 早上10:00 ~ 12:30. 下午2:00 ~ 4:00');
                     }
-                } else {
-                    Yii::$app->session->setFlash('danger', '对不起,非交易日不能进行交易!');
-                }
 
+        } else {
+                $show = false;
+                Yii::$app->session->setFlash('danger', '非交易时间. 早上10:00 ~ 12:30. 下午2:00 ~ 4:00');
+            }
+        } else {
+            $show = false;
+            Yii::$app->session->setFlash('danger', '对不起,非交易日不能进行交易!');
         }
         return $this->render('sell', [
             'model' => $model,
             'stack' => $stack,
+            'show' => $show,
             'memberStack' => $memberStack
         ]);
     }

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Stacks'), 'url' => [
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stack-create">
-    <?php if ($open|| true): ?>
+    <?php if ($open): ?>
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="stack-form sm-form">
 
@@ -37,8 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <?php ActiveForm::end(); ?>
-        <?php endif ?>
-
     </div>
+    <?php endif ?>
 
 </div>

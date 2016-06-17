@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stack-create">
 
+    <?php if($show): ?>
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="stack-form sm-form">
 
@@ -39,5 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php ActiveForm::end(); ?>
 
     </div>
+    <?php endif ?>
 
 </div>
