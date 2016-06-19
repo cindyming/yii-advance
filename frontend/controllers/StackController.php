@@ -106,7 +106,7 @@ class StackController extends \yii\web\Controller
         } else if ($stack->status) {
             Yii::$app->session->setFlash('danger', '股票已锁定,请选择其它股票进行购买.');
         } else if (Date::isWorkingDay()) {
-            if (Date::isWorkingTime() || true) {
+            if (Date::isWorkingTime()) {
                 $open = true;
                 if ($model->load(Yii::$app->request->post())) {
                     if($model->account_type) {
@@ -241,7 +241,7 @@ class StackController extends \yii\web\Controller
             $show = false;
             Yii::$app->session->setFlash('danger', '股票已锁定,请选择其它股票进行购买.');
         } else if (Date::isWorkingDay()) {
-            if (Date::isWorkingTime() || true) {
+            if (Date::isWorkingTime()) {
                 if ($model->load(Yii::$app->request->post())) {
                      $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;
 
