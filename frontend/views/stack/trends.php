@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             [
                 'attribute' => 'code',
+                'header' => '股票代码',
                 'value' => function($model) {
                     return $model->getCode();
                 },
