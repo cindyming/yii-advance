@@ -24,13 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'code',
                 'value' => function($model) {
-                    return $model->stack->code;
-                }
+                    return $model->getCode();
+                },
+                'filter' => array_merge(array('' => '请选择'), Stack::getStackCodeOptions()),
             ],
             [
                 'attribute' => 'name',
+                'filter' => false,
                 'value' => function($model) {
-                    return $model->stack->name;
+                    return $model->getName();
                 }
             ],
             [

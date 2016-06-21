@@ -77,4 +77,18 @@ class StackTrends extends ActiveRecord
     {
         return $this->hasOne(Stack::className(), ['id' => 'stack_id']);
     }
+
+    public function getCode()
+    {
+        $stacks = Stack::getStackCodeOptions();
+
+        return isset($stacks[$this->stack_id]) ?  $stacks[$this->stack_id] : '';
+    }
+
+    public function getName()
+    {
+        $stacks = Stack::getStackNameOptions();
+
+        return isset($stacks[$this->stack_id]) ?  $stacks[$this->stack_id] : '';
+    }
 }

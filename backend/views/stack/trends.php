@@ -22,15 +22,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-                'attribute' => 'code',
+                'attribute' => 'stack_id',
                 'value' => function($model) {
-                    return $model->stack->code;
-                }
+                    return $model->getCode();
+                },
+                'filter' =>  \common\models\Stack::getStackCodeOptions(),
             ],
             [
                 'attribute' => 'name',
+                'filter' => false,
                 'value' => function($model) {
-                    return $model->stack->name;
+                    return $model->getName();
                 }
             ],
             [

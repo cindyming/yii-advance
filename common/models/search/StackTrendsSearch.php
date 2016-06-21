@@ -43,7 +43,7 @@ class StackTrendsSearch extends StackTrends
     public function search($params)
     {
         $query = StackTrends::find()
-                ->joinWith(['stack' => function($query) { $query->from(['stack' => 'stack']);}])
+            //    ->joinWith(['stack' => function($query) { $query->from(['stack' => 'stack']);}])
                 ->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
@@ -77,8 +77,7 @@ class StackTrendsSearch extends StackTrends
             'id' => $this->id,
             'stack_id' => $this->stack_id,
             $this::tableName() . '.price' => $this->price,
-        ]) ->andFilterWhere(['like','stack.code',$this->code])
-            ->andFilterWhere(['like','stack.name',$this->name])
+        ])
             ->orderBy(['created_at' => SORT_DESC]);
 
         return $dataProvider;

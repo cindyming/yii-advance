@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use kartik\grid\GridView;;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\StackSearch */
@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'layout' => '{items} {summary} {pager}',
-        'pjax' => true,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'code',
@@ -29,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' =>  'updated_at',
-                'filterType'=>GridView::FILTER_DATE_RANGE,
+                'filter' => false,
             ],
             [
                 'attribute' => 'status',
