@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     return $model->getCode();
                 },
-                'filter' => array_merge(array('' => '请选择'), \common\models\Stack::getStackCodeOptions()),
+                'filter' =>  \common\models\Stack::getStackCodeOptions(),
             ],
             [
                 'attribute' => 'name',
