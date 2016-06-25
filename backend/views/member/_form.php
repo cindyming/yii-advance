@@ -23,6 +23,8 @@ use yii\widgets\ActiveForm;
     
     <?= $form->field($model, 'title')->dropDownList(Yii::$app->options->getOptions('title')) ?>
 
+    <?= $form->field($model, 'country')->dropDownList(Yii::$app->options->getOptions('country')) ?>
+
     <?= $form->field($model, 'nickname')->textInput(['maxlength' => true]) ?>
 
     <?php if($model->isNewRecord):?>

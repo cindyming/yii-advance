@@ -10,7 +10,7 @@ class AccessRule extends \yii\filters\AccessRule
      */
     protected function matchRole($user)
     {
-        if (System::loadConfig('enable_memmber_login')) {
+        if (System::loadConfig('enable_memmber_login') && (Yii::$app->params['country'] == ($user->country))) {
             return parent::matchRole($user);
         } else {
             Yii::$app->user->logout();

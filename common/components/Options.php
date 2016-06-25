@@ -18,6 +18,10 @@ class Options
             3 => '正式',
             4 => '已拒绝'
         ),
+        'country' => array(
+            "CN" => '中国',
+            "VI" => '越南',
+        ),
         'question_type' => array(
             1 => '付款问题',
             2 => '代理问题',
