@@ -159,7 +159,7 @@ class Member extends ActiveRecord
             'password_confirm' => Yii::t('app', 'Password Confirm'),
             'password2_confirm' => Yii::t('app', 'Password2 Confirm'),
             'status' => Yii::t('app', 'Status'),
-            'country' => Yii::t('app', '国家'),
+            'country' => Yii::t('app', '站点'),
             'locked' => Yii::t('app', 'Locked'),
             'access_token' => Yii::t('app', 'Access Token'),
             'role_id' => Yii::t('app', 'Role ID'),
