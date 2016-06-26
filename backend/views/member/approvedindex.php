@@ -52,6 +52,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Yii::$app->options->getOptionLabel('locked', $model->locked);
                 }
             ],
+
+            [
+                'attribute' => 'country',
+                'filter' => Yii::$app->options->getOptions('country'),
+                'value' => function($model) {
+                    return Yii::$app->options->getOptionLabel('country', $model->country);
+                }
+            ],
             [
                 'attribute' => 'buy_stack',
                 'filter' => Yii::$app->options->getOptions('buy_stack'),
