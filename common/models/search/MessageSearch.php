@@ -87,7 +87,7 @@ class MessageSearch extends Message
             $query->andFilterWhere(['>', 'replied_content', '']);
         } else if($this->replied_content  == 2) {
             $query->andFilterWhere(['=', 'replied_content', null]);
-        }var_dump($query->createCommand()->getRawSql());
+        }
 
 
         return $dataProvider;
