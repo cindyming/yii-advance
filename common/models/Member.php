@@ -90,6 +90,21 @@ class Member extends ActiveRecord
                     return sha1(rand());
                 },
             ],
+
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'country',
+                ],
+                'value' => function ($event) {
+                    if ($this->country) {
+                        return $this->country;
+                    } else {
+                        return 'CN';
+                    }
+
+                },
+            ],
             [
                 'class' => AttributeBehavior::className(),
                 'attributes' => [
@@ -117,7 +132,7 @@ class Member extends ActiveRecord
     public function rules()
     {
         return [
-            [[ 'username', 'identity', 'phone', 'title', 'investment', 'bank', 'cardname', 'cardnumber', 'bankaddress','nickname', 'country'], 'required'],
+            [[ 'username', 'identity', 'phone', 'title', 'investment', 'bank', 'cardname', 'cardnumber', 'bankaddress','nickname'], 'required'],
             [['status', 'locked', 'role_id', 'investment', 'buy_stack', 'added_by'], 'integer'],
             [['password_old', 'password2_old', 'password_hash', 'password_hash2', 'password', 'password2', 'password_confirm', 'password2_confirm'], 'string', 'min' => 6],
             [['created_at', 'updated_at', 'approved_at'], 'safe'],

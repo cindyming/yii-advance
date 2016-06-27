@@ -24,8 +24,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->dropDownList(Yii::$app->options->getOptions('title')) ?>
 
-    <?= $form->field($model, 'country')->dropDownList(Yii::$app->options->getOptions('country')) ?>
-
 
     <?= $form->field($model, 'password', ['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'password_confirm',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
