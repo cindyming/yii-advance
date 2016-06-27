@@ -100,7 +100,7 @@ class Member extends ActiveRecord
                     if ($this->country) {
                         return $this->country;
                     } else {
-                        return 'CN';
+                        return Yii::$app->params['country'];
                     }
 
                 },
