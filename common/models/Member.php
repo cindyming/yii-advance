@@ -135,7 +135,7 @@ class Member extends ActiveRecord
             [[ 'username', 'identity', 'phone', 'title', 'investment', 'bank', 'cardname', 'cardnumber', 'bankaddress','nickname'], 'required'],
             [['status', 'locked', 'role_id', 'investment', 'buy_stack', 'added_by'], 'integer'],
             [['password_old', 'password2_old', 'password_hash', 'password_hash2', 'password', 'password2', 'password_confirm', 'password2_confirm'], 'string', 'min' => 6],
-            [['created_at', 'updated_at', 'approved_at'], 'safe'],
+            [['created_at', 'updated_at', 'approved_at', 'country'], 'safe'],
             [['stack_fund', 'finance_fund'], 'number'],
             [['username'], 'checkUsername'],
             [['password_confirm'], 'compare', 'compareAttribute' => 'password'],
@@ -203,6 +203,7 @@ class Member extends ActiveRecord
 
     public function checkUsername($attribute, $param)
     {
+        $this->username = preg_replace('/[^a-zA-Z0-9]+/', '', $this->username);
         $existUser = Member::find()->where(['=', 'username', $this->username])->one();
         if($existUser && ($existUser->id != $this->id)){
             $this->addError($attribute, '该用户名已存在，请重新输入一个!');
