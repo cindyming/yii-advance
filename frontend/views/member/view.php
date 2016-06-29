@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'username',
             'status',
-            'locked',
             'nickname',
             'identity',
             'phone',
