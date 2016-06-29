@@ -204,7 +204,7 @@ class Member extends ActiveRecord
     public function checkUsername($attribute, $param)
     {
         if ($this->isNewRecord) {
-            $this->username = preg_replace('/[^a-zA-Z0-9]+/', '', $this->username);
+            $this->username = str_replace(' ', '', $this->username);
         }
 
         $existUser = Member::find()->where(['=', 'username', $this->username])->one();
