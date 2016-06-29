@@ -203,7 +203,10 @@ class Member extends ActiveRecord
 
     public function checkUsername($attribute, $param)
     {
-      //  $this->username = preg_replace('/[^a-zA-Z0-9]+/', '', $this->username);
+        if ($this->isNewRecord) {
+            $this->username = preg_replace('/[^a-zA-Z0-9]+/', '', $this->username);
+        }
+
         $existUser = Member::find()->where(['=', 'username', $this->username])->one();
         if($existUser && ($existUser->id != $this->id)){
             $this->addError($attribute, '该用户名已存在，请重新输入一个!');
