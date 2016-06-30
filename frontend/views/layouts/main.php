@@ -68,9 +68,9 @@ AppAsset::register($this);
                             ['label' => '我的注册', 'url' => ['/member/index']],
                         ]
                     ],
-                    [
-                        'label' => '基金资产', 'url' => ['/account/fund'],
-                    ],
+                    // [
+                    //     'label' => '基金资产', 'url' => ['/account/fund'],
+                    // ],
                     [
                         'label' => '股票管理',
                         'url' => ['/stack/index'],

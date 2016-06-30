@@ -30,13 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' =>  'updated_at',
                 'filter' => false,
             ],
-            [
-                'attribute' => 'status',
-                'value' => function($model) {
-                    return Yii::$app->options->getOptionLabel('status', $model->status);
-                },
-                'filter' => Yii::$app->options->getOptions('status',true),
-            ],
+            // [
+            //     'attribute' => 'status',
+            //     'value' => function($model) {
+            //         return Yii::$app->options->getOptionLabel('status', $model->status);
+            //     },
+            //     'filter' => Yii::$app->options->getOptions('status',true),
+            // ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
