@@ -39,7 +39,7 @@ AppAsset::register($this);
         <div class="container">
             <ul>
                 <li>
-                    会员ID: <?php echo Yii::$app->user->identity->username?>
+                    会员ID: <?php echo Yii::$app->user->identity->username;?>
                 </li>
                 <li>
                     理财账户余额: <?php echo Yii::$app->user->identity->finance_fund; ?>
@@ -101,10 +101,10 @@ AppAsset::register($this);
                         ]
                     ],
                     [
-                        'label' => '会员管理', 'url' => ['/member/view', 'id' => Yii::$app->user->identity->id],
+                        'label' => '会员管理', 'url' => ['/member/view'],
                         'items' => [
                             ['label' => '修改密码', 'url' => ['/member/changepassword']],
-                            ['label' => '会员资料', 'url' => ['/member/view', 'id' => Yii::$app->user->identity->id]]
+                            ['label' => '会员资料', 'url' => ['/member/view']]
                         ]
                     ],
                     Yii::$app->user->isGuest ?

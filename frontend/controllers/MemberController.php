@@ -108,8 +108,9 @@ class MemberController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView()
     {
+        $id = Yii::$app->user->identity->id;
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -150,6 +151,8 @@ class MemberController extends Controller
 
     public function actionAutologin($id)
     {
+        Yii::$app->user->logout();
+
         $member = User::findOne($id);
         Yii::$app->user->login($member);
 
