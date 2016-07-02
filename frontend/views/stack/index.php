@@ -1,21 +1,35 @@
 <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
 
+$dependency = [
+    'class' => 'yii\caching\DbDependency',
+    'sql' => 'SELECT COUNT(id) FROM stack_trends',
+];
+
+$variations = [
+    Yii::$app->request->get('page', 1),
+    Yii::$app->request->get('StackSearch', array())
+];
+
+
+$this->title = Yii::t('app', 'Stacks List');
+?>
+
+<?php if ($this->beginCache('stack_list', ['dependency' => $dependency, 'variations' => $variations])): ?>
+
+<?php
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\StackSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Stacks List');
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stack-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= yii\helpers\Html::encode($this->title) ?></h1>
 
-    <?= GridView::widget([
+    <?= yii\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'layout' => '{items} {summary} {pager}',
@@ -48,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => Yii::t('yii', '购买'),
                             'aria-label' => Yii::t('yii', '购买'),
                         ];
-                        return ($model->status) ? '' : Html::a('购买', $url, $options);
+                        return ($model->status) ? '' : yii\helpers\Html::a('购买', $url, $options);
                     },
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
@@ -62,3 +76,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+
+
+<?php
+
+$this->endCache();
+
+endif;
+?>

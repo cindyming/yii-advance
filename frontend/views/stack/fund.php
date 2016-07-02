@@ -1,8 +1,4 @@
 <?php
-
-use yii\helpers\Html;
-use kartik\grid\GridView;;
-
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\StackSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -10,11 +6,28 @@ use kartik\grid\GridView;;
 $this->title = Yii::t('app', 'My Stacks');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php
+
+
+$dependency = [
+    'class' => 'yii\caching\DbDependency',
+    'sql' => 'SELECT max(updated_at) FROM member_stack where member_id =' . Yii::$app->user->identity->id,
+];
+
+$variations = [
+    Yii::$app->request->get('page', 1),
+    Yii::$app->request->get('MemberStack', array())
+];
+?>
+
+<?php if ($this->beginCache('stack_fund' . Yii::$app->user->identity->id, ['dependency' => $dependency, 'variations' => $variations])): ?>
+
 <div class="stack-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= yii\helpers\Html::encode($this->title) ?></h1>
 
-    <?= GridView::widget([
+    <?= kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'layout' => '{items} {summary} {pager}',
@@ -63,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'title' => Yii::t('yii', '卖出'),
                             'aria-label' => Yii::t('yii', '卖出'),
                         ];
-                        return Html::a('卖出', $url, $options);
+                        return yii\helpers\Html::a('卖出', $url, $options);
                     },
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
@@ -77,3 +90,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+
+    <?php
+
+    $this->endCache();
+
+endif;
+?>

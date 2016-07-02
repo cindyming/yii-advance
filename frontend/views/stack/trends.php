@@ -1,21 +1,33 @@
 <?php
 
-use yii\helpers\Html;
-use kartik\grid\GridView;;
+
+$dependency = [
+    'class' => 'yii\caching\DbDependency',
+    'sql' => 'SELECT COUNT(id) FROM stack_trends',
+];
+
+$variations = [
+    Yii::$app->request->get('page', 1),
+    Yii::$app->request->get('StackTrendsSearch', array())
+];
+
+$this->title = Yii::t('app', 'Stack Trends');
+
+if ($this->beginCache('stack_trends', ['dependency' => $dependency, 'variations' => $variations])):
+?>
+<?php
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\StackSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Stack Trends');
-
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stack-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= yii\helpers\Html::encode($this->title) ?></h1>
 
-    <?= GridView::widget([
+    <?= kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'layout' => '{items} {summary} {pager}',
@@ -43,9 +55,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' =>  'created_at',
-                'filterType'=>GridView::FILTER_DATE_RANGE,
+                'filterType'=>kartik\grid\GridView::FILTER_DATE_RANGE,
             ],
         ],
     ]); ?>
 
 </div>
+<?php
+
+$this->endCache();
+?>
+
+<?php endif ?>

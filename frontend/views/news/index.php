@@ -1,19 +1,32 @@
 <?php
 
-use yii\helpers\Html;
-use kartik\grid\GridView;
-
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\Newssearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'News List');
 ?>
+
+
+<?php
+$dependency = [
+'class' => 'yii\caching\DbDependency',
+'sql' => 'SELECT COUNT(id) FROM news',
+];
+
+$variations = [
+Yii::$app->request->get('page', 1),
+];
+
+?>
+
+<?php if ($this->beginCache('new_list', ['dependency' => $dependency, 'variations' => $variations])): ?>
+
 <div class="news-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= yii\helpers\Html::encode($this->title) ?></h1>
 
-    <?= GridView::widget([
+    <?= kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'layout' => '{items} {summary} {pager}',
         'pjax' => true,
@@ -42,3 +55,10 @@ $this->title = Yii::t('app', 'News List');
     ]); ?>
 
 </div>
+
+    <?php
+
+    $this->endCache();
+
+endif;
+?>
