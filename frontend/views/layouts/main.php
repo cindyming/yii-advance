@@ -39,7 +39,7 @@ AppAsset::register($this);
         <div class="container">
             <ul>
                 <li>
-                    会员ID: <?php echo Yii::$app->user->identity->username;?>
+                    会员编号: <?php echo Yii::$app->user->identity->username;?>
                 </li>
                 <li>
                     理财账户余额: <?php echo Yii::$app->user->identity->finance_fund; ?>
