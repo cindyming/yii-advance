@@ -37,6 +37,18 @@ class NewsController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+            'pageCache' => [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['index'],
+                'duration' => 360,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM news',
+                ],
+                'variations' => [
+                    Yii::$app->request->get('page', 1)
+                ]
+            ],
         ];
     }
 

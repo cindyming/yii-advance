@@ -57,7 +57,7 @@ class StackController extends \yii\web\Controller
             'pageCache' => [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['index', 'trends'],
-                'duration' => 60,
+                'duration' => 360,
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT COUNT(*) FROM stack_trends',
