@@ -20,7 +20,7 @@ class MemberSearch extends Member
         return [
             [['id', 'status', 'locked', 'role_id', 'investment', 'buy_stack', 'added_by'], 'integer'],
             [['auth_key', 'username', 'access_token', 'nickname', 'password_hash', 'password_hash2', 'identity', 'phone', 'title', 'bank', 'cardname', 'cardnumber', 'bankaddress', 'email', 'qq', 'created_at', 'updated_at', 'approved_at'], 'safe'],
-            [['stack_fund', 'finance_fund'], 'number'],
+            [['stack_fund', 'finance_fund', 'country'], 'number'],
         ];
     }
 
@@ -67,6 +67,7 @@ class MemberSearch extends Member
             'investment' => $this->investment,
             'buy_stack' => $this->buy_stack,
             'added_by' => $this->added_by,
+            'country' => $this->country,
             'stack_fund' => $this->stack_fund,
             'finance_fund' => $this->finance_fund,
         ]);
