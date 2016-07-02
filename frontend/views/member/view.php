@@ -23,9 +23,15 @@ $this->params['breadcrumbs'][] = $model->username;
             'nickname',
             'identity',
             'phone',
-            'title',
+            [
+                'attribute'=>'title',
+                'value'=> Yii::$app->options->getOptionLabel('title', $model->title)
+            ],
             'investment',
-            'bank',
+            [
+                'attribute'=>'bank',
+                'value'=> Yii::$app->options->getOptionLabel('bank', $model->bank)
+            ],
             'cardname',
             'cardnumber',
             'bankaddress',
