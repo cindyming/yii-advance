@@ -53,6 +53,21 @@ class StackController extends \yii\web\Controller
                     'logout' => ['post'],
                 ],
             ],
+
+            'pageCache' => [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['index', 'trends'],
+                'duration' => 60,
+                'dependency' => [
+                    'class' => 'yii\caching\DbDependency',
+                    'sql' => 'SELECT COUNT(*) FROM stack_trends',
+                ],
+                'variations' => [
+                    Yii::$app->request->get('page', 1),
+                    Yii::$app->request->get('StackSearch', array()),
+                    Yii::$app->request->get('StackTrendsSearch', array())
+                ]
+            ],
         ];
     }
     public function actionValidatebuy()

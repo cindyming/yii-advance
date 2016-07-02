@@ -244,8 +244,6 @@ return [
     'Update Member: ' => '更新会员信息: ',
     'Update Stack: ' => '更新股票',
     'Transaction Rule' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'mis' => '女士',
+    'mr' => '先生',
 ];

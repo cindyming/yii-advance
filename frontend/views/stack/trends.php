@@ -8,6 +8,7 @@ use kartik\grid\GridView;;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Stack Trends');
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stack-index">

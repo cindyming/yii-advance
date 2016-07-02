@@ -8,6 +8,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Stacks List');
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stack-index">
