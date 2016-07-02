@@ -19,8 +19,8 @@ class MemberSearch extends Member
     {
         return [
             [['id', 'status', 'locked', 'role_id', 'investment', 'buy_stack', 'added_by'], 'integer'],
-            [['auth_key', 'username', 'access_token', 'nickname', 'password_hash', 'password_hash2', 'identity', 'phone', 'title', 'bank', 'cardname', 'cardnumber', 'bankaddress', 'email', 'qq', 'created_at', 'updated_at', 'approved_at'], 'safe'],
-            [['stack_fund', 'finance_fund', 'country'], 'number'],
+            [['auth_key', 'username', 'access_token', 'country', 'nickname', 'password_hash', 'password_hash2', 'identity', 'phone', 'title', 'bank', 'cardname', 'cardnumber', 'bankaddress', 'email', 'qq', 'created_at', 'updated_at', 'approved_at'], 'safe'],
+            [['stack_fund', 'finance_fund'], 'number'],
         ];
     }
 
