@@ -58,7 +58,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'qq')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
+    <div class="form-group btns">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
