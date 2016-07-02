@@ -40,7 +40,7 @@ class NewsController extends Controller
             'pageCache' => [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['index'],
-                'duration' => 360,
+                'duration' => 360000,
                 'dependency' => [
                     'class' => 'yii\caching\DbDependency',
                     'sql' => 'SELECT COUNT(*) FROM news',
