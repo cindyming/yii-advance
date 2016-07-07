@@ -31,17 +31,17 @@ Yii::$app->request->get('page', 1),
         'layout' => '{items} {summary} {pager}',
         'pjax' => true,
         'columns' => [
-            [
-                'class' => 'yii\grid\SerialColumn',
-                'header' => '编号'
-            ],
-            [
-                'attribute' => 'be_top',
-                'value' => function($model) {
-                    return Yii::$app->options->getOptionLabel('be_top', $model->be_top);
-                },
-                'filter' => Yii::$app->options->getOptions('be_top'),
-            ],
+            // [
+            //     'class' => 'yii\grid\SerialColumn',
+            //     'header' => '编号'
+            // ],
+            // [
+            //     'attribute' => 'be_top',
+            //     'value' => function($model) {
+            //         return Yii::$app->options->getOptionLabel('be_top', $model->be_top);
+            //     },
+            //     'filter' => Yii::$app->options->getOptions('be_top'),
+            // ],
             'title',
             [
                 'attribute' => 'public_at',
