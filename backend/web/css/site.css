@@ -16,6 +16,9 @@ body.login{
     padding: 20px 15px 20px;
 }
 .member-form .form-group{width:48%;margin:0 1% 5px 0;display:inline-block;vertical-align: top;}
+.member-form .form-group label{ display: inline-block;width:30%;height:40px;float:left;line-height: 38px;padding: 0 0 0 2%;background:#efefef; border: 1px solid #ccc;vertical-align: middle;}
+.member-form .form-group .form-control{display: inline-block;width: 70%;border: 1px solid #ccc;border-left: none 0;}
+.member-form .form-group.has-error .help-block{}
 .date-form .form-group{width:25%;margin-right:1%;display:inline-block;vertical-align: top;}
 .date-form .form-group.submit-date{margin-top:27px}
 table th{font-size:12px}
@@ -245,7 +248,10 @@ ul.tabswitch li{border-bottom:3px solid transparent;display:inline-block;padding
 ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
 
 .member-form .form-group.btns{clear: both;display: block;}
-
+@media (max-width: 350px) {
+.member-form .form-group label{width:40%}
+.member-form .form-group .form-control{width:60%}
+}
 @media (max-width: 768px) {
     .navbar-collapse,
     .site-login,
