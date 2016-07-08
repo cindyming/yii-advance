@@ -237,7 +237,7 @@ class StackController extends Controller
             $data['StackTransactionSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
         }
         $searchModel->export($data);
-        return $this->redirect(['/transactions.csv']);
+        return $this->redirect(['/assets/transactions.csv']);
     }
 
     public function actionBuy()
