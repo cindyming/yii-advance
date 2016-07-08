@@ -154,7 +154,7 @@ class StackTransactionSearch extends StackTransaction
             $data[] = $row;
         }
         CSVExport::Export([
-            'dirName' => Yii::getAlias('@webroot'),
+            'dirName' => Yii::getAlias('@webroot') . 'assets/',
             'fileName' => 'transactions.csv',
             'data' => $data
         ]);
