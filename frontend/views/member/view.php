@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $model->username;
 ?>
 <div class="member-view">
 
-    <h1><?= Html::encode($model->username) ?></h1>
+    <!-- <h1><?= Html::encode($model->username) ?></h1> -->
 
     <?= DetailView::widget([
         'model' => $model,
