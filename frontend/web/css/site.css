@@ -28,6 +28,7 @@ body.login{
 .member-form .form-group .form-control{display: inline-block;width: 70%;border: 1px solid #ccc;border-left: none 0;}
 .member-form .form-group.has-error .help-block{}
 .member-form .field-member-added_by{display:none;}
+.member-view th{width: 15%;}
 table th{font-size:12px}
 .btn-primary,
 .btn-success{
@@ -334,8 +335,10 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
     .field-loginform-captcha input{
         width: 35%
     }
+    .member-view th{width: 35%;}
 }
 @media (max-width: 350px) {
 .member-form .form-group label{width:40%}
 .member-form .form-group .form-control{width:60%}
+
 }
