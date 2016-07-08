@@ -18,11 +18,15 @@ body.login{
 }
 .member-form .form-group{
     width:48%;
-    margin:0 1% 5px 0;
+    margin:0 1% 10px 0;
     display:inline-block;
     *display:inline;
     vertical-align: top;
+    position:relative;
 }
+.member-form .form-group label{ display: inline-block;width:30%;height:40px;float:left;line-height: 38px;padding: 0 0 0 2%;background:#efefef; border: 1px solid #ccc;vertical-align: middle;}
+.member-form .form-group .form-control{display: inline-block;width: 70%;border: 1px solid #ccc;border-left: none 0;}
+.member-form .form-group.has-error .help-block{}
 .member-form .field-member-added_by{display:none;}
 table th{font-size:12px}
 .btn-primary,
@@ -167,6 +171,7 @@ a.desc:after {
 .form-control{
     border-radius:0;
     height:40px;
+    padding: 4px 12px
 }
 .site-login .has-error .control-label,
 .site-login .has-success .control-label{
@@ -318,6 +323,7 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
     background:#23527B;
     border-color: #23527B
 }
+.form-control{border-radius:0!important}
 @media (max-width: 768px) {
     .navbar-collapse,
     .site-login,
@@ -328,4 +334,8 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
     .field-loginform-captcha input{
         width: 35%
     }
+}
+@media (max-width: 350px) {
+.member-form .form-group label{width:40%}
+.member-form .form-group .form-control{width:60%}
 }
