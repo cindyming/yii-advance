@@ -44,7 +44,7 @@ class StackController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
+                        'actions' => ['index', 'trends', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
@@ -226,6 +226,18 @@ class StackController extends Controller
             echo json_encode(array());
         }
         Yii::$app->end();
+    }
+
+
+    public function actionExport()
+    {
+        $searchModel = new StackTransactionSearch();
+        $data = Yii::$app->request->queryParams;
+        if (Yii::$app->request->get('week', 0)) {
+            $data['StackTransactionSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
+        }
+        $searchModel->export($data);
+        return $this->redirect(['/transactions.csv']);
     }
 
     public function actionBuy()

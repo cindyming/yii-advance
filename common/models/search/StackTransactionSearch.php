@@ -2,6 +2,8 @@
 
 namespace common\models\search;
 
+use common\models\CSVExport;
+use common\models\Stack;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -91,5 +93,71 @@ class StackTransactionSearch extends StackTransaction
             ->orderBy(['created_at' => SORT_DESC]);
 
         return $dataProvider;
+    }
+
+
+    public function export($params)
+    {
+        $start = time();
+        $query = StackTransaction::find()
+            ->select(array(
+              'username', 'member_id', 'stack_id', 'stack_id AS stack_name', 'type',
+                 'volume', 'price', 'total_price', 'charge','stack_transaction.status', 'stack_transaction.created_at'
+            ))
+            ->joinWith(['member' => function($query) { $query->from(['member' => 'member']);}])
+            ->orderBy(['created_at' => SORT_DESC]);
+
+
+        $this->load($params);
+
+        if ($this->created_at) {
+            $date = explode(' - ', $this->created_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1] . ' 23:59:59']);
+            }
+        }
+
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'type' => $this->type,
+            'stack_transaction.status' => $this->status
+        ])->orderBy(['created_at' => SORT_DESC]);
+
+        $sql = ($query->createCommand()->getRawSql());
+
+        $connection = Yii::$app->db;
+
+        $command = $connection->createCommand($sql);
+
+        $result = $command->queryAll();
+
+        $header = array(
+            'username' => '会员编号',
+            'stack_id' => '股票代码',
+            'stack_name' => '股票名称',
+            'type' => '交易类型',
+            'volume' => '交易量',
+            'price' => '股票价格',
+            'total_price' => '总股价',
+            'charge' => '交易手续费',
+            'status'=> '交易状态',
+            'created_at' => '交易日期');
+
+        $data = array($header);
+        foreach ($result as $row) {
+            unset($row['member_id']);
+            $row['stack_name'] = Stack::getStackNameOptions()[$row['stack_id']];
+            $row['stack_id'] = Stack::getStackCodeOptions()[$row['stack_id']];
+            $row['type'] = Yii::$app->options->getOptionLabel('stack_type', $row['type']);
+            $row['status'] = Yii::$app->options->getOptionLabel('transcation_status', $row['status']);
+            $data[] = $row;
+        }
+        CSVExport::Export([
+            'dirName' => Yii::getAlias('@webroot'),
+            'fileName' => 'transactions.csv',
+            'data' => $data
+        ]);
+
     }
 }
