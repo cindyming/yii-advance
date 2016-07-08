@@ -17,7 +17,7 @@ $dependency = [
 
 $variations = [
     Yii::$app->request->get('page', 1),
-    Yii::$app->request->get('MemberStack', array())
+    Yii::$app->request->get('MemberStackSearch', array())
 ];
 ?>
 
@@ -36,18 +36,21 @@ $variations = [
             ['class' => 'yii\grid\SerialColumn'],
             [
                 'attribute' => 'membername',
+                'filter' => false,
                 'value' => function($model) {
                     return $model->member->username;
                 }
             ],
             [
-                'attribute' => 'stackcode',
+                'attribute' => 'stack_id',
                 'value' => function($model) {
                     return $model->stack->code;
-                }
+                },
+                'filter' =>  \common\models\Stack::getStackCodeOptions(),
             ],
             [
                 'attribute' => 'stackname',
+                'filter' => false,
                 'value' => function($model) {
                     return $model->stack->name;
                 }

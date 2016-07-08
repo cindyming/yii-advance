@@ -18,7 +18,7 @@ class MemberStackSearch extends MemberStack
     public function rules()
     {
         return [
-            [['id', 'member_id', 'stack_id', 'sell_volume', 'lock_volume'], 'integer'],
+            [['id', 'member_id', 'stack_id', 'stack_id'], 'integer'],
             [['created_at', 'updated_at', 'membername', 'stackname', 'stackcode'], 'safe'],
         ];
     }
@@ -67,8 +67,6 @@ class MemberStackSearch extends MemberStack
             'id' => $this->id,
             'member_id' => $this->member_id,
             'stack_id' => $this->stack_id,
-            'sell_volume' => $this->sell_volume,
-            'lock_volume' => $this->lock_volume,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ])->andFilterWhere(['like','member.username',$this->membername])

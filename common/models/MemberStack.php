@@ -81,7 +81,7 @@ class MemberStack extends ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'member_id' => Yii::t('app', 'Member ID'),
-            'stack_id' => Yii::t('app', 'Stack ID'),
+            'stack_id' => Yii::t('app', '股票代码'),
             'sell_volume' => Yii::t('app', 'Sell Volume'),
             'lock_volume' => Yii::t('app', 'Lock Volume'),
             'created_at' => Yii::t('app', 'Created At'),
