@@ -50,7 +50,7 @@ class CSVExport
 		}
 		ob_start();
 		$df = fopen($dirName . $fileName, 'w');
-		fwrite($dirName . $fileName, "\xEF\xBB\xBF");
+		fwrite($df, "\xEF\xBB\xBF");
 		foreach ($array as $row) {
 			fputcsv($df, $row);
 		}
