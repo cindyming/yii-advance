@@ -235,7 +235,7 @@ class StackController extends Controller
         $data = Yii::$app->request->queryParams;
         if (Yii::$app->request->get('week', 0)) {
             $data['StackTransactionSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
-        } else if (!Yii::$app->request->get('StackTransactionSearch', null)) {
+        } else if ((!isset($data["StackTransactionSearch"])) && (!isset($data["StackTransactionSearch"]['created_at']))) {
             $data['StackTransactionSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
         }
         $searchModel->export($data);
