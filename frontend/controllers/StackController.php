@@ -123,6 +123,9 @@ class StackController extends \yii\web\Controller
         } else if (Date::isWorkingDay()) {
             if (Date::isWorkingTime()) {
                 $open = true;
+                $key = 'BUY' . Yii::$app->user->identity->id . $stack->id;
+                $sellLock = new JLock($key);
+                $sellLock->start();
                 if ($model->load(Yii::$app->request->post())) {
                     if($model->account_type) {
                         $data = Yii::$app->request->post();
@@ -183,6 +186,7 @@ class StackController extends \yii\web\Controller
                         $model->total_price = $stack->price * $model->volume;
                     }
                 }
+                $sellLock->end();
             } else {
                 Yii::$app->session->setFlash('danger', '非交易时间. 早上10:00 ~ 12:30. 下午2:00 ~ 4:00');
             }
@@ -259,7 +263,6 @@ class StackController extends \yii\web\Controller
             if (Date::isWorkingTime()) {
                 if ($model->load(Yii::$app->request->post())) {
                      $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;
-
                         $sellLock = new JLock($key);
                         $sellLock->start();
                         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
