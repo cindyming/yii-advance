@@ -32,11 +32,31 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
         <div class="form-group stack-button">
-            <?= Html::submitButton('确认[理财账户]购买', ['class' => 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(1)"]) ?>
-            <?= Html::submitButton('确认[购股账户]购买', ['class' => 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(2)"]) ?>
+            <?= Html::submitButton('确认[理财账户]购买', ['class' => 'btn btn-primary', 'id' => 'btn', 'onClick' => "$('#stacktransaction-account_type').val(1)"]) ?>
+            <?= Html::submitButton('确认[购股账户]购买', ['class' => 'btn btn-primary', 'id' => 'btn2', 'onClick' => "$('#stacktransaction-account_type').val(2)"]) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
+        <script type="text/javascript"> 
+        var wait=5; 
+        function time(o) { 
+                if (wait == 0) { 
+                    o.removeAttribute("disabled");           
+                    o.value="提交"; 
+                    wait = 5; 
+                } else { 
+                    o.setAttribute("disabled", true); 
+                    o.value=wait+"提交中"; 
+                    wait--; 
+                    setTimeout(function() { 
+                        time(o) 
+                    }, 
+                    1000) 
+                } 
+            } 
+        document.getElementById("btn").onclick=function(){time(this);} 
+        document.getElementById("btn2").onclick=function(){time(this);} 
+        </script> 
     </div>
     <?php endif ?>
 
