@@ -39,28 +39,10 @@ $isOut = (Yii::$app->request->get('type') == 'out');
         <?= $form->field($model, 'account_type')->radioList(Yii::$app->options->getOptions('account_type')); ?>
         <?= $form->field($model, 'note')->textInput(['value' => (($isOut) ? '扣除金额' :'预存金额')]) ?>
         <div class="form-group">
-            <?= Html::submitButton('保存', ['class' => 'btn btn-primary','id' => 'btn']) ?>
+            <?= Html::submitButton('保存', ['class' => 'btn btn-primary']) ?>
         </div>
         <?php ActiveForm::end(); ?>
-    <script type="text/javascript"> 
-        var wait=5; 
-        function time(o) { 
-                if (wait == 0) { 
-                    o.removeAttribute("disabled");           
-                    o.value="提交"; 
-                    wait = 10; 
-                } else { 
-                    o.setAttribute("disabled", true); 
-                    o.value=wait+"提交中"; 
-                    wait--; 
-                    setTimeout(function() { 
-                        time(o) 
-                    }, 
-                    1000) 
-                } 
-            } 
-        document.getElementById("btn").onclick=function(){time(this);} 
-    </script> 
+
     </div><!-- cash-_form -->
 
 </div>
