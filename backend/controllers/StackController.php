@@ -49,13 +49,13 @@ class StackController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
+                        'actions' => ['index', 'trends', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
 
                         'roles' => [User::STACK_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'unlock', 'view', 'fund'],
+                        'actions' => ['index', 'trends', 'transactions', 'export', 'unlock', 'view', 'fund'],
                         'roles' => [User::STACK_TWO_ADMIN]
                     ],
                 ],
