@@ -28,7 +28,6 @@ $this->title = '申请提现';
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div><!-- cash-_form -->
 
 </div>

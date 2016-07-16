@@ -34,12 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'password2',['options' => ['class' => 'form-group required']])->passwordInput(['maxlength' => true]) ?>
 
         <div class="form-group stack-button">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Sell Stack') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', 'onClick' => "$('#stacktransaction-account_type').val(1)"]) ?>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Sell Stack') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary','onClick' => "$('#stacktransaction-account_type').val(1)"]) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
 
     </div>
     <?php endif ?>
-
 </div>
