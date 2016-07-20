@@ -250,7 +250,7 @@ class StackController extends Controller
             $validate = true;;
             if (!Member::isEnabled($model->membername)) {
                 $validate = false;
-                Yii::$app->session->setFlash('danger', '用户编号不存在或者没有通过审核,请确认后输入');
+                $model->addError('membername', '用户编号不存在或者没有通过审核,请确认后输入');
             }
 
             if ($validate) {
@@ -281,6 +281,10 @@ class StackController extends Controller
                 }
             } else {
                 $model->validate();
+                if (!Member::isEnabled($model->membername)) {
+                    $validate = false;
+                    $model->addError('membername', '用户编号不存在或者没有通过审核,请确认后输入');
+                }
             }
 
         }
