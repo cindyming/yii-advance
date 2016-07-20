@@ -95,7 +95,7 @@ class MemberSearch extends Member
         }
 
         $query->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'username', $this->getUsername()])
             ->andFilterWhere(['like', 'access_token', $this->access_token])
             ->andFilterWhere(['like', 'nickname', $this->nickname])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])

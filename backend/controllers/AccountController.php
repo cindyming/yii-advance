@@ -89,7 +89,7 @@ class AccountController extends \yii\web\Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($member = Member::isExist($model->membername)) {
+            if ($member = Member::isEnabled($model->membername)) {
                 $validate = true;
                 if (Yii::$app->request->get('type') == 'out') {
                     if ($model->account_type == 1) {
@@ -137,7 +137,7 @@ class AccountController extends \yii\web\Controller
                     }
                 }
             } else {
-                $model->addError('membername', '用户编号不存在,请确认后输入');
+                $model->addError('membername', '用户编号不存在或者没有通过审核,请确认后输入');
             }
         }
         return $this->render('add', [

@@ -76,6 +76,11 @@ class AccountController extends \yii\web\Controller
                 $validate = false;
                 $model->addError('amount', '账户余额不足, 理财账户:' . Yii::$app->user->identity->finance_fund);
             }
+
+            if ($model->amount < round(System::loadConfig('lowest_cash_amount'), 2)) {
+                $validate = false;
+                $model->addError('amount', '最低提现额度是:' . round(System::loadConfig('lowest_cash_amount'), 2));
+            }
             if ($validate) {
                 $member = Yii::$app->user->identity;
                 $member->finance_fund -= $model->amount;

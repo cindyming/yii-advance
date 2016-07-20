@@ -204,7 +204,7 @@ class Member extends ActiveRecord
     public function checkUsername($attribute, $param)
     {
         if ($this->isNewRecord) {
-            $this->username = str_replace(' ', '', $this->username);
+            $this->username = strtolower(str_replace(' ', '', $this->username));
         }
 
         $existUser = Member::find()->where(['=', 'username', $this->username])->one();
@@ -220,9 +220,21 @@ class Member extends ActiveRecord
         return $this->save();
     }
 
+    public  function getUsername()
+    {
+        return strtolower(str_replace(' ', '', $this->username));
+    }
+
     public static function isExist($usename)
     {
         $existUser = Member::find()->where(['=', 'username', $usename]);
+        return ($existUser) ? $existUser->one() : null;
+    }
+
+
+    public static function isEnabled($usename)
+    {
+        $existUser = Member::find()->where(['=', 'username', $usename])->andWhere(['=', 'role_id', 3]);
         return ($existUser) ? $existUser->one() : null;
     }
 }
