@@ -248,6 +248,11 @@ class StackController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $validate = true;;
+            if (!Member::isEnabled($model->membername)) {
+                $validate = false;
+                $model->addError('membername', '用户编号不存在或者没有通过审核,请确认后输入');
+            }
+
             if ($validate) {
                 $model->setStackId();
                 $model->setMemberId();
