@@ -250,7 +250,7 @@ class StackController extends Controller
             $validate = true;;
             if (!Member::isEnabled($model->membername)) {
                 $validate = false;
-                $model->addError('membername', '用户编号不存在或者没有通过审核,请确认后输入');
+                Yii::$app->session->setFlash('danger', '用户编号不存在或者没有通过审核,请确认后输入');
             }
 
             if ($validate) {
@@ -270,7 +270,7 @@ class StackController extends Controller
                         $transaction->commit();
                         return $this->redirect(['transactions']);
                     } else {
-                        Yii::$app->session->setFlash('success', '股票添加失败，请稍后再试或者联系管理员');
+                        Yii::$app->session->setFlash('danger', '股票添加失败，请稍后再试或者联系管理员');
                         Yii::error('Stack Buy Failed');
                         Yii::error( json_encode($model->getErrors()));
                         Yii::error( json_encode($memberStack->getErrors()));
