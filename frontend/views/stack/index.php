@@ -15,8 +15,6 @@ $variations = [
 $this->title = Yii::t('app', 'Stacks List');
 ?>
 
-<?php if ($this->beginCache('stack_list', ['dependency' => $dependency, 'variations' => $variations])): ?>
-
 <?php
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\StackSearch */
@@ -77,10 +75,3 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-
-<?php
-
-$this->endCache();
-
-endif;
-?>
