@@ -122,7 +122,8 @@ class StackTransactionSearch extends StackTransaction
             'id' => $this->id,
             'type' => $this->type,
             'stack_transaction.status' => $this->status
-        ])->orderBy(['created_at' => SORT_DESC]);
+        ])->andFilterWhere(['like','member.username',$this->membername])
+            ->orderBy(['created_at' => SORT_DESC]);
 
         $sql = ($query->createCommand()->getRawSql());
 
