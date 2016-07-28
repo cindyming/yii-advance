@@ -104,6 +104,7 @@ class StackTransactionSearch extends StackTransaction
               'username', 'member_id', 'stack_id', 'stack_id AS stack_name', 'type',
                  'volume', 'price', 'total_price', 'charge','stack_transaction.status', 'stack_transaction.created_at'
             ))
+            ->joinWith(['stack' => function($query) { $query->from(['stack' => 'stack']);}])
             ->joinWith(['member' => function($query) { $query->from(['member' => 'member']);}])
             ->orderBy(['created_at' => SORT_DESC]);
 
@@ -122,7 +123,9 @@ class StackTransactionSearch extends StackTransaction
             'id' => $this->id,
             'type' => $this->type,
             'stack_transaction.status' => $this->status
-        ])->andFilterWhere(['like','member.username',$this->membername])
+        ])->andFilterWhere(['like','stack.code',$this->stackcode])
+            ->andFilterWhere(['like','stack.name',$this->stackname])
+            ->andFilterWhere(['like','member.username',$this->membername])
             ->orderBy(['created_at' => SORT_DESC]);
 
         $sql = ($query->createCommand()->getRawSql());
