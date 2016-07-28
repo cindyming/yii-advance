@@ -102,7 +102,7 @@ class StackTransactionSearch extends StackTransaction
         $query = StackTransaction::find()
             ->select(array(
               'username', 'member_id', 'stack_id', 'stack_id AS stack_name', 'type',
-                 'volume', 'price', 'total_price', 'charge','stack_transaction.status', 'stack_transaction.created_at'
+                 'volume', 'stack_transaction.price', 'total_price', 'charge','stack_transaction.status', 'stack_transaction.created_at'
             ))
             ->joinWith(['stack' => function($query) { $query->from(['stack' => 'stack']);}])
             ->joinWith(['member' => function($query) { $query->from(['member' => 'member']);}])
