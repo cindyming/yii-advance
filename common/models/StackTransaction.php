@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\base\Exception;
 use yii\db\Expression;
 use yii\behaviors\AttributeBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -187,5 +188,25 @@ class StackTransaction extends ActiveRecord
         } else {
             $this->member_id = Yii::$app->user->identity->id;
         }
+    }
+
+    public function cancelSell() {
+
+        $model = MemberStack::find()->where(['=', 'member_id', $this->member_id])->andWhere(['=', 'stack_id', $this->stack_id])->one();
+        $str = '撤销' . $this->member_id . ', ' . $this->stack_id . ':' . $this->volume;
+        $model->lock_volume -= $this->volume;
+        $model->sell_volume += $this->volume;
+        if (($model->lock_volume >= 0)  && ($model->sell_volume >= 0)) {
+            $this->status = 2;
+            if ($model->save() && $this->save()) {
+
+            } else {
+                throw new Exception(Log::arrayToString($model->getErrors()) . Log::arrayToString($this->getErrors()));
+            }
+        } else {
+            throw new Exception('可扣的数量不对,请联系管理员, ' . $this->member_id . $model->lock_volume . $model->sell_volume);
+        }
+
+        return $str;
     }
 }

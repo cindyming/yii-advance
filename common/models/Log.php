@@ -74,4 +74,19 @@ class Log extends ActiveRecord
         $log->note = ($note) ? $note : '';
         $log->save();
     }
+
+    public static function arrayToString($errors) {
+        $result = '';
+
+        foreach ($errors as $r) {
+            if (is_array($r)) {
+                $result .= implode(', ', $r);
+            } else if (is_string($r)) {
+                $result .=  $r;
+            }
+
+        }
+
+        return $result;
+    }
 }

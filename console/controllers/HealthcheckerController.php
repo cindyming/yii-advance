@@ -27,7 +27,7 @@ class HealthcheckerController extends Controller
             $member_id = $tr['member_id'];
             $stack_id = $tr['stack_id'];
             echo $member_id . '--------' . $stack_id . PHP_EOL;
-            $allTrans = Yii::$app->db->createCommand("SELECT member_id, stack_id, sum(volume) as sum_volume, status, `type` FROM stack_transaction WHERE member_id={$member_id} AND stack_id={$stack_id}  group by type, status")->query();
+            $allTrans = Yii::$app->db->createCommand("SELECT member_id, stack_id, sum(volume) as sum_volume, status, `type` FROM stack_transaction WHERE member_id={$member_id} AND stack_id={$stack_id} AND status !=2  group by type, status")->query();
             $memberStack = MemberStack::find()->where(['=', 'member_id', $member_id])->andWhere(['=', 'stack_id', $stack_id])->one();
             $finishBuy = $finishSell = $lockBuy = $lockSell = 0;
 
