@@ -216,7 +216,7 @@ class StackTransaction extends ActiveRecord
         $model = MemberStack::find()->where(['=', 'member_id', $this->member_id])->andWhere(['=', 'stack_id', $this->stack_id])->one();
         $nameOption = Stack::getStackNameOptions();
         $str = '管理员撤销' . $this->member_id . ',购买 ' . (isset($nameOption[$this->stack_id]) ? $nameOption[$this->stack_id] : ''). ':' . $this->volume . '. ' . $this->created_at;
-        $model->lock_volume -= $this->volume;
+
         if (($model->lock_volume >= 0)) {
             $this->status = 2;
             $connection = Yii::$app->db;
@@ -224,6 +224,7 @@ class StackTransaction extends ActiveRecord
 
                 $member = Member::findOne($this->member_id);
                 $member->finance_fund += $this->total_price;
+                $model->lock_volume -= $this->volume;
 
                 $data = array(
                     'member_id' => $this->member_id,
@@ -235,11 +236,11 @@ class StackTransaction extends ActiveRecord
                     'note' => $str
                 );
 
-                $model = new InRecord();
-                $model->load($data, '');
+                $inRecord = new InRecord();
+                $inRecord->load($data, '');
 
                 $transaction = $connection->beginTransaction();
-                if ($model->save() && $this->save() && $model->save()) {
+                if ($model->save() && $this->save() && $inRecord->save()) {
                     $transaction->commit();
                 } else {
                     $transaction->rollBack();

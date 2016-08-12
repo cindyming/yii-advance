@@ -26,7 +26,7 @@ class CancelController extends Controller
         $i = 0;
         foreach ($transactions as $transaction) {
             try {
-                $str = $transaction->cancelSell();
+                $str = $transaction->cancelBuy();
                 var_dump($str);
                 $i ++;
             } catch (Exception $e) {
