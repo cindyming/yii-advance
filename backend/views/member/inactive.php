@@ -45,6 +45,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => '证件号',
             ],
             [
+                'attribute' => 'cardname',
+                'header' => '开户名',
+            ],
+            [
+                'attribute' => 'cardnumber',
+                'header' => '银行卡号',
+            ],
+            [
+                'attribute' => 'bankaddress',
+                'header' => '开户行',
+            ],
+            [
                 'attribute' => 'phone',
                 'header' => '电话号码',
             ]
