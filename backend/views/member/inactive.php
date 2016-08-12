@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <button onclick="deleteAll()">删除选中的会员</button>
+    <div style="margin-bottom: 10px;"> <button onclick="deleteAll()">删除选中的会员</button></div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
