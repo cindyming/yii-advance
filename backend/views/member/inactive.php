@@ -7,7 +7,7 @@ use kartik\grid\GridView;;
 /* @var $searchModel common\models\search\MemberSerach */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '会员';
+$this->title = '僵尸会员';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="member-index">
