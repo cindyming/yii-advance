@@ -19,8 +19,9 @@ class CancelController extends Controller
     {
         $transactions = StackTransaction::find()->where(['=', 'status', 0])
             ->andWhere(['=', 'stack_id', 2])
-            ->andWhere(['=', 'type', 1])
-            ->andWhere(['>', 'created_at', '2016-07-29 15:22:00'])->all();
+            ->andWhere(['=', 'type', 0])
+            ->andWhere(['=', 'price', 3.22])
+            ->andWhere(['>', 'created_at', '2016-08-11 15:00:00'])->all();
         var_dump('总数:' . count($transactions));
         $i = 0;
         foreach ($transactions as $transaction) {

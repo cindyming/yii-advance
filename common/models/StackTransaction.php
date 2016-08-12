@@ -209,4 +209,50 @@ class StackTransaction extends ActiveRecord
 
         return $str;
     }
+
+    public function cancelBuy() {
+
+
+        $model = MemberStack::find()->where(['=', 'member_id', $this->member_id])->andWhere(['=', 'stack_id', $this->stack_id])->one();
+        $nameOption = Stack::getStackNameOptions();
+        $str = '管理员撤销' . $this->member_id . ',购买 ' . (isset($nameOption[$this->stack_id]) ? $nameOption[$this->stack_id] : ''). ':' . $this->volume . '. ' . $this->created_at;
+        $model->lock_volume -= $this->volume;
+        if (($model->lock_volume >= 0)) {
+            $this->status = 2;
+            $connection = Yii::$app->db;
+            try {
+
+                $member = Member::findOne($this->member_id);
+                $member->finance_fund += $this->total_price;
+
+                $data = array(
+                    'member_id' => $this->member_id,
+                    'type' => 4,
+                    'fee' => 0,
+                    'amount' => $this->total_price,
+                    'total' => $member->finance_fund,
+                    'account_type' => 1,
+                    'note' => $str
+                );
+
+                $model = new InRecord();
+                $model->load($data, '');
+
+                $transaction = $connection->beginTransaction();
+                if ($model->save() && $this->save() && $model->save()) {
+                    $transaction->commit();
+                } else {
+                    $transaction->rollBack();
+                    throw new Exception(Log::arrayToString($model->getErrors()) . Log::arrayToString($this->getErrors()));
+                }
+            } catch (Exception $e) {
+                $transaction->rollBack();
+                throw new Exception($e->getMessage());
+            }
+        } else {
+            throw new Exception('可扣的数量不对,请联系管理员, ' . $this->member_id . $model->lock_volume . $model->sell_volume);
+        }
+
+        return $str;
+    }
 }
