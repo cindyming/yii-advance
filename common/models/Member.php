@@ -207,7 +207,7 @@ class Member extends ActiveRecord
             $this->username = strtolower(str_replace(' ', '', $this->username));
         }
 
-        $existUser = Member::find()->where(['=', 'username', $this->username])->one();
+        $existUser = Member::find()->where(['=', 'username', $this->username])->andWhere(['!=', 'role_id', 4])->one();
         if($existUser && ($existUser->id != $this->id)){
             $this->addError($attribute, '该用户名已存在，请重新输入一个!');
         }
@@ -227,7 +227,7 @@ class Member extends ActiveRecord
 
     public static function isExist($usename)
     {
-        $existUser = Member::find()->where(['=', 'username', $usename]);
+        $existUser = Member::find()->where(['=', 'username', $usename])->andWhere(['!=', 'role_id', 4]);
         return ($existUser) ? $existUser->one() : null;
     }
 

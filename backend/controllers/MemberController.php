@@ -8,6 +8,7 @@ use Yii;
 use common\models\Member;
 use common\models\search\MemberSearch;
 use yii\base\Exception;
+use yii\data\SqlDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,7 +35,7 @@ class MemberController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'approvedindex', 'unapprovedindex', 'approve', 'resetpassword', 'reject', 'validate', 'create', 'update','view', 'delete'],
+                        'actions' => ['index', 'approvedindex', 'removeall', 'inactivelist', 'unapprovedindex', 'approve', 'resetpassword', 'reject', 'validate', 'create', 'update','view', 'delete', 'adelete'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
@@ -129,6 +130,24 @@ class MemberController extends Controller
         }
     }
 
+    public function actionInactivelist() {
+        $count = Yii::$app->db->createCommand('
+                SELECT COUNT(*) FROM member where id not in (select member_id from member_stack) and role_id=3 and finance_fund =0 and stack_fund=0
+            ', [])->queryScalar();
+
+                    $dataProvider = new SqlDataProvider([
+                        'sql' => 'select * from member where id not in (select member_id from member_stack) and role_id=3 and finance_fund =0 and stack_fund=0',
+                        'totalCount' => $count,
+                        'pagination' => [
+                            'pageSize' => 20,
+                        ],
+                    ]);
+
+        return $this->render('inactive', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function actionResetpassword($id)
     {
         $model = $this->findModel($id);
@@ -219,6 +238,33 @@ class MemberController extends Controller
         Yii::$app->session->setFlash('success', '会员删除成功');
 
         return $this->redirect(['unapprovedindex']);
+    }
+
+    public function actionRemoveall($id)
+    {
+        $ids = explode('-', $id);
+
+        foreach ($ids as $id) {
+            $model = Member::findOne($id);
+            if ($model) {
+                $model->role_id = 4;
+                $model->save();
+            }
+
+        }
+        Yii::$app->session->setFlash('success', '会员删除成功');
+
+        return $this->redirect(['inactivelist']);
+    }
+
+    public function actionAdelete($id)
+    {
+        $model = $this->findModel($id);
+        $model->role_id = 4;
+        $model->save();
+        Yii::$app->session->setFlash('success', '会员删除成功');
+
+        return $this->redirect(['approvedindex']);
     }
 
     /**

@@ -96,6 +96,29 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'kartik\grid\ActionColumn',
+                'header' => '删除',
+                'hiddenFromExport' => true,
+                'template' => Yii::$app->user->identity->isStackAdmin() ? '' : '{delete}',
+                'buttons' => [
+                    'delete' => function ($url, $model, $key) {
+                        $options = [
+                            'title' => Yii::t('yii', '删除'),
+                            'aria-label' => Yii::t('yii', '删除'),
+                            'data-confirm' => Yii::t('yii', '你确定要删除会员[' . $model->username . '],所有的记录都会被清除.'),
+                            'target' => '_blank'
+                        ];
+                        return Html::a('删除', $url, $options);
+                    },
+                ],
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    if ($action === 'delete') {
+                        $url = '/member/adelete?id='.$model->id;
+                        return $url;
+                    }
+                }
+            ],
+            [
+                'class' => 'kartik\grid\ActionColumn',
                 'header' => '操作',
                 'hiddenFromExport' => true,
                 'template' => Yii::$app->user->identity->isStackAdmin() ? '' : '{login}',

@@ -53,7 +53,8 @@ AppAsset::register($this);
                             ['label' => '注册会员', 'url' => ['/member/create']],
                             ['label' => '审核会员', 'url' => ['/member/unapprovedindex']],
                             ['label' => '正式会员', 'url' => ['/member/approvedindex']],
-                            ['label' => '全部会员', 'url' => ['/member/index']]
+                            ['label' => '全部会员', 'url' => ['/member/index']],
+                            ['label' => '将是会员', 'url' => ['/member/inactivelist']]
                         ]
                     ],
                     [
