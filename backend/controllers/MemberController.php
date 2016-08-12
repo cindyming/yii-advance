@@ -135,13 +135,13 @@ class MemberController extends Controller
                 SELECT COUNT(*) FROM member where id not in (select member_id from member_stack) and role_id=3 and finance_fund =0 and stack_fund=0
             ', [])->queryScalar();
 
-                    $dataProvider = new SqlDataProvider([
-                        'sql' => 'select * from member where id not in (select member_id from member_stack) and role_id=3 and finance_fund =0 and stack_fund=0',
-                        'totalCount' => $count,
-                        'pagination' => [
-                            'pageSize' => 20,
-                        ],
-                    ]);
+        $dataProvider = new SqlDataProvider([
+            'sql' => 'select * from member where id not in (select member_id from member_stack) and role_id=3 and finance_fund =0 and stack_fund=0',
+            'totalCount' => $count,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
 
         return $this->render('inactive', [
             'dataProvider' => $dataProvider,
