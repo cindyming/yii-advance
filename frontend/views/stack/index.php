@@ -38,6 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'price',
                 'filter' => false,
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return '<span id="price' . $data->id . '" class="stackPrice">' . $data->price . '</span>';
+                },
             ],
             [
                 'attribute' =>  'updated_at',
@@ -74,4 +78,25 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+
+<script type="text/javascript">
+    function refreshPrice()
+    {
+        $.ajax({
+            url:"/stack/prices",
+            async:false,
+            dataType:'json',
+            success: function(result) {
+                $('.stackPrice').each(function(i, e){
+                    key = $(e).attr('id');
+                    console.log(result[key]);
+                    $(e).html(result[key]);
+                });
+                setTimeout('refreshPrice()',1000);
+            }
+        });
+    }
+
+    setTimeout('refreshPrice()',1000);
+</script>
 

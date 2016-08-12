@@ -113,7 +113,7 @@ class Stack extends ActiveRecord
         if (!$stacks || !count($stacks)) {
             $stacks = Stack::find()->all();
             $stacks = ArrayHelper::map($stacks, 'id', 'code');
-            Yii::$app->cache->add($key, json_encode($stacks), 365*24*60*60*60);
+            Yii::$app->cache->set($key, json_encode($stacks), 365*24*60*60*60);
         }
 
         return $stacks;
@@ -127,10 +127,25 @@ class Stack extends ActiveRecord
         if (!$stacks) {
             $stacks = Stack::find()->all();
             $stacks = ArrayHelper::map($stacks, 'id', 'name');
-            Yii::$app->cache->add($key, json_encode($stacks), 365*24*60*60*60);
+            Yii::$app->cache->set($key, json_encode($stacks), 365*24*60*60*60);
         }
 
         return $stacks;
+    }
+
+    public static function getPrice($stack_id)
+    {
+        $price = Yii::$app->cache->get('STACK_' . $stack_id);
+
+        if (!$price) {
+            $stack = Stack::findOne($stack_id);
+            $price = $stack ? $stack->price : 0;
+            if ($price) {
+                Yii::$app->cache->set('STACK_' . $stack_id, $price, 24*60*60*60);
+            }
+        }
+
+        return $price;
     }
 
 }

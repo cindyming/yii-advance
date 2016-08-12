@@ -41,7 +41,7 @@ class StackController extends \yii\web\Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['buy', 'validatebuy','sell', 'index', 'trends', 'fund', 'transactions', 'unlock'],
+                        'actions' => ['buy', 'validatebuy','sell', 'index', 'trends', 'fund', 'transactions', 'unlock', 'prices'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -355,6 +355,19 @@ class StackController extends \yii\web\Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionPrices()
+    {
+        $stacks = Stack::getStackNameOptions();
+        $prices = array();
+
+        foreach ($stacks as $id => $s) {
+            $prices['price' . $id] = Stack::getPrice($id);
+        }
+
+        echo json_encode($prices);
+        Yii::$app->response->send();
     }
 
     public function actionTransactions()

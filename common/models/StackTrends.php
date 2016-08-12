@@ -54,6 +54,12 @@ class StackTrends extends ActiveRecord
         ];
     }
 
+    public function afterSave($insert, $changedAttributes)
+    {
+        Yii::$app->cache->set('STACK_' .  $this->stack_id, '');
+        parent::afterSave($insert, $changedAttributes);
+    }
+
     /**
      * @inheritdoc
      */
