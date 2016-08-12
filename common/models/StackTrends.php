@@ -56,7 +56,7 @@ class StackTrends extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        Yii::$app->cache->set('STACK_' .  $this->stack_id, '');
+        Yii::$app->cache->set('STACK_' .  $this->stack_id, $this->price);
         parent::afterSave($insert, $changedAttributes);
     }
 
