@@ -32,13 +32,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'id',
                 'hidden' => true,
             ],
-            'username',
-            'nickname',
-            'identity',
-            'cardname',
-            'cardnumber',
-            'bankaddress',
-            'phone',
+            [
+                'attribute' => 'username',
+                'header' => '会员编号',
+            ],
+            [
+                'attribute' => 'nickname',
+                'header' => '会员昵称',
+            ],
+            [
+                'attribute' => 'identity',
+                'header' => '证件号',
+            ],
+            [
+                'attribute' => 'phone',
+                'header' => '电话号码',
+            ]
         ],
     ]); ?>
 
