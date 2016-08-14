@@ -132,11 +132,15 @@ class MemberController extends Controller
 
     public function actionInactivelist() {
         $count = Yii::$app->db->createCommand('
-                SELECT COUNT(*) FROM member where id not in (select member_id from member_stack) and role_id=3 and finance_fund =0 and stack_fund=0
+                SELECT COUNT(*) FROM member LEFT JOIN
+                (select member_id, sum(sell_volume) as sell_total, sum(lock_volume) as lock_total from member_stack group by member_id) stack_member
+                on stack_member.member_id=member.id where (sell_total+lock_total) < 100 and role_id=3  and (finance_fund+stack_fund) < 10
             ', [])->queryScalar();
 
         $dataProvider = new SqlDataProvider([
-            'sql' => 'select * from member where id not in (select member_id from member_stack) and role_id=3 and finance_fund =0 and stack_fund=0',
+            'sql' => 'select *, (sell_total+lock_total) as total, finance_fund+stack_fund as itotal FROM member LEFT JOIN
+                (select member_id, sum(sell_volume) as sell_total, sum(lock_volume) as lock_total from member_stack group by member_id) stack_member
+                on stack_member.member_id=member.id where (sell_total+lock_total) < 100 and role_id=3 and (finance_fund+stack_fund) < 100 order by itotal ASC, total ASC',
             'totalCount' => (int)$count,
             'pagination' => [
                 'pageSize' => 20,

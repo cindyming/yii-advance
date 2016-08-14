@@ -40,6 +40,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'nickname',
                 'header' => '会员昵称',
             ],
+
+
+            [
+                'attribute' => 'itotal',
+                'header' => '资金数',
+            ],
+            [
+                'attribute' => 'total',
+                'header' => '总股数',
+            ],
+
+
+
             [
                 'attribute' => 'identity',
                 'header' => '证件号',
