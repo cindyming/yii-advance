@@ -134,7 +134,7 @@ class MemberController extends Controller
         $count = Yii::$app->db->createCommand('
                 SELECT COUNT(*) FROM member LEFT JOIN
                 (select member_id, sum(sell_volume) as sell_total, sum(lock_volume) as lock_total from member_stack group by member_id) stack_member
-                on stack_member.member_id=member.id where (sell_total+lock_total) < 100 and role_id=3  and (finance_fund+stack_fund) < 10
+                on stack_member.member_id=member.id where (sell_total+lock_total) < 100 and role_id=3  and (finance_fund+stack_fund) < 100
             ', [])->queryScalar();
 
         $dataProvider = new SqlDataProvider([
