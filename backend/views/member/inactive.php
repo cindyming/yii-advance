@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <div style="margin-bottom: 10px;"> <button onclick="deleteAll()">删除选中的会员</button></div>
+    <div style="margin-bottom: 10px;"> <button onclick="deleteAll()">废除选中的会员账号</button></div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <script type="text/javascript">
     function deleteAll() {
 
-        result = confirm('所有选中的用户将被删除');
+        result = confirm('所有选中的用户将被废除');
 
         if(result) {
             var keys = $('#Cancel').yiiGridView('getSelectedRows');
