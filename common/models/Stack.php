@@ -135,15 +135,18 @@ class Stack extends ActiveRecord
 
     public static function getPrice($stack_id)
     {
-        $price = Yii::$app->cache->get('STACK_' . $stack_id);
+//        $price = Yii::$app->cache->get('STACK_' . $stack_id);
+//
+//        if (!$price) {
+//            $stack = Stack::findOne($stack_id);
+//            $price = $stack ? $stack->price : 0;
+//            if ($price) {
+//                Yii::$app->cache->set('STACK_' . $stack_id, $price, 24*60*60*60);
+//            }
+//        }
 
-        if (!$price) {
-            $stack = Stack::findOne($stack_id);
-            $price = $stack ? $stack->price : 0;
-            if ($price) {
-                Yii::$app->cache->set('STACK_' . $stack_id, $price, 24*60*60*60);
-            }
-        }
+        $stack = Stack::findOne($stack_id);
+        $price = $stack ? $stack->price : 0;
 
         return $price;
     }

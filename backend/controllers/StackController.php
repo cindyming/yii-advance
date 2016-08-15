@@ -126,18 +126,24 @@ class StackController extends Controller
             $model = Stack::findOne($_POST['editableKey']);
             if ($model && $model->id) {
                 $price = $_POST['Stack'][$_POST['editableIndex']]['price'];
-                $model->price = $price;
-                $stackTrends = new StackTrends();
-                $stackTrends->load(array(
-                    'stack_id' => $model->id,
-                    'price' => $model->price,
-                ), '');
-                $stackTrends->save();
-                $model->save();
-                StackAuthorize::dealAuth($model);
+                if (abs($model->price - $price)/$price < 0.1) {
+                    $model->price = $price;
+                    $stackTrends = new StackTrends();
+                    $stackTrends->load(array(
+                        'stack_id' => $model->id,
+                        'price' => $model->price,
+                    ), '');
+                    $stackTrends->save();
+                    $model->save();
+                    StackAuthorize::dealAuth($model);
+                    return ['output' => $price, 'message' => ''];
+                } else {
+                    return ['output' => '', 'message' => '价格的改变幅度不可以超过10% '];
+                }
+
 
                 // return JSON encoded output in the below format
-                return ['output' => $price, 'message' => ''];
+
 
                 // alternatively you can return a validation error
                 // return ['output'=>'', 'message'=>'Validation error'];
