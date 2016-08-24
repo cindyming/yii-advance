@@ -240,7 +240,7 @@ class StackTransaction extends ActiveRecord
                 $inRecord->load($data, '');
 
                 $transaction = $connection->beginTransaction();
-                if ($model->save() && $this->save() && $inRecord->save()) {
+                if ($model->save() && $this->save() && $inRecord->save() && $member->save()) {
                     $transaction->commit();
                 } else {
                     $transaction->rollBack();
