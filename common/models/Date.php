@@ -84,14 +84,12 @@ class Date extends \yii\db\ActiveRecord
 
     public static function isWorkingDay()
     {
-        return true;
         $data = Date::find()->where(['=', 'date', new Expression('curdate()')])->one();
         return ($data && $data->status == 0) ? true : false;
     }
 
     public static function isWorkingTime()
     {
-        return true;
         $hours = date('H');
         $mins = date('i');
         if (((10 <= $hours) && ($hours < 12)) || ((14 <= $hours) && ($hours < 16)) || (($hours == 12) && ($mins <= 30))) {
