@@ -126,7 +126,7 @@ class StackController extends Controller
             $model = Stack::findOne($_POST['editableKey']);
             if ($model && $model->id) {
                 $price = $_POST['Stack'][$_POST['editableIndex']]['price'];
-                if (abs($model->price - $price)/$price < 0.1) {
+                if (abs($model->price - $price)/$price < 2) {
                     $model->price = $price;
                     $stackTrends = new StackTrends();
                     $stackTrends->load(array(
