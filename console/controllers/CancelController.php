@@ -18,15 +18,17 @@ class CancelController extends Controller
     public function actionIndex()
     {
         $transactions = StackTransaction::find()->where(['=', 'status', 0])
-            ->andWhere(['=', 'stack_id', 1])
-            ->andWhere(['=', 'type', 0])
-            ->andWhere(['=', 'price', 3.12])
-            ->andWhere(['>', 'created_at', '2016-08-24 10:59:00'])->all();
+            ->andWhere(['>', 'created_at', '2016-09-02 00:00:00'])->all();
         var_dump('总数:' . count($transactions));
         $i = 0;
         foreach ($transactions as $transaction) {
             try {
-                $str = $transaction->cancelBuy();
+                if  ($transaction->type == 0) {
+                    $str = $transaction->cancelBuy();
+                } else {
+                    $str = $transaction->cancelSell();
+                }
+
                 var_dump($str);
                 $i ++;
             } catch (Exception $e) {
