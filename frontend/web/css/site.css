@@ -325,6 +325,7 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
     border-color: #23527B
 }
 .form-control{border-radius:0!important}
+.cash-index .pull-right .btn-toolbar{display: none;}
 @media (max-width: 768px) {
     .navbar-collapse,
     .site-login,

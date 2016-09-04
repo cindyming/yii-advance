@@ -213,9 +213,8 @@ h2.site-name{
     background:#27a9e3;
     color:#fff
 }
-table span.glyphicon{
-    margin:0 5px
-}
+table span.glyphicon{margin:0 5px}
+.user-index .kv-panel-before .btn-toolbar{display: none;}
 .filters input,
 .filters select{height:30px}
 .filters .help-block{
@@ -250,6 +249,12 @@ ul.tabswitch li{border-bottom:3px solid transparent;display:inline-block;padding
 ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
 
 .member-form .form-group.btns{clear: both;display: block;}
+
+.member-index .pull-right .btn-toolbar,
+.stack-index .pull-right .btn-toolbar,
+.user-index .pull-right .btn-toolbar,
+.cash-index .pull-right .btn-toolbar{display: none;}
+
 @media (max-width: 350px) {
 .member-form .form-group label{width:40%}
 .member-form .form-group .form-control{width:60%}
