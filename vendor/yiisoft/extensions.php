@@ -174,6 +174,24 @@ return array (
                     '@kartik/editable' => $vendorDir . '/kartik-v/yii2-editable',
                 ),
         ),
+    'kartik-v/yii2-export' =>
+        array (
+            'name' => 'kartik-v/yii2-export',
+            'version' => '9999999-dev',
+            'alias' =>
+                array (
+                    '@kartik/export' => $vendorDir . '/kartik-v/yii2-export',
+                ),
+        ),
+    'kartik-v/yii2-dialog' =>
+        array (
+            'name' => 'kartik-v/yii2-dialog',
+            'version' => '9999999-dev',
+            'alias' =>
+                array (
+                    '@kartik/dialog' => $vendorDir . '/kartik-v/yii2-dialog',
+                ),
+        ),
     'kartik-v/popover-x' =>
         array (
             'name' => 'kartik-v/popover-x',
