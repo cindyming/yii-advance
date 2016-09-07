@@ -127,7 +127,7 @@ class StackController extends Controller
             $model = Stack::findOne($_POST['editableKey']);
             if ($model && $model->id) {
                 $price = $_POST['Stack'][$_POST['editableIndex']]['price'];
-                if (abs($model->price - $price)/$price < 2) {
+                if (abs($model->price - $price)/$price <= 0.1) {
                     $model->price = $price;
                     $stackTrends = new StackTrends();
                     $stackTrends->load(array(
@@ -313,13 +313,18 @@ class StackController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($oldModel->price != $model->price) {
-                $stackTrends = new StackTrends();
-                $stackTrends->load(array(
-                    'stack_id' => $model->id,
-                    'price' => $model->price,
-                ), '');
-                $stackTrends->save();
-                StackAuthorize::dealAuth($model);
+                if (abs($model->price - $oldModel->price)/$oldModel->price <= 0.1) {
+                    $stackTrends = new StackTrends();
+                    $stackTrends->load(array(
+                        'stack_id' => $model->id,
+                        'price' => $model->price,
+                    ), '');
+                    $stackTrends->save();
+                    StackAuthorize::dealAuth($model);
+                } else {
+                    Yii::$app->session->setFlash('danger', '价格的改变幅度不可以超过10% ');
+                }
+
             }
             Yii::$app->session->setFlash('success', '信息修改成功');
             return $this->redirect(['index']);
