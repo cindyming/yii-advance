@@ -84,7 +84,7 @@ class StackTransactionSearch extends StackTransaction
             'member_id' => $this->member_id,
             'volume' => $this->volume,
             'type' => $this->type,
-            'price' => $this->price,
+            $this::tableName() . '.price' => $this->price,
             'stack_transaction.status' => $this->status,
             'total' => $this->total,
         ])->andFilterWhere(['like','stack.code',$this->stackcode])
