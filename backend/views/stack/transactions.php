@@ -82,6 +82,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'status',
+                'label' => '撤销',
+                'filter' => false,
+                'hiddenFromExport' => true,
+                'content' => function($model) {
+                    return ($model->status || Yii::$app->user->identity->isStackAdmin()) ? '' :( Html::a('撤销', '/stack/cancel?id='.$model->id, ['data-confirm'=>"你确定要撤销"  . $model->member->username ."[" . $model->stack->code . "]" . $model->volume ."股的交易"]));
+                }
+            ],
+            [
+                'attribute' => 'status',
                 'label' => '操作',
                 'filter' => false,
                 'hiddenFromExport' => true,

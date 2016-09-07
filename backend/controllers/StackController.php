@@ -16,6 +16,7 @@ use common\models\System;
 use Yii;
 use common\models\Stack;
 use common\models\search\StackSearch;
+use yii\base\Exception;
 use yii\caching\MemCache;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -44,7 +45,7 @@ class StackController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
+                        'actions' => ['index', 'trends', 'cancel', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
@@ -55,7 +56,7 @@ class StackController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'export', 'unlock', 'view', 'fund', 'update'],
+                        'actions' => ['index', 'trends', 'cancel', 'transactions', 'export', 'unlock', 'view', 'fund', 'update'],
                         'roles' => [User::STACK_TWO_ADMIN]
                     ],
                 ],
@@ -340,6 +341,30 @@ class StackController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionCancel($id)
+    {
+        $transaction = StackTransaction::findOne($id);
+
+        if  ($transaction->status) {
+            Yii::$app->session->setFlash('danger', "交易已经完成不可以撤销");
+        } else {
+            try {
+                if  ($transaction->type == 0) {
+                    $transaction->cancelBuy();
+                } else {
+                    $transaction->cancelSell();
+                }
+                Yii::$app->session->setFlash('success', '交易撤销成功');
+            } catch(Exception $e) {
+                Yii::$app->session->setFlash('danger', $e->getMessage());
+            }
+        }
+
+
+       return  $this->redirect(Yii::$app->request->referrer);
+
     }
 
     /**
