@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'price',
                 'format' => 'decimal',
-                'filter' => false,
+                'filter' => true,
             ],
             [
                 'attribute' => 'total_price',
