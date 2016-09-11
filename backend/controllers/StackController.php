@@ -45,18 +45,18 @@ class StackController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'cancel', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
+                        'actions' => ['index', 'fundexport', 'trends', 'cancel', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
+                        'actions' => ['index', 'fundexport', 'trends', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
 
                         'roles' => [User::STACK_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'trends', 'cancel', 'transactions', 'export', 'unlock', 'view', 'fund', 'update'],
+                        'actions' => ['index', 'fundexport', 'trends', 'cancel', 'transactions', 'export', 'unlock', 'view', 'fund', 'update'],
                         'roles' => [User::STACK_TWO_ADMIN]
                     ],
                 ],
@@ -386,5 +386,14 @@ class StackController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionFundexport()
+    {
+        $searchModel = new MemberStackSearch();
+        $data = Yii::$app->request->queryParams;
+
+        $searchModel->export($data);
+        return $this->redirect(['/assets/fund.csv']);
     }
 }

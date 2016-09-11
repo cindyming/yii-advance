@@ -2,6 +2,7 @@
 
 namespace common\models\search;
 
+use common\models\CSVExport;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -114,5 +115,104 @@ class MemberSearch extends Member
         return $dataProvider;
     }
 
+    public function export($params)
+    {
+        $query = Member::find()
+            ->select(array(
+                'username', 'nickname', 'phone', 'identity', 'approved_at',
+                'locked','country','buy_stack'
+            ))
+            ->orderBy(['approved_at' => SORT_DESC]);
 
+
+        $this->load($params);
+
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'status' => $this->status,
+            'locked' => $this->locked,
+            'role_id' => $this->role_id,
+            'investment' => $this->investment,
+            'buy_stack' => $this->buy_stack,
+            'added_by' => $this->added_by,
+            'country' => $this->country,
+            'stack_fund' => $this->stack_fund,
+            'finance_fund' => $this->finance_fund,
+        ]);
+
+        if ($this->approved_at) {
+            $date = explode(' - ', $this->approved_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.approved_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.approved_at', $date[1] . ' 23:59:59']);
+            }
+        }
+        if ($this->created_at) {
+            $date = explode(' - ', $this->created_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.created_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.created_at', $date[1] . ' 23:59:59']);
+            }
+        }
+        if ($this->updated_at) {
+            $date = explode(' - ', $this->updated_at);
+            if (count($date)  == 2) {
+                $query->andFilterWhere(['>=', $this::tableName() . '.updated_at', $date[0] . ' 00:00:00']);
+                $query->andFilterWhere(['<=', $this::tableName() . '.updated_at', $date[1] . ' 23:59:59']);
+            }
+        }
+
+        $query->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'username', $this->getUsername()])
+            ->andFilterWhere(['like', 'access_token', $this->access_token])
+            ->andFilterWhere(['like', 'nickname', $this->nickname])
+            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
+            ->andFilterWhere(['like', 'password_hash2', $this->password_hash2])
+            ->andFilterWhere(['like', 'identity', $this->identity])
+            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'bank', $this->bank])
+            ->andFilterWhere(['like', 'cardname', $this->cardname])
+            ->andFilterWhere(['like', 'cardnumber', $this->cardnumber])
+            ->andFilterWhere(['like', 'bankaddress', $this->bankaddress])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'qq', $this->qq])
+            ->orderBy(['approved_at' => SORT_DESC]);
+
+
+        $sql = ($query->createCommand()->getRawSql());
+
+        $connection = Yii::$app->db;
+
+        $command = $connection->createCommand($sql);
+
+        $result = $command->queryAll();
+
+        $header = array(
+            'username' => '会员编号',
+            'nickname' => '会员昵称',
+            'phone' => '手机号码',
+            'identity' => '证件号',
+            'approved_at' => '审核日期',
+            'locked' => '是否锁定',
+            'country' => '站点',
+            'buy_stack' => '购股权限',
+        );
+
+        $data = array($header);
+        foreach ($result as $row) {
+            unset($row['member_id']);
+            $row['locked'] = Yii::$app->options->getOptionLabel('locked', $row['locked']);
+            $row['country'] = Yii::$app->options->getOptionLabel('country', $row['country']);
+            $row['buy_stack'] = Yii::$app->options->getOptionLabel('buy_stack', $row['buy_stack']);
+            $data[] = $row;
+        }
+
+        CSVExport::Export([
+            'dirName' => Yii::getAlias('@webroot') . '/assets/',
+            'fileName' => 'member.csv',
+            'data' => $data
+        ]);
+
+    }
 }

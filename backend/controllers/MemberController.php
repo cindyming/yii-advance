@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\OutRecord;
+use common\models\search\MemberStackSearch;
 use common\models\System;
 use Yii;
 use common\models\Member;
@@ -35,12 +36,12 @@ class MemberController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'approvedindex', 'removeall', 'inactivelist', 'unapprovedindex', 'approve', 'resetpassword', 'reject', 'validate', 'create', 'update','view', 'delete', 'adelete'],
+                        'actions' => ['index', 'export', 'approvedindex', 'removeall', 'inactivelist', 'unapprovedindex', 'approve', 'resetpassword', 'reject', 'validate', 'create', 'update','view', 'delete', 'adelete'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create','out', 'validate', 'approvedindex'],
+                        'actions' => ['index', 'export', 'create','out', 'validate', 'approvedindex'],
                         'roles' => [User::STACK_ADMIN],
                     ],
                 ],
@@ -285,5 +286,18 @@ class MemberController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionExport()
+    {
+        $searchModel = new MemberSearch();
+        $data = Yii::$app->request->queryParams;
+        if (Yii::$app->request->get('week', 0)) {
+            $data['MemberSearch']['approved_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
+        } else if ((!isset($data["MemberSearch"])) && (!isset($data["MemberSearch"]['approved_at']))) {
+            $data['MemberSearch']['approved_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
+        }
+        $searchModel->export($data);
+        return $this->redirect(['/assets/member.csv']);
     }
 }

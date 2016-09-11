@@ -54,45 +54,20 @@ $gridColumns = [
         }
     ],
 ];
-
-$fullExportMenu = ExportMenu::widget([
-    'dataProvider' => $dataProvider,
-    'columns' => $gridColumns,
-    'target' => ExportMenu::TARGET_BLANK,
-    'fontAwesome' => true,
-    'showConfirmAlert' => false,
-    'showColumnSelector' => false,
-    'pjaxContainerId' => 'kv-pjax-container',
-    'dropdownOptions' => [
-        'label' => 'Full',
-        'class' => 'btn btn-default',
-        'itemsBefore' => [
-            '<li class="dropdown-header">导出全部筛选的数据</li>',
-        ],
-    ]
-]);
-
 ?>
 <div class="stack-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+
+    <div class="b_download">
+        <?= Html::a('下载筛选数据', '/stack/fundexport', array('onClick' =>"$(this).attr('href', $(this).attr('href') + window.location.search);", "target"=>'_blank')) ?>
+    </div>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container']],
-        'export' => [
-            'label' => '保存当前页数据',
-            'fontAwesome' => true,
-        ],
-        'exportConfig' => [
-            GridView::EXCEL => ['label' => '保存为Excel文件']
-        ],
-        'toolbar'=>[
-            '{export}',
-            $fullExportMenu,
-            '{toggleData}'
-        ],
         'panel'=>[
             'type'=>GridView::TYPE_PRIMARY,
         ],

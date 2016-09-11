@@ -14,25 +14,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <div class="b_download">
+        <?= Html::a('下载最近一周', '/member/export?week=1') ?>
+        <?= Html::a('下载筛选数据', '/member/export', array('onClick' =>"$(this).attr('href', $(this).attr('href') + window.location.search);", "target"=>'_blank')) ?>
+    </div>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'export'=>[
-            'fontAwesome'=>true,
-            'showConfirmAlert'=>false,
-            'target'=>GridView::TARGET_BLANK
-        ],
-        'exportConfig' => [
-            GridView::EXCEL => ['label' => '保存为Excel文件']
-        ],
-        'toolbar'=>[
-            '{export}',
-            '{toggleData}'
-        ],
-        'panel'=>[
-            'type'=>GridView::TYPE_PRIMARY,
-        ],
-        'autoXlFormat' => true,
         'layout' => '{items} {summary} {pager}',
         'pjax' => true,
         'columns' => [

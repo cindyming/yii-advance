@@ -27,12 +27,12 @@ class AccountController extends \yii\web\Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve', 'validateadd'],
+                        'actions' => ['list', 'exportcash', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve', 'validateadd'],
                         'roles' => [\backend\models\User::SUPPER_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list', 'cashlist', 'inlist', 'outlist'],
+                        'actions' => ['list', 'exportcash', 'cashlist', 'inlist', 'outlist'],
                         'roles' => [\backend\models\User::STACK_TWO_ADMIN]
                     ],
                 ],
@@ -268,6 +268,19 @@ class AccountController extends \yii\web\Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionExportcash()
+    {
+        $searchModel = new CashSearch();
+        $data = Yii::$app->request->queryParams;
+        if (Yii::$app->request->get('week', 0)) {
+            $data['CashSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
+        } else if ((!isset($data["CashSearch"])) && (!isset($data["CashSearch"]['created_at']))) {
+            $data['CashSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
+        }
+        $searchModel->export($data);
+        return $this->redirect(['/assets/cash.csv']);
     }
 
 }
