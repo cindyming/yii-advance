@@ -68,9 +68,6 @@ $gridColumns = [
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container']],
-        'panel'=>[
-            'type'=>GridView::TYPE_PRIMARY,
-        ],
         'layout' => '{items} {summary} {pager}',
         'pjax' => true,
         'columns' => $gridColumns
