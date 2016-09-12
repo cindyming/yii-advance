@@ -150,6 +150,7 @@ class CashSearch extends Cash
         $data = array($header);
         foreach ($result as $row) {
             unset($row['member_id']);
+            $row['cardnumber'] = "'"  . $row['cardnumber'] . "'";
             $row['bank'] = Yii::$app->options->getOptionLabel('bank', $row['bank']);
             $data[] = $row;
         }
