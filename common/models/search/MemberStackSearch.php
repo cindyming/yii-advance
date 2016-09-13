@@ -133,9 +133,9 @@ class MemberStackSearch extends MemberStack
 
         CSVExport::Export([
             'dirName' => Yii::getAlias('@webroot') . '/assets/',
-            'fileName' => 'fund.csv',
+            'fileName' => 'fund.xls',
             'data' => $data
-        ]);
+        ], 'fund');
 
     }
 }

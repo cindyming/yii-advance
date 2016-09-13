@@ -246,7 +246,7 @@ class StackController extends Controller
             $data['StackTransactionSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
         }
         $searchModel->export($data);
-        return $this->redirect(['/assets/transactions.csv']);
+        return $this->redirect(['/assets/transactions.xls']);
     }
 
     public function actionBuy()
@@ -394,6 +394,6 @@ class StackController extends Controller
         $data = Yii::$app->request->queryParams;
 
         $searchModel->export($data);
-        return $this->redirect(['/assets/fund.csv']);
+        return $this->redirect(['/assets/fund.xls']);
     }
 }

@@ -210,9 +210,9 @@ class MemberSearch extends Member
 
         CSVExport::Export([
             'dirName' => Yii::getAlias('@webroot') . '/assets/',
-            'fileName' => 'member.csv',
+            'fileName' => 'member.xls',
             'data' => $data
-        ]);
+        ], 'member');
 
     }
 }

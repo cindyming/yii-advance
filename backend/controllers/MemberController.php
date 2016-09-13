@@ -298,6 +298,6 @@ class MemberController extends Controller
             $data['MemberSearch']['approved_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
         }
         $searchModel->export($data);
-        return $this->redirect(['/assets/member.csv']);
+        return $this->redirect(['/assets/member.xls']);
     }
 }

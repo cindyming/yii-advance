@@ -160,9 +160,9 @@ class StackTransactionSearch extends StackTransaction
       //  unlink(Yii::getAlias('@webroot') . '/assets/transactions.csv');
         CSVExport::Export([
             'dirName' => Yii::getAlias('@webroot') . '/assets/',
-            'fileName' => 'transactions.csv',
+            'fileName' => 'transactions.xls',
             'data' => $data
-        ]);
+        ], 'transactions');
 
     }
 }
