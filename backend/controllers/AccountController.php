@@ -280,7 +280,7 @@ class AccountController extends \yii\web\Controller
             $data['CashSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
         }
         $searchModel->export($data);
-        return $this->redirect(['/assets/cash.csv']);
+        return $this->redirect(['/assets/cash.xls']);
     }
 
 }
