@@ -202,6 +202,8 @@ class MemberSearch extends Member
         $data = array($header);
         foreach ($result as $row) {
             unset($row['member_id']);
+            $row['phone'] = $row['phone'] . ' ';
+            $row['identity'] = $row['identity'] . ' ';
             $row['locked'] = Yii::$app->options->getOptionLabel('locked', $row['locked']);
             $row['country'] = Yii::$app->options->getOptionLabel('country', $row['country']);
             $row['buy_stack'] = Yii::$app->options->getOptionLabel('buy_stack', $row['buy_stack']);
