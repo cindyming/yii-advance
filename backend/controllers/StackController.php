@@ -127,7 +127,7 @@ class StackController extends Controller
             $model = Stack::findOne($_POST['editableKey']);
             if ($model && $model->id) {
                 $price = $_POST['Stack'][$_POST['editableIndex']]['price'];
-                if (abs($model->price - $price)/$price <= 0.1) {
+                if (abs($model->price - $price)/$price <= 5) {
                     $model->price = $price;
                     $stackTrends = new StackTrends();
                     $stackTrends->load(array(
@@ -313,7 +313,7 @@ class StackController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if ($oldModel->price != $model->price) {
-                if (abs($model->price - $oldModel->price)/$oldModel->price <= 0.1) {
+                if (abs($model->price - $oldModel->price)/$oldModel->price <= 5) {
                     $stackTrends = new StackTrends();
                     $stackTrends->load(array(
                         'stack_id' => $model->id,
