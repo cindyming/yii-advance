@@ -227,7 +227,8 @@ class MemberSearch extends Member
 
 
         $this->load($data);
-        $query->andFilterWhere(['like', 'username', $this->getUsername()]);
+        $query->andFilterWhere(['like', 'username', $this->getUsername()])
+        ->andFilterWhere(['role_id' => $this->role_id]);
 
         $sql = ($query->createCommand()->getRawSql());
 

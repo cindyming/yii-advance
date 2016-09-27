@@ -1,0 +1,16 @@
+a:2:{i:0;a:2:{i:0;s:769:"
+<div class="news-index">
+
+    <h1>新闻公告</h1>
+
+    <div id="w0-pjax"><div id="w0" class="grid-view" data-krajee-grid="kvGridInit_bb9212bf"><div id="w0-container" class="table-responsive kv-grid-container"><table class="kv-grid-table table table-bordered table-striped kv-table-wrap"><thead>
+
+<tr><th data-col-seq="0">公告标题</th><th data-col-seq="1">发布日期</th><th>&nbsp;</th></tr>
+
+</thead>
+<tbody>
+<tr data-key="1"><td data-col-seq="0">新年快乐</td><td data-col-seq="1">2016-02-16</td><td><a href="/news/view?id=1" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a></td></tr>
+</tbody></table></div> <div class="summary">第<b>1-1</b>条，共<b>1</b>条数据.</div> </div></div>
+</div>
+
+    ";i:1;N;}i:1;O:24:"yii\caching\DbDependency":5:{s:2:"db";s:2:"db";s:3:"sql";s:26:"SELECT COUNT(id) FROM news";s:6:"params";a:0:{}s:4:"data";a:1:{s:9:"COUNT(id)";s:1:"1";}s:8:"reusable";b:0;}}
