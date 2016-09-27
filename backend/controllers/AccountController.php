@@ -288,6 +288,7 @@ class AccountController extends \yii\web\Controller
         $searchModel = new MemberSearch();
 
         $data = Yii::$app->request->queryParams;
+        $data['MemberSearch']['role_id'] = 3;
         $searchModel->exportList($data);
         return $this->redirect(['/assets/huobi.xls']);
     }
