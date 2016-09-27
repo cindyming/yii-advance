@@ -16,6 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Yii::$app->user->identity->isStackTwoAdmin() ? '' :HTML::a('增减货币', ['/account/add?type=in'],['class' => 'btn btn-success'])?>
     </p>
+
+    <div class="b_download">
+        <?= Html::a('下载筛选数据', '/account/listexport', array('onClick' =>"$(this).attr('href', $(this).attr('href') + window.location.search);", "target"=>'_blank')) ?>
+    </div>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

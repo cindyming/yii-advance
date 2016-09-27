@@ -217,4 +217,42 @@ class MemberSearch extends Member
         ], 'member');
 
     }
+
+    public function exportList($data) {
+        $query = Member::find()
+            ->select(array(
+                'username', 'investment', 'finance_fund', 'stack_fund'
+            ))
+            ->orderBy(['approved_at' => SORT_DESC]);
+
+
+        $this->load($data);
+        $query->andFilterWhere(['like', 'username', $this->getUsername()]);
+
+        $sql = ($query->createCommand()->getRawSql());
+
+        $connection = Yii::$app->db;
+
+        $command = $connection->createCommand($sql);
+
+        $result = $command->queryAll();
+
+        $header = array(
+            'username' => '会员编号',
+            'investment' => '投资金额',
+            'finance_fund' => '理财基金余额',
+            'stack_fund' => '购股基金余额',
+        );
+
+        $data = array($header);
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+
+        CSVExport::Export([
+            'dirName' => Yii::getAlias('@webroot') . '/assets/',
+            'fileName' => 'huobi.xls',
+            'data' => $data
+        ], 'member');
+    }
 }

@@ -27,12 +27,12 @@ class AccountController extends \yii\web\Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list', 'exportcash', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve', 'validateadd'],
+                        'actions' => ['list', 'exportcash', 'listexport', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve', 'validateadd'],
                         'roles' => [\backend\models\User::SUPPER_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['list', 'exportcash', 'cashlist', 'inlist', 'outlist'],
+                        'actions' => ['list', 'exportcash', 'listexport', 'cashlist', 'inlist', 'outlist'],
                         'roles' => [\backend\models\User::STACK_TWO_ADMIN]
                     ],
                 ],
@@ -281,6 +281,15 @@ class AccountController extends \yii\web\Controller
         }
         $searchModel->export($data);
         return $this->redirect(['/assets/cash.xls']);
+    }
+
+    public function actionListexport()
+    {
+        $searchModel = new MemberSearch();
+
+        $data = Yii::$app->request->queryParams;
+        $searchModel->exportList($data);
+        return $this->redirect(['/assets/huobi.xls']);
     }
 
 }
