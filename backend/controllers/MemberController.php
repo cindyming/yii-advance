@@ -36,12 +36,12 @@ class MemberController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'export', 'approvedindex', 'removeall', 'inactivelist', 'unapprovedindex', 'approve', 'resetpassword', 'reject', 'validate', 'create', 'update','view', 'delete', 'adelete'],
+                        'actions' => ['index', 'export', 'recovery', 'approvedindex', 'removeall', 'inactivelist', 'unapprovedindex', 'approve', 'resetpassword', 'reject', 'validate', 'create', 'update','view', 'delete', 'adelete'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'export', 'create','out', 'validate', 'approvedindex'],
+                        'actions' => ['index', 'export', 'recovery', 'create','out', 'validate', 'approvedindex'],
                         'roles' => [User::STACK_ADMIN],
                     ],
                 ],
@@ -102,6 +102,24 @@ class MemberController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionRecovery($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->role_id == 4) {
+            $model->role_id = 3;
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', '会员(' .$model->username. ')恢复成功');
+            } else {
+                Yii::$app->session->setFlash('danger', '会员(' .$model->username. ')恢复失败');
+            }
+        } else {
+            Yii::$app->session->setFlash('danger', '会员(' .$model->username. ')恢复失败');
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     public function actionApprove($id)

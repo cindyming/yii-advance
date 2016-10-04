@@ -43,6 +43,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => Yii::$app->options->getOptions('role',true),
             ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => '恢复',
+                'template' => '{recovery}',
+                'buttons' => [
+                    'recovery' => function ($url, $model, $key) {
+                        $options = [
+                            'title' => Yii::t('yii', '恢复'),
+                            'aria-label' => Yii::t('yii', '恢复'),
+                            'data-confirm' => Yii::t('yii', '你确定要恢复会员[' . $model->username . ']吗?'),
+                            'data-method' => 'post',
+                        ];
+                        return ($model->role_id == 4 ) ? Html::a('恢复', $url, $options) : '';
+                    },
+                ],
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    if ($action === 'recovery') {
+                        $url ='/member/recovery?id='.$model->id;
+                        return $url;
+                    }
+                }
+            ],
         ],
     ]); ?>
 
