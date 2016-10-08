@@ -16,6 +16,7 @@ class System extends ActiveRecord
     public $sell_fee_rate;
     public $annual_fee;
     public $transaction_rule;
+    public $maintenance;
 
     /**
      * @inheritdoc
@@ -46,6 +47,7 @@ class System extends ActiveRecord
             'annual_fee' => Yii::t('app', 'Annual Fee'),
             'username' =>  Yii::t('app', 'User Name'),
             'transaction_rule' =>  Yii::t('app', 'Transaction Rule'),
+            'maintenance' => '系统维护中'
             ];
     }
 

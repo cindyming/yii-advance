@@ -15,6 +15,7 @@ $this->title = '系统设置';
 
         <?= $form->field($model, 'enable_memmber_login')->dropDownList([1 => '开放', 0 => '关闭']) ?>
         <?= $form->field($model, 'show_add_member')->dropDownList([1 => '开放', 0 => '关闭']) ?>
+        <?= $form->field($model, 'maintenance')->dropDownList([1 => '否', 0 => '是']) ?>
         <?= $form->field($model, 'lowest_cash_amount',[ 'template' => "{label}\n{input}百，如您输入1就代表1百\n{hint}\n{error}"])->textInput(['value' => ($model->lowest_cash_amount / 100)]) ?>
         <?= $form->field($model, 'cash_factorage')->textInput() ?>
         <?= $form->field($model, 'sell_fee_rate')->textInput() ?>
