@@ -12,6 +12,15 @@ return array (
       '@yii/swiftmailer' => $vendorDir . '/yiisoft/yii2-swiftmailer',
     ),
   ),
+    'yiisoft/yii2-redis' =>
+        array (
+            'name' => 'yiisoft/yii2-redis',
+            'version' => '9999999-dev',
+            'alias' =>
+                array (
+                    '@yii/redis' => $vendorDir . '/yiisoft/yii2-redis',
+                ),
+        ),
   'yiisoft/yii2-codeception' => 
   array (
     'name' => 'yiisoft/yii2-codeception',

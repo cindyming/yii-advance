@@ -16,10 +16,6 @@ return [
         ]
     ],
     'components' => [
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-            'cachePath'=> '@common/cache'
-        ],
         'options' => [
             'class' => 'common\components\Options',
         ],
