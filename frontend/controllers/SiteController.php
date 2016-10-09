@@ -27,7 +27,7 @@ class SiteController extends Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['signup', 'autologin', 'captcha', 'index', 'login'],
+                        'actions' => ['signup', 'autologin', 'captcha', 'index'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
