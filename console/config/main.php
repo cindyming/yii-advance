@@ -27,13 +27,7 @@ return [
         'cache' => [
             'class' => 'yii\redis\Cache',
             'keyPrefix' => 'cache_'
-        ],
-        'redis' => [
-            'class' => 'yii\redis\Connection',
-            'hostname' => 'localhost',
-            'port' => 6379,
-            'database' => 0
-        ],
+        ]
     ],
     'params' => $params,
 ];
