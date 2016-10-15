@@ -42,7 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
             success: function(result) {
                 $('.stackPrice').each(function(i, e){
                     key = $(e).attr('id');
-                    console.log(result[key]);
                     $(e).html(result[key]['price']);
                     $('#' + key.replace('price', 'update')).html(result[key]['update']);
                 });
