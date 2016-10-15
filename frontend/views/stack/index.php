@@ -43,7 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 $('.stackPrice').each(function(i, e){
                     key = $(e).attr('id');
                     console.log(result[key]);
-                    $(e).html(result[key]);
+                    $(e).html(result[key]['price']);
+                    $('#' + key.replace('price', 'update')).html(result[key]['update']);
                 });
                 setTimeout('refreshPrice()',1000);
             }
