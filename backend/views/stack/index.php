@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="stack_list">
         <?php foreach ($stacks as $stack): ?>
             <div class="item <?= $stack->status ?  'disabled' : 'enabled' ?>">
-                <div class="name" ><?= $stack->name?>  <?php Html::a('价格编辑'. '/stack/update?id=' . $stack->id) ?></div>
+                <div class="name" ><?= $stack->name?>  <?php echo Html::a('价格编辑'. '/stack/update?id=' . $stack->id) ?></div>
                 <div class="stackPrice" id="price<?= $stack->id?>"><?= $stack->price?></div>
                 <div class="updatePrice">
                     <?= Html::input('text', 'price', '', ['id' => "priceNew" . $stack->id]) ?>
