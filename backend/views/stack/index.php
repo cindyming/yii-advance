@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Create Stack'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <div clas="stack_list">
+    <div class="stack_list">
         <?php foreach ($stacks as $stack): ?>
             <div class="item <?= $stack->status ?  'disabled' : 'enabled' ?>">
                 <div class="name" ><?= $stack->name?></div>
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php if ($stack->status == 0): ?>
                 <div class="updatePrice">
                     <?= Html::input('text', 'price', '', ['id' => "priceNew" . $stack->id]) ?>
-                    <?= Html::button('改价', ['onclick' => "changePrice(" .$stack->id. ")"]) ?>
+                    <?= Html::button('改价', ['class' => 'btn btn-primary', 'onclick' => "changePrice(" .$stack->id. ")"]) ?>
                 </div>
                 <?php endif ?>
                 <div class="time" ><label id="update<?= $stack->id?>"><?= $stack->updated_at?> </label>更新</div>

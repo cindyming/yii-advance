@@ -255,6 +255,17 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
 .user-index .pull-right .btn-toolbar a.btn-default,
 .cash-index .pull-right .btn-toolbar a.btn-default{display: none;}
 
+.stack_list{}
+.stack_list .item{border:1px solid #ccc;width:24%;display:inline-block;margin:0 1% 1% 0;text-align:right;padding:1%;vertical-align:top;min-height:135px}
+.stack_list .item:nth-child(4n){margin-right:0}
+.item.disabled{background:#e4e4e4}
+.stack_list .name{font-size:16px;}
+.stack_list .stackPrice{font-size:24px}
+.stack_list .updatePrice{}
+.updatePrice button{padding:3px 12px}
+.stack_list .time{font-size:12px;color:#999}
+
+
 @media (max-width: 350px) {
 .member-form .form-group label{width:40%}
 .member-form .form-group .form-control{width:60%}
