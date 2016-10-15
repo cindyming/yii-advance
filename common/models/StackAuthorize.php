@@ -162,7 +162,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
 
     public static function dealAuth($stack)
     {
-        if (Date::isWorkingDay() && Date::isWorkingTime() || true) {
+        if (Date::isWorkingDay() && Date::isWorkingTime()) {
             $stackId = $stack->id;
             $stackPrice = $stack->price;
             $inAuthrizes = StackAuthorize::find()->where(['=', 'status', 1])

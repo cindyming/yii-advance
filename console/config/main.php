@@ -20,6 +20,14 @@ return [
                 ],
             ],
         ],
+        'session' => [
+            'class' => 'yii\redis\Session',
+            'keyPrefix' => 'session_'
+        ],
+        'cache' => [
+            'class' => 'yii\redis\Cache',
+            'keyPrefix' => 'cache_'
+        ]
     ],
     'params' => $params,
 ];

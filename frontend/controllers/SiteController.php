@@ -13,6 +13,7 @@ use yii\filters\AccessControl;
  */
 class SiteController extends Controller
 {
+    public $enableCsrfValidation = false;
     /**
      * @inheritdoc
      */
@@ -27,7 +28,7 @@ class SiteController extends Controller
                 ],
                 'rules' => [
                     [
-                        'actions' => ['signup', 'autologin', 'captcha', 'index'],
+                        'actions' => ['signup', 'autologin', 'captcha', 'index', 'login'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],

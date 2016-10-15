@@ -45,18 +45,18 @@ class StackController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'fundexport', 'trends', 'cancel', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
+                        'actions' => ['index', 'fundexport', 'trends', 'changeprice', 'cancel', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
                         'roles' => [User::SUPPER_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'fundexport', 'trends', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
+                        'actions' => ['index', 'fundexport', 'trends', 'changeprice', 'transactions', 'export', 'unlock', 'view', 'create', 'validatebuy', 'buy', 'update', 'delete', 'fund'],
 
                         'roles' => [User::STACK_ADMIN]
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'fundexport', 'trends', 'cancel', 'transactions', 'export', 'unlock', 'view', 'fund', 'update'],
+                        'actions' => ['index', 'fundexport', 'trends', 'changeprice', 'cancel', 'transactions', 'export', 'unlock', 'view', 'fund', 'update'],
                         'roles' => [User::STACK_TWO_ADMIN]
                     ],
                 ],
@@ -119,44 +119,10 @@ class StackController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new StackSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        if (isset($_POST['hasEditable'])) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            $model = Stack::findOne($_POST['editableKey']);
-            if ($model && $model->id) {
-                $price = $_POST['Stack'][$_POST['editableIndex']]['price'];
-                if (abs($model->price - $price)/$price <= 5) {
-                    $model->price = $price;
-                    $stackTrends = new StackTrends();
-                    $stackTrends->load(array(
-                        'stack_id' => $model->id,
-                        'price' => $model->price,
-                    ), '');
-                    $stackTrends->save();
-                    $model->save();
-                    StackAuthorize::dealAuth($model);
-                    return ['output' => $price, 'message' => ''];
-                } else {
-                    return ['output' => '', 'message' => '价格的改变幅度不可以超过10% '];
-                }
-
-
-                // return JSON encoded output in the below format
-
-
-                // alternatively you can return a validation error
-                // return ['output'=>'', 'message'=>'Validation error'];
-            } // else if nothing to do always return an empty JSON encoded output
-            else {
-                return ['output' => '', 'message' => 'Update Failed'];
-            }
-        }
+        $stacks = Stack::find()->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'stacks' => $stacks
         ]);
     }
 
@@ -298,6 +264,34 @@ class StackController extends Controller
         return $this->render('buy', [
             'model' => $model,
         ]);
+    }
+
+    public function actionChangeprice($id)
+    {
+        $model = $this->findModel($id);
+        $price = Yii::$app->request->post('price');
+
+        $result = array('status' => 0, 'message' => '股票价格修改失败', 'update' => '');
+
+        if ($model && $model->id) {
+            if (abs($model->price - $price) / $price <= 5) {
+                $stackTrends = new StackTrends();
+                $stackTrends->load(array(
+                    'stack_id' => $model->id,
+                    'price' => $model->price,
+                ), '');
+                $stackTrends->save();
+                StackAuthorize::dealAuth($model);
+            }
+            $model->price = $price;
+            if ($model->save()) {
+                $model = $this->findModel($id);
+                $result = array('status' => 1, 'message' => '股票价格修改成功', 'update' => (string)$model->updated_at);
+            };
+
+        }
+
+         echo json_encode($result);die;
     }
 
     /**
