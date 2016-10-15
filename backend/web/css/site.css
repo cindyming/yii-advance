@@ -263,7 +263,7 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
 .stack_list .stackPrice{font-size:24px}
 .stack_list .updatePrice{}
 .updatePrice button{padding:3px 12px}
-.stack_list .time{font-size:12px;color:#999}
+.stack_list .time{font-size:12px;color:#999;padding-top: 5px}
 
 
 @media (max-width: 350px) {
