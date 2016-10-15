@@ -17,50 +17,41 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Create Stack'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <div clas="stack_list">
+        <?php foreach ($stacks as $stack): ?>
+            <div class="item <?= $stack->status ?  'disabled' : 'enabled' ?>">
+                <div class="name" ><?= $stack->name?></div>
+                <div class="stackPrice" id="price<?= $stack->id?>"><?= $stack->price?></div>
+                <?php if ($stack->status == 0): ?>
+                <div class="updatePrice">
+                    <?= Html::input('text', 'price', '', ['id' => "priceNew" . $stack->id]) ?>
+                    <?= Html::button('改价', ['onclick' => "changePrice(" .$stack->id. ")"]) ?>
+                </div>
+                <?php endif ?>
+                <div class="time" ><label id="update<?= $stack->id?>"><?= $stack->updated_at?> </label>更新</div>
+            </div>
+        <?php endforeach ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'layout' => '{items} {summary} {pager}',
-        'pjax' => true,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'code',
-            'name',
-            [
-                'class' => 'kartik\grid\EditableColumn',
-                'attribute'=>'price',
-                'editableOptions'=> function ($model, $key, $index) {
-                    return [
-                        'inputType' => \kartik\editable\Editable::INPUT_TEXT,
-                        'size'=>'sm',
-                    ];
-                },
-                'filter' => false,
-
-            ],
-
-            [
-                'attribute' =>  'updated_at',
-                'filterType'=>GridView::FILTER_DATE_RANGE,
-            ],
-            [
-                'attribute' =>  'created_at',
-                'filterType'=>GridView::FILTER_DATE_RANGE,
-            ],
-            [
-                'attribute' => 'status',
-                'value' => function($model) {
-                    return Yii::$app->options->getOptionLabel('status', $model->status);
-                },
-                'filter' => Yii::$app->options->getOptions('status',true),
-            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'header' => '修改',
-                'template' => '{update}',
-            ]
-        ],
-    ]); ?>
-
+    </div>
 </div>
+<script type="text/javascript">
+    function changePrice(id) {
+        var price = $('#priceNew' + id).val();
+        if (price) {
+            $('#priceNew' + id).parents('div.updatePrice').removeClass('has-error');
+            $.post('/stack/changeprice?id=' + id, {'price':price}, function(data){
+                if (data.status) {
+                    $('#price' + id).html(price);
+                    $('#update' + id).html(data.update);
+                    $('#priceNew' + id).val('');
+                } else {
+                    alert(data.message);
+                }
+            }, 'json');
+        } else {
+            $('#priceNew' + id).parents('div.updatePrice').addClass('has-error');
+            alert('请先输入新价格')
+        }
+
+    }
+</script>

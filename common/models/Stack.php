@@ -148,7 +148,7 @@ class Stack extends ActiveRecord
         $stack = Stack::findOne($stack_id);
         $price = $stack ? $stack->price : 0;
 
-        return $price;
+        return ['price' => $price, 'update' => $stack->updated_at];
     }
 
 }

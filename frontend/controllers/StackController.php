@@ -328,12 +328,10 @@ class StackController extends \yii\web\Controller
 
     public function actionIndex()
     {
-        $searchModel = new StackSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $stacks = Stack::find()->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'stacks' => $stacks
         ]);
     }
 
