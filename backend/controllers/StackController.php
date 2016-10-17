@@ -278,7 +278,7 @@ class StackController extends Controller
                 $stackTrends = new StackTrends();
                 $stackTrends->load(array(
                     'stack_id' => $model->id,
-                    'price' => $model->price,
+                    'price' => $price,
                 ), '');
                 $stackTrends->save();
                 StackAuthorize::dealAuth($model);
