@@ -82,7 +82,7 @@ AppAsset::register($this);
                         ]
                     ],
                     [
-                        'label' => '财务管理', 'url' => ['/blank'],
+                        'label' => '财务管理', 'url' => ['/account/inlist'],
                         'items' => [
                             ['label' => '入账明细', 'url' => ['/account/inlist']],
                             ['label' => '出账明细', 'url' => ['/account/outlist']],
