@@ -122,6 +122,7 @@ class StackTransactionSearch extends StackTransaction
         $query->andFilterWhere([
             'id' => $this->id,
             'type' => $this->type,
+            'stack_transaction.price' => $this->price,
             'stack_transaction.status' => $this->status
         ])->andFilterWhere(['like','stack.code',$this->stackcode])
             ->andFilterWhere(['like','stack.name',$this->stackname])
