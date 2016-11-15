@@ -124,7 +124,7 @@ class StackController extends \yii\web\Controller
             if (Date::isWorkingTime()) {
                 $open = true;
                 $key = 'BUY' . Yii::$app->user->identity->id . $stack->id;
-                if (Yii::$app->cache->exists($key)) {
+                if (!Yii::$app->cache->exists($key)) {
                     Yii::$app->cache->set($key, 1, 10);
                     if ($model->load(Yii::$app->request->post())) {
                         if ($model->account_type) {
@@ -268,7 +268,7 @@ class StackController extends \yii\web\Controller
             if (Date::isWorkingTime()) {
                 if ($model->load(Yii::$app->request->post())) {
                         $key = 'CELL' . Yii::$app->user->identity->id . $stack->id;
-                        if (Yii::$app->cache->exists($key)) {
+                        if (!Yii::$app->cache->exists($key)) {
                             Yii::$app->cache->set($key, 1, 10);
                             $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
                             if($model->account_type) {
