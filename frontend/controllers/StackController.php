@@ -187,6 +187,7 @@ class StackController extends \yii\web\Controller
                             $model->total_price = $stack->price * $model->volume;
                         }
                     }
+                    Yii::$app->cache->delete($key);
                 } else {
                     $show = false;
                     Yii::$app->session->setFlash('danger', '对不起,重复提交!');
