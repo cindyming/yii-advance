@@ -21,6 +21,16 @@ return array (
                     '@yii/redis' => $vendorDir . '/yiisoft/yii2-redis',
                 ),
         ),
+
+    'light/widgets' =>
+        array (
+            'name' => 'light/widgets',
+            'version' => '0.9.0.0',
+            'alias' =>
+                array (
+                    '@light/widgets' => $vendorDir . '/light/widgets',
+                ),
+        ),
   'yiisoft/yii2-codeception' => 
   array (
     'name' => 'yiisoft/yii2-codeception',

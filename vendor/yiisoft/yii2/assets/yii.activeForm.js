@@ -360,10 +360,12 @@
                             } else {
                                 updateInputs($form, messages, submitting);
                             }
+                            $('body').find('[type=submit]').show();
                         },
                         error: function () {
                             data.submitting = false;
                             submitFinalize($form);
+                            $('body').find('[type=submit]').show();
                         }
                     });
                 } else if (data.submitting) {
@@ -371,8 +373,10 @@
                     setTimeout(function () {
                         updateInputs($form, messages, submitting);
                     }, 200);
+                    $('body').find('[type=submit]').show();
                 } else {
                     updateInputs($form, messages, submitting);
+                    $('body').find('[type=submit]').show();
                 }
             });
         },
