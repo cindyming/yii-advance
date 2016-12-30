@@ -169,10 +169,13 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 ->andWhere(['=', 'stack_id', $stackId])
                 ->andWhere(['=', 'type', 0])
                 ->andWhere(['>=', 'price', $stackPrice])->all();
+            $count = count($inAuthrizes);
+            $i = 0;
             StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=0 AND price>={$stackPrice}");
             foreach ($inAuthrizes as $auth) {
                 if ($auth->price >= $stackPrice) {
-                    $auth->dealBuyAction($stackPrice);
+                    $auth->dealBuyAction($stackPrice, $i/6);
+                    $i++;
                 }
             }
 
@@ -180,16 +183,18 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 ->andWhere(['=', 'stack_id', $stackId])
                 ->andWhere(['=', 'type', 1])
                 ->andWhere(['<=', 'price', $stackPrice])->all();
+            $count = count($inAuthrizes);
             StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=1 AND price<={$stackPrice}");
             foreach ($inAuthrizes as $auth) {
                 if ($auth->price <= $stackPrice) {
-                    $auth->dealSellAction($stackPrice);
+                    $auth->dealSellAction($stackPrice, $i/6);
+                    $i++;
                 }
             }
         }
     }
 
-    protected function dealBuyAction($price)
+    protected function dealBuyAction($price, $timePlus)
     {
 
 
@@ -237,7 +242,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 $success = false;
                 if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save() && $this->save()) {
                     $model = StackTransaction::findOne($model->id);
-                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+rand(1,5));
+                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+$timePlus);
                     $outRecord->created_at = $date;
                     $model->created_at = $date;
                     $outRecord->save();
@@ -268,7 +273,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
 
 
     }
-    protected function dealSellAction($price)
+    protected function dealSellAction($price, $timePlus)
     {
         $stack = Stack::findOne($this->stack_id);
         $memberStack = MemberStack::getMemberStack($this, false);
@@ -307,7 +312,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 if ($model->save() && $memberStack->save() && $this->save()) {
                     $transaction->commit();
                     $model = StackTransaction::findOne($model->id);
-                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+rand(1,5));
+                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+$timePlus);
                     $model->created_at = $date;
                     $model->save();
                 } else {

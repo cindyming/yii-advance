@@ -237,4 +237,23 @@ class Member extends ActiveRecord
         $existUser = Member::find()->where(['=', 'username', $usename])->andWhere(['=', 'role_id', 3]);
         return ($existUser) ? $existUser->one() : null;
     }
+
+    public function beforeSave($insert)
+    {
+        if (!$insert) {
+            $oldInfo = Member::findOne($this->id)->getAttributes();
+            $newInfo = $this->getAttributes();
+
+            $from = array_diff_assoc($oldInfo, $newInfo);
+            $to = array_diff_assoc($newInfo, $oldInfo);
+
+            $action = "属性更新:" . json_encode($from) . 'TO:' . json_encode($to);
+            $action .= Yii::$app->request->isConsoleRequest ? "Script: " . json_encode(Yii::$app->request->getParams()) :  "URL: " . Yii::$app->request->getAbsoluteUrl() ;
+
+            Log::add('USER' . $this->id, '更新信息', true, $action);
+
+        }
+
+        return parent::beforeSave($insert);
+    }
 }
