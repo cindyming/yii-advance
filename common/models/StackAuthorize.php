@@ -169,7 +169,6 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 ->andWhere(['=', 'stack_id', $stackId])
                 ->andWhere(['=', 'type', 0])
                 ->andWhere(['>=', 'price', $stackPrice])->all();
-            $count = count($inAuthrizes);
             $i = 0;
             StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=0 AND price>={$stackPrice}");
             foreach ($inAuthrizes as $auth) {
@@ -183,7 +182,6 @@ class StackAuthorize extends \yii\db\ActiveRecord
                 ->andWhere(['=', 'stack_id', $stackId])
                 ->andWhere(['=', 'type', 1])
                 ->andWhere(['<=', 'price', $stackPrice])->all();
-            $count = count($inAuthrizes);
             StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=1 AND price<={$stackPrice}");
             foreach ($inAuthrizes as $auth) {
                 if ($auth->price <= $stackPrice) {
