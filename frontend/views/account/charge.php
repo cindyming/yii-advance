@@ -26,7 +26,7 @@ $this->title = '申请提现';
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-
+    <?= $form->field($model, 'member_id')->label('')->hiddenInput(['value' => Yii::$app->user->identity->id]) ?>
     <?php ActiveForm::end(); ?>
 </div><!-- cash-_form -->
 
