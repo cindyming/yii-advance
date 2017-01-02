@@ -308,11 +308,12 @@ class StackAuthorize extends \yii\db\ActiveRecord
             try {
                 $transaction = $connection->beginTransaction();
                 if ($model->save() && $memberStack->save() && $this->save()) {
-                    $transaction->commit();
+
                     $model = StackTransaction::findOne($model->id);
                     $date = date('Y-m-d H:i:s', strtotime($model->created_at)+$timePlus);
                     $model->created_at = $date;
                     $model->save();
+                    $transaction->commit();
                 } else {
                     Yii::error('Sell Stack Failed');
                     Yii::error(json_encode($model->getErrors()));
