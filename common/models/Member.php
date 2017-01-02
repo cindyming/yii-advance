@@ -250,7 +250,7 @@ class Member extends ActiveRecord
             $action = "属性更新:" . json_encode($from) . 'TO:' . json_encode($to);
             $action .= Yii::$app->request->isConsoleRequest ? "Script: " . json_encode(Yii::$app->request->getParams()) :  "URL: " . Yii::$app->request->getAbsoluteUrl() ;
 
-            Log::add('USER' . $this->id, '更新信息', true, $action);
+            Log::add('USER' . $this->id, '更新信息', false, $action);
 
         }
 
