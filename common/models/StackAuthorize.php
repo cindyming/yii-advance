@@ -185,7 +185,7 @@ class StackAuthorize extends \yii\db\ActiveRecord
             StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=1 AND price<={$stackPrice}");
             foreach ($inAuthrizes as $auth) {
                 if ($auth->price <= $stackPrice) {
-                    $auth->dealSellAction($stackPrice, $i%m6);
+                    $auth->dealSellAction($stackPrice, $i%6);
                     $i++;
                 }
             }
