@@ -175,6 +175,10 @@ class AuthorizeController extends Controller
                 $transaction = $connection->beginTransaction();
                 if ($model->save() && $memberStack->save() && $auth->save()) {
                     $transaction->commit();
+                    $model = StackTransaction::findOne($model->id);
+                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+$plusTimes);
+                    $model->created_at = $date;
+                    $model->save();
                 } else {
                     Yii::error('Sell Stack Failed');
                     Yii::error(json_encode($model->getErrors()));
