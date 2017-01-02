@@ -110,6 +110,12 @@ class AuthorizeController extends Controller
                 $auth->note = '成功购买[' . $stack->code . ']' . $model->volume . '股[' . date('Y-m-d H:i:s') . ']';
                 $success = false;
                 if ( $model->save() && $memberStack->save() && $member->save() &&  $outRecord->save() && $auth->save()) {
+                    $model = StackTransaction::findOne($model->id);
+                    $date = date('Y-m-d H:i:s', strtotime($model->created_at)+$plusTimes);
+                    $outRecord->created_at = $date;
+                    $model->created_at = $date;
+                    $outRecord->save();
+                    $model->save();
                     $success = true;
                 }
                 if ($success) {
