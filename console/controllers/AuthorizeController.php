@@ -34,10 +34,12 @@ class AuthorizeController extends Controller
                         ->andWhere(['=', 'stack_id', $stackId])
                         ->andWhere(['=', 'type', 0])
                         ->andWhere(['>=', 'price', $stackPrice])->all();
+                    $i = 0;
                     StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=0 AND price>={$stackPrice}");
                     foreach ($inAuthrizes as $auth) {
                         if ($auth->price >= $stackPrice) {
-                            $this->dealBuyAction($auth, $stackPrice);
+                            $this->dealBuyAction($auth, $stackPrice, $i%6);
+                            $i++;
                         }
                     }
 
@@ -48,7 +50,7 @@ class AuthorizeController extends Controller
                     StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=1 AND price<={$stackPrice}");
                     foreach ($inAuthrizes as $auth) {
                         if ($auth->price <= $stackPrice) {
-                            $this->dealSellAction($auth, $stackPrice);
+                            $this->dealSellAction($auth, $stackPrice,  $i%6);
                         }
                     }
                 }
@@ -61,7 +63,7 @@ class AuthorizeController extends Controller
         }
     }
 
-    protected function dealBuyAction($auth, $price)
+    protected function dealBuyAction($auth, $price, $plusTimes)
     {
 
 
@@ -134,7 +136,7 @@ class AuthorizeController extends Controller
 
 
     }
-    protected function dealSellAction($auth, $price)
+    protected function dealSellAction($auth, $price, $plusTimes)
     {
         $stack = Stack::findOne($auth->stack_id);
         $memberStack = MemberStack::getMemberStack($auth, false);
