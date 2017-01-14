@@ -67,47 +67,54 @@ class AccountController extends \yii\web\Controller
 
         $data = Yii::$app->request->post();
         if ($model->load(Yii::$app->request->post()) && isset($data['Cash']) && isset($data['Cash']['password2'])) {
-            if ($model->member_id == Yii::$app->user->identity->id) {
-                $validate = true;
-                if (!Yii::$app->user->identity->validatePassword2($data['Cash']['password2'])) {
-                    $validate = false;
-                    $model->addError('password2', '第二密码错误,请确认后重新输入');
-                }
-                if ($model->amount > Yii::$app->user->identity->finance_fund) {
-                    $validate = false;
-                    $model->addError('amount', '账户余额不足, 理财账户:' . Yii::$app->user->identity->finance_fund);
-                }
+            $open = true;
+            $key = 'APPLY_CASH';
+            if (!Yii::$app->cache->exists($key)) {
+                Yii::$app->cache->set($key, 1, 10);
+                if ($model->member_id == Yii::$app->user->identity->id) {
+                    $validate = true;
+                    if (!Yii::$app->user->identity->validatePassword2($data['Cash']['password2'])) {
+                        $validate = false;
+                        $model->addError('password2', '第二密码错误,请确认后重新输入');
+                    }
+                    if ($model->amount > Yii::$app->user->identity->finance_fund) {
+                        $validate = false;
+                        $model->addError('amount', '账户余额不足, 理财账户:' . Yii::$app->user->identity->finance_fund);
+                    }
 
-                if ($model->amount < round(System::loadConfig('lowest_cash_amount'), 2)) {
-                    $validate = false;
-                    $model->addError('amount', '最低提现额度是:' . round(System::loadConfig('lowest_cash_amount'), 2));
-                }
-                if ($validate) {
-                    $member = Yii::$app->user->identity;
-                    $member->finance_fund -= $model->amount;
-                    $model->fee = round(System::loadConfig('cash_factorage'), 2);
-                    $model->real_amount = $model->amount - $model->fee;
-                    $member->save();
-                    $model->save();
-                    $outRecord = new OutRecord();
-                    $data = array(
-                        'member_id' => Yii::$app->user->identity->id,
-                        'account_type' => 1,
-                        'amount' => $model->amount,
-                        'fee' => $model->fee,
-                        'total' => $member->finance_fund,
-                        'type' => 1,
-                        'note' => '会员提现(含银行转账手续费)'
-                    );
-                    $outRecord->load($data, '');
-                    $outRecord->save();
-                    Yii::$app->session->setFlash('success', '提现申请提交成功');
-                    $this->redirect(['cashlist']);
+                    if ($model->amount < round(System::loadConfig('lowest_cash_amount'), 2)) {
+                        $validate = false;
+                        $model->addError('amount', '最低提现额度是:' . round(System::loadConfig('lowest_cash_amount'), 2));
+                    }
+                    if ($validate) {
+                        $member = Yii::$app->user->identity;
+                        $member->finance_fund -= $model->amount;
+                        $model->fee = round(System::loadConfig('cash_factorage'), 2);
+                        $model->real_amount = $model->amount - $model->fee;
+                        $member->save();
+                        $model->save();
+                        $outRecord = new OutRecord();
+                        $data = array(
+                            'member_id' => Yii::$app->user->identity->id,
+                            'account_type' => 1,
+                            'amount' => $model->amount,
+                            'fee' => $model->fee,
+                            'total' => $member->finance_fund,
+                            'type' => 1,
+                            'note' => '会员提现(含银行转账手续费)'
+                        );
+                        $outRecord->load($data, '');
+                        $outRecord->save();
+                        Yii::$app->session->setFlash('success', '提现申请提交成功');
+                        $this->redirect(['cashlist']);
+                    } else {
+                        Yii::$app->session->setFlash('danger', '提现申请失败,清输入正确的信息');
+                    }
                 } else {
-                    Yii::$app->session->setFlash('danger', '提现申请失败,清输入正确的信息');
+                    Yii::$app->session->setFlash('danger', '提现申请失败请稍后再试.');
                 }
             } else {
-                Yii::$app->session->setFlash('danger', '提现申请失败请稍后再试.');
+                Yii::$app->session->setFlash('danger', '对不起,重复提交!');
             }
         }
 
