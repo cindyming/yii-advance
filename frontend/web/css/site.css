@@ -24,6 +24,8 @@ body.login{
 }
 .member-form .field-member-added_by{display:none;}
 table th{font-size:12px}
+.btn,
+.btn-primary{border-radius:0}
 .btn-primary,
 .btn-success{
     background:#2D4279;
@@ -131,7 +133,7 @@ a.desc:after {
 
 .site-login{
     width:35%;
-    margin:10% auto;
+    margin:2% auto;
     background:rgba(255, 255, 255, 0.46);
     padding: 1% 2%;
 }
@@ -149,13 +151,12 @@ a.desc:after {
     padding: 0;
     color: #333!important;
     width:22%;
-    display: inline-block;
-    *display:inline;
+    display: block;
     text-align: left;
 }
 .site-login input{
-    height: 35px;
-    border: 1px solid #ccc;
+    height: 28px;
+    border: 1px solid #ccc!important;
     display: inline-block;
     *display:inline;
     width: 75%;
@@ -163,14 +164,14 @@ a.desc:after {
     margin-bottom: 3px;
 }
 .site-login a{color:#00D6F9}
-.site-login .help-block{padding-left:22%}
+.site-login .help-block{}
 .form-control{
-    border-radius:0;
+    border-radius:0!important;
     height:40px;
 }
 .site-login .has-error .control-label,
 .site-login .has-success .control-label{
-    color:#fff
+    color:#fff;
 }
 .help-block{
     padding-left:0
@@ -181,10 +182,9 @@ a.desc:after {
     margin-top:-2%;
 }
 .field-loginform-captcha input{
-    width:51%
 }
 .site-login button{
-    width:100%
+    width:75%
 }
 .header{
     background-color:#F2F2F2;

@@ -3,7 +3,7 @@ body {
     height: 100%;
 }
 body.login{
-    background:#333
+    background:#c7c7c7
 }
 .wrap {
     min-height: 100%;
@@ -19,10 +19,15 @@ body.login{
 .date-form .form-group{width:25%;margin-right:1%;display:inline-block;vertical-align: top;}
 .date-form .form-group.submit-date{margin-top:27px}
 table th{font-size:12px}
+.btn,
+.btn-primary{
+    border-radius:20px
+}
 .btn-primary,
 .btn-success{
     background:#F61919;
-    border:1px solid #F61919
+    border:1px solid #F61919;
+    border-radius:20px
 }
 .btn-primary:hover,
 .btn-success:hover,
@@ -31,6 +36,8 @@ table th{font-size:12px}
     background:#E03434;
     border-color: #E03434
 }
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
+{border-color:#f5f5f5}
 .news-date{margin:0 0 10px}
 .footer {
     height: 60px;
@@ -127,23 +134,19 @@ a.desc:after {
     margin:0 auto;
 }
 .site-login h1{
-    font-size:32px;
+    font-size:14px;
     line-height: 40px;
     color:#fff;
-    border-bottom:1px solid #3f4954;
-    text-align:center;
-    padding-bottom:2%;
-    margin-bottom:5%
 }
 .site-login label{
     padding: 0;
     color: #fff;
     width:22%;
-    display: inline-block;
+    display: block;
     text-align: left;
 }
 .site-login input{
-    height: 35px;
+    height: 28px;
     border: 0px;
     display: inline-block;
     width: 75%;
@@ -152,7 +155,7 @@ a.desc:after {
 }
 .site-login .help-block{padding-left:22%}
 .form-control{
-    border-radius:0;
+    border-radius:0!important;
     height:40px;
 }
 .has-error .control-label,
@@ -168,21 +171,20 @@ a.desc:after {
     margin-top:-2%;
 }
 .field-loginform-captcha input{
-    width:51%
 }
 .site-login button{
-    width:100%
+   /* width:100%*/
 }
 .header{
-    background-color: #2E363F;
+    background-color: #fff;
 }
-h1{font-size:28px;}
+h1{font-size:12px;}
 h2.site-name{
     display: inline;
     color: #fff;
     float: left;
     margin: 0;
-    font-size: 22px;
+    font-size: 12px;
     line-height:50px;
     font-weight:normal;
 }
@@ -199,7 +201,7 @@ h2.site-name{
     color:#999
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
-    color:#fff
+    color:#333
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
@@ -212,7 +214,7 @@ table span.glyphicon{
     margin:0 5px
 }
 .filters input,
-.filters select{height:30px}
+.filters select{height:22px}
 .filters .help-block{
     padding:0;
     margin:0;
