@@ -207,9 +207,13 @@ class Member extends ActiveRecord
             $this->username = strtolower(str_replace(' ', '', $this->username));
         }
 
-        $existUser = Member::find()->where(['=', 'username', $this->username])->andWhere(['!=', 'role_id', 4])->one();
+        $existUser = Member::find()->where(['=', 'username', $this->username])->one();
         if($existUser && ($existUser->id != $this->id)){
-            $this->addError($attribute, '该用户名已存在，请重新输入一个!');
+            if ($existUser->role_id == 4) {
+                $this->addError($attribute, '该用户名已被锁定僵尸会员占用, 请确认后重新输入!');
+            } else {
+                $this->addError($attribute, '该用户名已存在，请重新输入一个!');
+            }
         }
     }
 
@@ -250,7 +254,7 @@ class Member extends ActiveRecord
             $action = "属性更新:" . json_encode($from) . 'TO:' . json_encode($to);
             $action .= Yii::$app->request->isConsoleRequest ? "Script: " . json_encode(Yii::$app->request->getParams()) :  "URL: " . Yii::$app->request->getAbsoluteUrl() ;
 
-            Log::add('USER' . $this->id, '更新信息', false, $action);
+            Log::add('USER' . $this->id, '更新信息', true, $action, $this->id);
 
         }
 
