@@ -3,7 +3,7 @@
 $this->params['breadcrumbs'][] = $this->title;
 
 
-$this->title = Yii::t('app', 'Stack Trends');
+$this->title = Yii::t('app', '股票动态');
 ?>
 
 <div class="stack-index">
