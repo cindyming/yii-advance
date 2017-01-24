@@ -1,7 +1,3 @@
-
-<div class="stack-index">
-
-    <h1><?= yii\helpers\Html::encode($this->title) ?></h1>
 <?php
 
 $this->params['breadcrumbs'][] = $this->title;
@@ -9,6 +5,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $this->title = Yii::t('app', 'Stack Trends');
 ?>
+
+<div class="stack-index">
+
+    <h1><?= yii\helpers\Html::encode($this->title) ?></h1>
+
 <?php
 
 /* @var $this yii\web\View */
