@@ -337,7 +337,7 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
 .updatePrice button{padding:3px 12px}
 .stack_list .time{font-size:12px;color:#999;padding-top: 5px}
 
-
+.stack-index.transaction-list table th:nth-child(4){width:6.5%!important}
 @media (max-width: 768px) {
     .navbar-collapse,
     .site-login,
