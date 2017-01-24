@@ -260,6 +260,7 @@ ul.tabswitch li.active{border-bottom:3px solid #27A9E3}
 .stack_list .item:nth-child(4n){margin-right:0}
 .item.disabled{background:#e4e4e4}
 .stack_list .name{font-size:16px;}
+.stack_list .name a{clear:both;display:block;}
 .stack_list .stackPrice{font-size:24px}
 .stack_list .updatePrice{}
 .updatePrice button{padding:3px 12px}

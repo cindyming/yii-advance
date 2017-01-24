@@ -10,7 +10,7 @@ use kartik\grid\GridView;;
 $this->title = Yii::t('app', 'Stack Transactions');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="stack-index">
+<div class="stack-index transaction-list">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
