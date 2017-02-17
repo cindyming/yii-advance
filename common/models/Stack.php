@@ -105,6 +105,13 @@ class Stack extends ActiveRecord
         return ArrayHelper::map($stacks, 'code', 'code');
     }
 
+
+    public static function getBackendStackOptions()
+    {
+        $stacks = Stack::findAll(array('status' => array(0, 2)));
+        return ArrayHelper::map($stacks, 'code', 'code');
+    }
+
     public static function getStackCodeOptions()
     {
         $key = 'STACK_CODES';
