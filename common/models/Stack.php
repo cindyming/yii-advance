@@ -95,4 +95,10 @@ class Stack extends ActiveRecord
         $stacks = Stack::findAll(array('status' => 0));
         return ArrayHelper::map($stacks, 'code', 'code');
     }
+
+    public static function getStackSellOptions()
+    {
+        $stacks = Stack::findAll(array('status' => array(0, 2)));
+        return ArrayHelper::map($stacks, 'code', 'code');
+    }
 }
