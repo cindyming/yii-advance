@@ -117,7 +117,7 @@ class Stack extends ActiveRecord
         $key = 'STACK_CODES';
 
         $stacks = json_decode(Yii::$app->cache->get($key), true);
-        if (!$stacks || !count($stacks)) {
+        if (!$stacks || !count($stacks) || true) {
             $stacks = Stack::find()->all();
             $stacks = ArrayHelper::map($stacks, 'id', 'code');
             Yii::$app->cache->set($key, json_encode($stacks), 365*24*60*60*60);
@@ -131,7 +131,7 @@ class Stack extends ActiveRecord
         $key = 'STACK_NAMES';
 
         $stacks = json_decode(Yii::$app->cache->get($key), true);
-        if (!$stacks) {
+        if (!$stacks || true) {
             $stacks = Stack::find()->all();
             $stacks = ArrayHelper::map($stacks, 'id', 'name');
             Yii::$app->cache->set($key, json_encode($stacks), 365*24*60*60*60);
