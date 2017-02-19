@@ -167,6 +167,10 @@ class AuthorizeController extends Controller
             $auth->status = 3;
             $auth->note = '股票可出售数量不足[' . $stack->code . ']';
             $auth->save();
+        } else if ($stack->status == 1) {
+            $this->status = 3;
+            $this->note = '股票锁定状态,委托失败. ' . $stack->status;
+            $this->save();
         } else {
             $model->total_price = $model->price * $model->volume;
             $memberStack->sell_volume -= $model->volume;
