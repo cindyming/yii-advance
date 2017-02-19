@@ -23,7 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="item <?= $stack->status ?  'disabled' : 'enabled' ?>">
                 <div class="name" >(<?php echo $stack->code ?>)<?= $stack->name?></div>
                 <div class="stackPrice" id="price<?= $stack->id?>"><?= $stack->price?></div>
+                <?php if(!$stack->status):?>
                 <div class="buy"><?php echo Html::a('购买', '/stack/buy?id=' . $stack->id)?></div>
+                <?php endif ?>
                 <div class="time" ><label id="update<?= $stack->id?>"><?= $stack->updated_at?> </label>更新</div>
             </div>
         <?php endforeach ?>
