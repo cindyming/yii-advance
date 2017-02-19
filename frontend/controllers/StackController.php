@@ -229,7 +229,9 @@ class StackController extends \yii\web\Controller
         $stack = Stack::findOne($id);
         $model = new StackTransaction();
         $memberStack = Yii::$app->user->identity->getMemberStack($stack->id);
-        if ($model->load(Yii::$app->request->post())) {
+        if($stack->status == 1) {
+            Yii::$app->session->setFlash('danger', '股票已锁定,请选择其它股票进行购买.');
+        } else if ($model->load(Yii::$app->request->post())) {
             if (Date::isWorkingDay()) {
                 if (Date::isWorkingTime()) {
                     if($model->account_type) {
