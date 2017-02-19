@@ -20,7 +20,7 @@ class AuthorizeController extends Controller
 {
     public function actionIndex()
     {
-        if (Date::isWorkingDay() && Date::isWorkingTime() || true) {
+        if (Date::isWorkingDay() && Date::isWorkingTime()) {
             $date = date('Y-m-d H:i:s', time()-2);
             $stacks = Stack::find()->where(['=', 'status', 0])->all();
             if (count($stacks)) {
@@ -70,6 +70,7 @@ class AuthorizeController extends Controller
         $member = Member::findOne($auth->member_id);
 
         $totalPrice = $price * $auth->volume;
+        $stack = Stack::findOne($auth->stack_id);
 
 
         if ((($auth->account_type == 1) && $member->finance_fund < $totalPrice) ||
@@ -77,8 +78,12 @@ class AuthorizeController extends Controller
             $auth->status = 3;
             $auth->note = '账户余额不足. 理财基金:.' . $member->finance_fund . '. 购股账户:'. $member->stack_fund;
             $auth->save();
+        } else if ($stack->status){
+            $auth->status = 3;
+            $auth->note = '股票锁定状态,委托不成功: ' .  $stack->status;
+            $auth->save();
         } else {
-            $stack = Stack::findOne($auth->stack_id);
+
             $memberStack = MemberStack::getMemberStack($auth);
 
             $model = new StackTransaction();
