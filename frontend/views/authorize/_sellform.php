@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="stack-authorize-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <?= $form->field($model, 'stackcode')->dropDownList(\common\models\Stack::getStackOptions()) ?>
+    <?= $form->field($model, 'stackcode')->dropDownList(\common\models\Stack::getStackSellOptions()) ?>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'volume')->textInput(['maxlength' => true]) ?>
