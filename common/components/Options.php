@@ -37,7 +37,8 @@ class Options
         ),
         'status' => array(
             0 => '正常',
-            1 => '锁定'
+            1 => '锁定',
+            2 => '只能卖不能买',
         ),
         'buy_stack' => array(
             1 => '是',

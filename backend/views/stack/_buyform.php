@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'membername')->textInput(['maxlength' => true, 'readOnly' => ($model->isNewRecord ? false : true)]) ?>
 
-    <?= $form->field($model, 'stackcode')->dropDownList(\common\models\Stack::getStackOptions()) ?>
+    <?= $form->field($model, 'stackcode')->dropDownList(\common\models\Stack::getBackendStackOptions()) ?>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 

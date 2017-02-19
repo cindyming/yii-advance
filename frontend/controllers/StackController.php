@@ -261,7 +261,7 @@ class StackController extends \yii\web\Controller
         if(!Yii::$app->user->identity->canBuyStock()) {
             $show = false;
             Yii::$app->session->setFlash('danger', '账号没有购股权限, 请联系管理员.');
-        } else if ($stack->status) {
+        } else if ($stack->status == 1) {
             $show = false;
             Yii::$app->session->setFlash('danger', '股票已锁定,请选择其它股票进行购买.');
         } else if (Date::isWorkingDay()) {
