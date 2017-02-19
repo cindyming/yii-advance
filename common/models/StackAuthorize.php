@@ -199,14 +199,19 @@ class StackAuthorize extends \yii\db\ActiveRecord
         $member = Member::findOne($this->member_id);
 
         $totalPrice = $price * $this->volume;
+        $stack = Stack::findOne($this->stack_id);
 
         if ((($this->account_type == 1) && $member->finance_fund < $totalPrice) ||
             (($this->account_type == 2) && $member->stack_fund < $totalPrice)) {
             $this->status = 3;
             $this->note = '账户余额不足. 理财基金:.' . $member->finance_fund . '. 购股账户:'. $member->stack_fund;
             $this->save();
+        } else if ($stack->status) {
+            $this->status = 3;
+            $this->note = '股票锁定状态,委托失败. ' . $stack->status;
+            $this->save();
         } else {
-            $stack = Stack::findOne($this->stack_id);
+
             $memberStack = MemberStack::getMemberStack($this);
 
             $model = new StackTransaction();
@@ -295,6 +300,10 @@ class StackAuthorize extends \yii\db\ActiveRecord
         if (!$model->checkSellVolume($memberStack, $model->volume)) {
             $this->status = 3;
             $this->note = '股票可出售数量不足[' . $stack->code . ']';
+            $this->save();
+        }  else if ($stack->status == 1) {
+            $this->status = 3;
+            $this->note = '股票锁定状态,委托失败. ' . $stack->status;
             $this->save();
         } else {
             $model->total_price = $model->price * $model->volume;
