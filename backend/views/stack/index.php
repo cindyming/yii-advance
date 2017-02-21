@@ -22,10 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="item <?= $stack->status ?  'disabled' : 'enabled' ?>">
                 <div class="name" >(<?php echo $stack->code ?>)<?= $stack->name?>  <?php echo Html::a('价格编辑', '/stack/update?id=' . $stack->id) ?></div>
                 <div class="stackPrice" id="price<?= $stack->id?>"><?= $stack->price?></div>
+                <?php  if ($stack->change_price):?>
                 <div class="updatePrice">
                     <?= Html::input('text', 'price', '', ['id' => "priceNew" . $stack->id]) ?>
                     <?= Html::button('改价', ['class' => 'btn btn-primary', 'onclick' => "changePrice(" .$stack->id. ")"]) ?>
                 </div>
+                <?php endif ?>
                 <div class="time" ><label id="update<?= $stack->id?>"><?= $stack->updated_at?> </label>更新</div>
             </div>
         <?php endforeach ?>

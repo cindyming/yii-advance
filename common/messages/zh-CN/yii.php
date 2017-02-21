@@ -246,4 +246,5 @@ return [
     'Transaction Rule' => '',
     'mis' => '女士',
     'mr' => '先生',
+	'Change Price'=> '允许修改价格',
 ];

@@ -16,8 +16,12 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'code')->textInput(['maxlength' => true, 'readOnly' => ($model->isNewRecord ? false : true)]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?php if ((!$model->isNewRecord) && $model->change_price): ?>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+    <?php endif ?>
+
+    <?= $form->field($model, 'change_price')->dropDownList(Yii::$app->options->getOptions('buy_stack')) ?>
 
     <?= $form->field($model, 'status')->dropDownList(Yii::$app->options->getOptions('status')) ?>
 

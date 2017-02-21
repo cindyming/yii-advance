@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\InRecord;
+use common\models\Log;
 use common\models\Member;
 use common\models\MemberStack;
 use common\models\OutRecord;
@@ -273,7 +274,7 @@ class StackController extends Controller
 
         $result = array('status' => 0, 'message' => '股票价格修改失败', 'update' => '');
 
-        if ($model && $model->id) {
+        if ($model && $model->id && $model->change_price) {
             if (abs($model->price - $price) / $price <= 5) {
                 $stackTrends = new StackTrends();
                 $stackTrends->load(array(
@@ -303,25 +304,45 @@ class StackController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $oldModel = $this->findModel($id);;
+        $oldModel = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if ($oldModel->price != $model->price) {
-                if (abs($model->price - $oldModel->price)/$oldModel->price <= 5) {
-                    $stackTrends = new StackTrends();
-                    $stackTrends->load(array(
-                        'stack_id' => $model->id,
-                        'price' => $model->price,
-                    ), '');
-                    $stackTrends->save();
-                    StackAuthorize::dealAuth($model);
-                } else {
-                    Yii::$app->session->setFlash('danger', '价格的改变幅度不可以超过10% ');
-                }
-
+        if ($model->load(Yii::$app->request->post())) {
+            if (!$model->change_price) {
+                $model->price = $oldModel->price;
             }
-            Yii::$app->session->setFlash('success', '信息修改成功');
-            return $this->redirect(['index']);
+            if ($model->save()) {
+                if ($oldModel->price != $model->price) {
+                    if (abs($model->price - $oldModel->price)/$oldModel->price <= 5) {
+                        $stackTrends = new StackTrends();
+                        $stackTrends->load(array(
+                            'stack_id' => $model->id,
+                            'price' => $model->price,
+                        ), '');
+                        $stackTrends->save();
+                        StackAuthorize::dealAuth($model);
+                    } else {
+                        Yii::$app->session->setFlash('danger', '价格的改变幅度不可以超过10% ');
+                    }
+
+                }
+                $oldInfo = $oldModel->getAttributes();
+                $newInfo = $model->getAttributes();
+
+                $from = array_diff_assoc($oldInfo, $newInfo);
+                $to = array_diff_assoc($newInfo, $oldInfo);
+
+                $action = "属性更新:" . json_encode($from) . 'TO:' . json_encode($to);
+                $action .= Yii::$app->request->isConsoleRequest ? "Script: " . json_encode(Yii::$app->request->getParams()) :  "URL: " . Yii::$app->request->getAbsoluteUrl() ;
+                Log::add('Stack' . $model->id, '更新信息', true, $action, $model->id);
+
+                Yii::$app->session->setFlash('success', '信息修改成功');
+                return $this->redirect(['index']);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+
         } else {
             return $this->render('update', [
                 'model' => $model,

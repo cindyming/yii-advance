@@ -59,7 +59,7 @@ class Stack extends ActiveRecord
     {
         return [
             [['name', 'code', 'status', 'price'], 'required'],
-            [['status'], 'integer'],
+            [['status', 'change_price'], 'integer'],
             [['price'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 250],
@@ -78,6 +78,7 @@ class Stack extends ActiveRecord
             'code' => Yii::t('app', 'Code'),
             'status' => Yii::t('app', 'Stack Status'),
             'price' => Yii::t('app', 'Price'),
+            'change_price' => Yii::t('app', 'Change Price'),
             'created_at' => Yii::t('app', 'Stack Created At'),
             'updated_at' => Yii::t('app', 'Stack Updated At'),
         ];
