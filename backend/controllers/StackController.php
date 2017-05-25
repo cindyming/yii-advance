@@ -274,8 +274,8 @@ class StackController extends Controller
 
         $result = array('status' => 0, 'message' => '股票价格修改失败', 'update' => '');
 
-        if ($model && $model->id && $model->change_price) {
-            if (abs($model->price - $price) / $price <= 5) {
+        if ($model && $model->id && $model->change_price) {echo abs($model->price - $price) / $model->price;
+            if (abs($model->price - $price) / $model->price <= 0.18) {
                 $stackTrends = new StackTrends();
                 $stackTrends->load(array(
                     'stack_id' => $model->id,
@@ -283,13 +283,14 @@ class StackController extends Controller
                 ), '');
                 $stackTrends->save();
                 StackAuthorize::dealAuth($model);
+                $model->price = $price;
+                if ($model->save()) {
+                    $model = $this->findModel($id);
+                    $result = array('status' => 1, 'message' => '股票价格修改成功', 'update' => (string)$model->updated_at);
+                };
+            } else {
+                $result['message'] = "股票价格改变失败,不能超过18%";
             }
-            $model->price = $price;
-            if ($model->save()) {
-                $model = $this->findModel($id);
-                $result = array('status' => 1, 'message' => '股票价格修改成功', 'update' => (string)$model->updated_at);
-            };
-
         }
 
          echo json_encode($result);die;
@@ -310,21 +311,27 @@ class StackController extends Controller
             if (!$model->change_price) {
                 $model->price = $oldModel->price;
             }
-            if ($model->save()) {
-                if ($oldModel->price != $model->price) {
-                    if (abs($model->price - $oldModel->price)/$oldModel->price <= 5) {
-                        $stackTrends = new StackTrends();
-                        $stackTrends->load(array(
-                            'stack_id' => $model->id,
-                            'price' => $model->price,
-                        ), '');
-                        $stackTrends->save();
-                        StackAuthorize::dealAuth($model);
-                    } else {
-                        Yii::$app->session->setFlash('danger', '价格的改变幅度不可以超过10% ');
-                    }
 
+            $priceRight = true;
+            if ($oldModel->price != $model->price) {
+                if (abs($model->price - $oldModel->price)/$oldModel->price <= 0.18) {
+                    $stackTrends = new StackTrends();
+                    $stackTrends->load(array(
+                        'stack_id' => $model->id,
+                        'price' => $model->price,
+                    ), '');
+                    $stackTrends->save();
+                    StackAuthorize::dealAuth($model);
+                } else {
+                    $priceRight = false;
+                    $model->price = $oldModel->price;
+                    $model->addError('price', '价格的改变幅度不可以超过18%');
+                    Yii::$app->session->setFlash('danger', '价格的改变幅度不可以超过18%');
                 }
+            }
+
+            if ($priceRight && $model->save()) {
+
                 $oldInfo = $oldModel->getAttributes();
                 $newInfo = $model->getAttributes();
 
