@@ -274,7 +274,7 @@ class StackController extends Controller
 
         $result = array('status' => 0, 'message' => '股票价格修改失败', 'update' => '');
 
-        if ($model && $model->id && $model->change_price) {echo abs($model->price - $price) / $model->price;
+        if ($model && $model->id && $model->change_price) {
             if (abs($model->price - $price) / $model->price <= 0.18) {
                 $stackTrends = new StackTrends();
                 $stackTrends->load(array(
