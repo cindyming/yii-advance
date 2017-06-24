@@ -10,21 +10,26 @@ class AccessRule extends \yii\filters\AccessRule
      */
     protected function matchRole($user)
     {
+        if (!$user->getIsGuest()) {
+            $loginKey = Yii::$app->session->get('LOGIN_KEY_' . $user->id);
+            $cacheKey = Yii::$app->user->identity->login_key;
+        }
+
         if ($user->getIsGuest()) {
             return parent::matchRole($user);
-        } else if (System::loadConfig('enable_memmber_login') && $user->getIdentity() && (Yii::$app->params['country'] == ($user->getIdentity()->country))) {
+        } else if ((Yii::$app->user->identity->login_key == $loginKey) && System::loadConfig('enable_memmber_login') && $user->getIdentity() && (Yii::$app->params['country'] == ($user->getIdentity()->country))) {
             return parent::matchRole($user);
         } else {
-            $error = false;
-            if ((System::loadConfig('enable_memmber_login')) && $user->getIdentity() && (Yii::$app->params['country'] != ($user->getIdentity()->country))) {
-                $error = true;
-
-            }
             Yii::$app->user->logout();
-            if ($error) {
+
+            if ((System::loadConfig('enable_memmber_login')) && $user->getIdentity() && (Yii::$app->params['country'] != ($user->getIdentity()->country))) {
                 Yii::$app->session->setFlash('danger', '您不能登录该站点，请与管理员联系');
+
+            } else if ($cacheKey != $loginKey) {
+                Yii::$app->session->setFlash('danger', '您已经在其它地方登录, 请与管理员联系');
             }
-            Yii::$app->getResponse()->redirect('/site/login');
+
+            return Yii::$app->getResponse()->redirect('/site/login');
         }
     }
 
