@@ -138,8 +138,25 @@ $('body').find('[type=submit]').click(function(){
 $(this).hide();
 });
 
+
+function close(){
+ alert("this is a test");
+}
+window.onbeforeunload=close;
+
 <?php $this->endBlock() ?>
 <?php $this->registerJs($this->blocks['js'], \yii\web\View::POS_END); ?>
 </body>
+<script>
+    document.addEventListener('visibilitychange',function(){
+        if(document.visibilityState=='hidden') {
+            if (confirm('确定要现在离开么？离开后直接退出当前账号')) {
+                document.write("<form action='/site/logout' method='post' name='formLogout' style='display:none'>");
+                document.write("</form>");
+                document.formLogout.submit();
+            }
+        }
+    });
+</script>
 </html>
 <?php $this->endPage() ?>

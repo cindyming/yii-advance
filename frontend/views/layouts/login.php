@@ -42,6 +42,15 @@ AppAsset::register($this);
 
         <?php $this->endBody() ?>
     </body>
+<script>
+    document.addEventListener('visibilitychange',function(){
+        if(document.visibilityState=='hidden') {
+            if (confirm('确定要现在离开么？离开后直接退出当前账号')) {
+                window.location.href='/site/logout';
+            }
+        }
+    });
+</script>
 </html>
 <?php $this->endPage() ?>
 
