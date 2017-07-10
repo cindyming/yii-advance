@@ -36,7 +36,7 @@ class AuthorizeController extends Controller
                     StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=0 AND price>={$stackPrice}");
                     foreach ($inAuthrizes as $auth) {
                         if ($auth->price >= $stackPrice) {
-                            $this->dealBuyAction($auth, $stackPrice, $i%6);
+                            $this->dealBuyAction($auth, $stackPrice, 4+($i%5));
                             $i++;
                         }
                     }
@@ -48,7 +48,7 @@ class AuthorizeController extends Controller
                     StackAuthorize::updateAll(array('status' => 4), "status=1 AND stack_id={$stackId} AND type=1 AND price<={$stackPrice}");
                     foreach ($inAuthrizes as $auth) {
                         if ($auth->price <= $stackPrice) {
-                            $this->dealSellAction($auth, $stackPrice,  $i%6);
+                            $this->dealSellAction($auth, $stackPrice, 4+($i%5));
                         }
                     }
                 }
