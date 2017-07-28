@@ -138,12 +138,6 @@ $('body').find('[type=submit]').click(function(){
 $(this).hide();
 });
 
-
-function close(){
- alert("this is a test");
-}
-window.onbeforeunload=close;
-
 <?php $this->endBlock() ?>
 <?php $this->registerJs($this->blocks['js'], \yii\web\View::POS_END); ?>
 </body>
