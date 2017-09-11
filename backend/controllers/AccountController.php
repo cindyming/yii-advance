@@ -27,7 +27,7 @@ class AccountController extends \yii\web\Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['list', 'exportcash', 'listexport', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve', 'validateadd'],
+                        'actions' => ['list', 'exportcash', 'listexport', 'exportoutlist', 'cashlist', 'inlist', 'outlist', 'reject', 'add', 'approve', 'validateadd'],
                         'roles' => [\backend\models\User::SUPPER_ADMIN]
                     ],
                     [
@@ -269,6 +269,21 @@ class AccountController extends \yii\web\Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
+    public function actionExportoutlist()
+    {
+        $searchModel = new OutRecordSearch();
+        $data = Yii::$app->request->queryParams;
+        if (Yii::$app->request->get('week', 0)) {
+            $data['OutRecordSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
+        } else if ((!isset($data["OutRecordSearch"])) && (!isset($data["OutRecordSearch"]['created_at']))) {
+            $data['OutRecordSearch']['created_at'] = date('Y-m-d', strtotime('-7 days')) . ' - ' .date('Y-m-d', time());
+        }
+        $searchModel->export($data);
+        return $this->redirect(['/assets/outlist.xls']);
+    }
+
 
     public function actionExportcash()
     {
