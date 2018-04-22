@@ -11,7 +11,7 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
-    public $rememberMe = false;
+    public $rememberMe = true;
     public $captcha;
 
     private $_user;
